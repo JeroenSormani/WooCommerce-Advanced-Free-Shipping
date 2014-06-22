@@ -28,7 +28,7 @@ function wafs_child_condition_values( $parent_id, $id, $group = 0, $condition = 
 				
 				$variation_title = '';
 				foreach ( $variation['attributes'] as $name => $option ) :
-					$variation_title .= $option;
+					$variation_title .= ( $option == reset( $variation['attributes'] ) ) ? $option : ', ' . $option;
 				endforeach;
 				
 				$values['options'][ $variation['variation_id'] ] = $variation_title;

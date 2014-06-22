@@ -1,0 +1,149 @@
+/* Hide visibility from admin */
+.post-type-wafs .misc-pub-visibility#visibility {
+	display: none;
+}
+
+.wafs-option label {
+	display: inline-block;
+	width: 150px;
+}
+
+.wafs_conditions_meta_box > p:first-child + div > .or_match {
+	display: none;
+}
+/*
+ * Condition group
+ */
+.condition-group {
+	margin-bottom: 30px;
+	background-color: #f5f5f5;
+	padding: 15px 20px 20px;
+	border: 1px solid #ddd;
+	-webkit-box-shadow: 0 1px 1px rgba( 0, 0, 0, .04);
+	box-shadow: 0 1px 1px rgba( 0, 0, 0, .04);
+}
+.wafs-condition-wrap {
+	margin: 10px 0px 5px;
+}
+.wafs-condition-wrap .wafs-condition {
+	width: 30%;
+}
+.wafs-condition-wrap .wafs-operator {
+	width: 12%;
+	min-width: 140px;
+}
+.wafs-condition-wrap .wafs-value {
+	width: 30%;
+}
+.wafs-condition-wrap input {
+	vertical-align: top;
+}
+
+#wafs_conditions p + p {
+	display: none;
+}
+/* Child condition button */
+.add-child-condition {
+	width: 20px;
+	height: 20px !important;
+	line-height: 20px !important;
+	padding: 0 5px 1px !important;
+	vertical-align: bottom !important;
+	margin-bottom: 2px !important;
+}
+.child-condition {
+	margin-left: 20px;
+	margin-top: 0px;
+}
+.child-condition:before {
+	content: " ";
+	border-width: 0px 0px 1px 1px;
+	width: 10px;
+	height: 10px;
+	display: block;
+	float: left;
+	border-color: #000;
+	border-style: solid;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+.child-condition .wafs-child-condition {
+	width: 25%;
+}
+
+/* Description */
+.wafs_desc {
+	display: none;
+	position: absolute;
+	background: rgba( 0, 0, 0, .8 );
+	min-width: 25px;
+	max-width: 200px;
+	border-radius: 6px;
+	padding: 5px 10px;
+	color: white;
+	margin-top: 10px;
+	right: 40px;
+	text-align: center;
+}
+.wafs_desc:after {
+	border-top: 0px solid transparent;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+	border-bottom: 10px solid rgba( 0, 0, 0, .8 );
+	content: ' ';
+	position: absolute;
+	top: -10px;
+	right: 10px;
+	z-index: 999;
+}
+.wafs_tip:hover ~ .wafs_desc {
+	display: block !important;
+}
+.wafs-description {
+	width: 40px;
+	float: right;
+	line-height: 20px;
+}
+
+/*
+ * Loading icon
+ */
+
+/* Load icon condition row */
+.wafs-condition-wrap ~ .loading-icon {
+	display: block;
+}
+.loading-icon {
+	width: 30%;
+	clear: both;
+	display: inline-block;
+	text-align: center;
+	line-height: 110%;
+	margin: 0 1px;
+}
+
+.condition-delete,
+.child-condition-delete {
+	display: none;
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+}
+.wafs-condition-wrap:hover .condition-delete,
+.wafs-condition-wrap:hover .child-condition-delete {
+	display: inline-block;
+	opacity: 1;
+}
+
+
+/* © WooCommerce Add icon */
+.add.button:before {
+	font-family: WooCommerce;
+	speak: none;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	margin-right: 7px;
+	content: "\e007";
+}

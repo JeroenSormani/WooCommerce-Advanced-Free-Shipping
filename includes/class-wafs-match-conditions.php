@@ -27,7 +27,7 @@ class Wafs_Match_Conditions {
 		add_action( 'wafs_match_condition_tax', array( $this, 'wafs_match_condition_tax' ), 10, 3 );
 		add_action( 'wafs_match_condition_quantity', array( $this, 'wafs_match_condition_quantity' ), 10, 3 );
 		add_action( 'wafs_match_condition_contains_product', array( $this, 'wafs_match_condition_contains_product' ), 10, 3 );
-		add_action( 'wafs_match_condition_only_product', array( $this, 'wafs_match_condition_only_product' ), 10, 3 );
+		add_action( 'wafs_match_condition_only_contains', array( $this, 'wafs_match_condition_only_contains' ), 10, 4 );
 		add_action( 'wafs_match_condition_coupon', array( $this, 'wafs_match_condition_coupon' ), 10, 3 );
 		
 		add_action( 'wafs_match_condition_zipcode', array( $this, 'wafs_match_condition_zipcode' ), 10, 3 );
@@ -36,6 +36,7 @@ class Wafs_Match_Conditions {
 		add_action( 'wafs_match_condition_country', array( $this, 'wafs_match_condition_country' ), 10, 3 );
 		add_action( 'wafs_match_condition_role', array( $this, 'wafs_match_condition_role' ), 10, 3 );
 		
+		add_action( 'wafs_match_condition_shipping_class', array( $this, 'wafs_match_condition_shipping_class' ), 10, 3 );
 		add_action( 'wafs_match_condition_width', array( $this, 'wafs_match_condition_width' ), 10, 3 );
 		add_action( 'wafs_match_condition_height', array( $this, 'wafs_match_condition_height' ), 10, 3 );
 		add_action( 'wafs_match_condition_length', array( $this, 'wafs_match_condition_length' ), 10, 3 );
@@ -190,16 +191,25 @@ class Wafs_Match_Conditions {
 	}
 		
 
-	/* Match only product
+	/* Match only contains
 	 *
 	 * @param bool $match
 	 * @param string $operator
 	 * @param mixed $value
 	 * @return bool
 	 */
-	public function wafs_match_condition_only_product( $match, $operator, $value ) {
+	public function wafs_match_condition_only_contains( $match, $operator, $value, $conditions ) {
 
 		global $woocommerce;
+
+		// Only get values of 'only_contains' conditions
+		foreach ( $conditions as $id => $condition ) :
+			if ( 'only_contains' == $condition['condition'] ) :
+				$only_contains[] = $condition['value'];
+			endif;
+		endforeach;
+		
+		
 		
 		$match = true;		
 		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
@@ -207,7 +217,7 @@ class Wafs_Match_Conditions {
 		if ( '==' == $operator ) :
 		
 			foreach ( $woocommerce->cart->cart_contents as $product ) :
-				if ( $product['product_id'] != $value ) :
+				if ( ! in_array( $product['product_id'], $only_contains ) ) :
 					$match = false;
 				endif;
 			endforeach;
@@ -215,7 +225,7 @@ class Wafs_Match_Conditions {
 		elseif ( '!=' == $operator ) :
 			
 			foreach ( $woocommerce->cart->cart_contents as $product ) :
-				if ( $product['product_id'] == $value ) :
+				if ( in_array( $product['product_id'], $only_contains ) ) :
 					$match = false;
 				endif;
 			endforeach;
@@ -405,6 +415,50 @@ class Wafs_Match_Conditions {
  *
  ***************************
 */
+
+
+	/* Match Shipping class
+	 *
+	 * Match the product shipping class
+	 *
+	 * @param bool $match
+	 * @param string $operator
+	 * @param mixed $value
+	 * @return bool
+	 */
+	public function wafs_match_condition_shipping_class( $match, $operator, $value ) {
+
+		global $woocommerce;
+		
+		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
+
+
+		foreach ( $woocommerce->cart->cart_contents as $product ) :
+
+			if ( ! empty( $product['variation_id'] ) ) :
+				$product = get_product( $product['variation_id'] );
+			else :
+				$product = get_product( $product['product_id'] );
+			endif;
+			
+			$shipping_classes[] = $product->get_shipping_class_id();
+
+		endforeach;
+		
+		
+		if ( '==' == $operator ) :
+			if ( in_array( $value, $shipping_classes ) ) :
+				$match = true;
+			endif;
+		elseif ( '!=' == $operator ) :
+			if ( ! in_array( $value, $shipping_classes ) ) :
+				$match = true;
+			endif;
+		endif;
+
+		return $match;
+		
+	}
 
 
 	/* Match width

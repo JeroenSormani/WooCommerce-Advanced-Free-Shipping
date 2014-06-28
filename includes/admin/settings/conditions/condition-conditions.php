@@ -11,7 +11,7 @@ function wafs_condition_conditions( $id, $group = 0, $current_value = 'total' ) 
 			'tax' 				=> __( 'Tax', 'woocommerce-advanced-free-shipping' ),
 			'quantity' 			=> __( 'Quantity', 'woocommerce-advanced-free-shipping' ),
 			'contains_product' 	=> __( 'Contains product', 'woocommerce-advanced-free-shipping' ),
-			'only_product' 		=> __( 'Only product', 'woocommerce-advanced-free-shipping' ),
+			'only_contains' 	=> __( 'Only contains', 'woocommerce-advanced-free-shipping' ),
 			'coupon' 			=> __( 'Coupon', 'woocommerce-advanced-free-shipping' ),
 		),
 		__( 'User Details', 'woocommerce-advanced-free-shipping' ) => array(
@@ -22,6 +22,7 @@ function wafs_condition_conditions( $id, $group = 0, $current_value = 'total' ) 
 			'role'	 			=> __( 'User role', 'woocommerce-advanced-free-shipping' ),
 		),
 		__( 'Product', 'woocommerce-advanced-free-shipping' ) => array(
+			'shipping_class'	=> __( 'Shipping class', 'woocommerce-advanced-free-shipping' ),
 			'width' 			=> __( 'Width', 'woocommerce-advanced-free-shipping' ),
 			'height' 			=> __( 'Height', 'woocommerce-advanced-free-shipping' ),
 			'length' 			=> __( 'Length', 'woocommerce-advanced-free-shipping' ),

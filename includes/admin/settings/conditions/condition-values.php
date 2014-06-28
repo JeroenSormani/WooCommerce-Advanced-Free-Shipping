@@ -45,7 +45,7 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 			
 		break;
 		
-		case 'only_product' :
+		case 'only_contains' :
 			
 			$values['field'] = 'select';
 
@@ -117,6 +117,18 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 		/**
 		 * Product
 		 */
+		 
+		case 'shipping_class' :
+		
+			$values['field'] = 'select';
+			
+				$values['options']['-1'] = __( 'No shipping class', 'woocommerce' );
+			foreach ( get_terms( 'product_shipping_class' ) as $shipping_class ) :
+				$values['options'][ $shipping_class->term_id ] = $shipping_class->name;
+			endforeach;
+		
+		break;
+		 
 		 
 		case 'width' :
 		

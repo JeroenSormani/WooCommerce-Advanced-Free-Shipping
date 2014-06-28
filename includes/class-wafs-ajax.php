@@ -105,8 +105,8 @@ class Wafs_Ajax {
 	public function wafs_update_condition_add_child_button() {
 
 		$has_child = array(
-			'only_product',
 			'contains_product',
+			'only_contains',
 		);
 
 		if ( in_array( $_POST['condition'], $has_child ) ) :

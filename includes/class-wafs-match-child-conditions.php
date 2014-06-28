@@ -7,7 +7,7 @@
  *	@class      Wapl_Conditions
  *	@author     Jeroen Sormani
  *	@package 	WooCommerce Advanced Product Labels
- *	@version    1.0.0
+ *	@version    1.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -23,7 +23,7 @@ class Wafs_Match_Child_Conditions {
 		global $woocommerce;
 	
 		add_action( 'wafs_match_child_condition_quantity', array( $this, 'wafs_match_child_condition_quantity' ), 10, 5 );
-		add_action( 'wafs_match_child_condition_variation', array( $this, 'wafs_match_child_condition_variation' ), 10, 5 );
+		add_action( 'wafs_match_child_condition_variation', array( $this, 'wafs_match_child_condition_variation' ), 10, 6 );
 		add_action( 'wafs_match_child_condition_weight', array( $this, 'wafs_match_child_condition_weight' ), 10, 5 );
 		add_action( 'wafs_match_child_condition_stock', array( $this, 'wafs_match_child_condition_stock' ), 10, 5 );
 		add_action( 'wafs_match_child_condition_stock_status', array( $this, 'wafs_match_child_condition_stock_status' ), 10, 5 );
@@ -31,7 +31,7 @@ class Wafs_Match_Child_Conditions {
 	}
 
 
-	/* Match quantity
+	/* Match quantity.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -65,18 +65,21 @@ class Wafs_Match_Child_Conditions {
 	}
 
 
-	/* Match variation
-	 *
+	/* Match variation.
+	 * 
 	 * @param bool $match
 	 * @param string $operator
 	 * @param mixed $value
 	 * @return bool
 	 */
-	public function wafs_match_child_condition_variation( $match, $operator, $value, $parent_condition, $product = array() ) {
+	public function wafs_match_child_condition_variation( $match, $operator, $value, $parent_condition, $product = array(), $parent_conditions ) {
 
-		$match = false;
+		global $woocommerce;
+
 		if ( 'contains_product' == $parent_condition['condition'] ) :
-
+			
+				$match = false;
+				
 				if ( '==' == $operator ) :
 					if ( $product['variation_id'] == $value ) :
 						$match = true;
@@ -88,16 +91,40 @@ class Wafs_Match_Child_Conditions {
 				endif;
 
 
-		elseif ( 'only_product' == $parent_condition['condition'] ) :
+		elseif ( 'only_contains' == $parent_condition['condition'] ) :
 			
-			$match = true; // Match until proven false.
+			
+				$match = true; // Match until proven false.
+				$allowed_variations = array();
+				
+				// Get allowed variation ID's
+				foreach ( $parent_conditions as $id => $condition ) :
+					if ( 'only_contains' == $condition['condition'] && isset( $condition['child_conditions'] ) ) :
 					
+						foreach ( $condition['child_conditions'] as $child_condition ) :
+							if ( 'variation' == $child_condition['condition'] && '==' == $child_condition['operator'] ) :
+								$allowed_variations[] = $child_condition['value'];
+							endif;
+	
+						endforeach;
+						
+					endif;
+				endforeach;
+	
+	
+				// Get all variation ids of the product we're checking right now.
+				foreach ( $woocommerce->cart->cart_contents as $id => $product ) :
+					if ( $parent_condition['value'] == $product['product_id'] ) :
+						$variation_ids[] = $product['variation_id'];
+					endif;
+				endforeach;
+	
 				if ( '==' == $operator ) :
-					if ( $product['variation_id'] != $value ) :
+					if ( count( array_diff( $variation_ids, $allowed_variations ) ) > 0 || ! in_array( $value, $variation_ids ) ) : // Must contain && can't contain any other.
 						$match = false;
 					endif;
 				elseif ( '!=' == $operator ) :
-					if ( $product['variation_id'] == $value ) :
+					if ( in_array( $value, $variation_ids ) ) :
 						$match = false;
 					endif;
 				endif;

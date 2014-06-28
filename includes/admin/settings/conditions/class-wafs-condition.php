@@ -113,8 +113,8 @@ class Wafs_Condition {
 	public function wafs_add_child_condition_button() {
 		
 		$has_child = array(
-			'only_product',
 			'contains_product',
+			'only_contains',
 		);
 
 		if ( in_array( $this->condition, $has_child ) ) :

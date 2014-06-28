@@ -9,6 +9,7 @@ function wafs_condition_description( $condition ) {
 	$descriptions = array(
 		'zipcode' 			=> __( '\'(Not) Equal to\' values can be separated by comma', 'woocommerce-advanced-free-shipping' ),
 		'state' 			=> __( 'By default states are only available in the U.S.', 'woocommerce-advanced-free-shipping' ),
+		'shipping_class'	=> __( 'One or more products in cart must match', 'woocommerce-advanced-free-shipping' ),
 		'weight' 			=> __( 'Weight calculated on all the cart contents', 'woocommerce-advanced-free-shipping' ),
 		'length' 			=> __( 'Compared to lengthiest product in cart', 'woocommerce-advanced-free-shipping' ),
 		'width' 			=> __( 'Compared to widest product in cart', 'woocommerce-advanced-free-shipping' ),

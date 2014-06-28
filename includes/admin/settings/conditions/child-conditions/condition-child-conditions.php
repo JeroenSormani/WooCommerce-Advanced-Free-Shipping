@@ -13,7 +13,7 @@ function wafs_child_condition_conditions( $parent_id, $id, $group = 0, $current_
 				'stock' 			=> __( 'Stock', 'woocommerce-advanced-free-shipping' ),
 			),
 		),
-		'only_product' => array( 
+		'only_contains' => array( 
 			__( 'Product', 'woocommerce-advanced-free-shipping' ) => array(
 				'quantity' 			=> __( 'Quantity', 'woocommerce-advanced-free-shipping' ),
 				'variation'			=> __( 'Variation', 'woocommerce-advanced-free-shipping' ),

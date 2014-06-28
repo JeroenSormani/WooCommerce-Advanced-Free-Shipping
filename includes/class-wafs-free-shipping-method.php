@@ -106,11 +106,11 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 				// Single conditions
 				foreach ( $conditions as $id => $condition ) :
 
-					$match = apply_filters( 'wafs_match_condition_' . $condition['condition'], false, $condition['operator'], $condition['value'] );		
+					$match = apply_filters( 'wafs_match_condition_' . $condition['condition'], false, $condition['operator'], $condition['value'], $conditions );		
 
 					// Child conditions
 					if ( isset( $condition['child_conditions'] ) && true == $match ) : // Only if parent condition is true
-						$match = $this->wafs_match_child_conditions( $condition );
+						$match = $this->wafs_match_child_conditions( $condition, $conditions );
 					endif;
 
 					if ( false == $match ) :
@@ -137,20 +137,26 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		 * @access public
 		 * @return BOOL
 		 */
-		public function wafs_match_child_conditions( $parent_condition ) {
+		public function wafs_match_child_conditions( $parent_condition, $parent_conditions ) {
 
 			global $woocommerce;
 
-			if ( ! isset( $woocommerce->cart ) || ! is_array( $woocommerce->cart->cart_contents ) ) return;
+			if ( ! isset( $woocommerce->cart ) || ! is_array( $woocommerce->cart->cart_contents ) ) :
+				return;
+			endif;
 			
 			foreach ( $woocommerce->cart->cart_contents as $id => $product ) :
 			
 				$child_match = true;			
 				$child_match_conditions = true;
 				foreach ( $parent_condition['child_conditions'] as $condition ) :
-				
+					
+					if ( ! isset( $condition['condition'] ) || ! isset( $condition['operator'] ) || ! isset( $condition['value'] ) ) :
+						return false;
+					endif;
+					
 					$child_match_conditions = apply_filters( 'wafs_match_child_condition_' . $condition['condition'], false, 
-						$condition['operator'], $condition['value'], $parent_condition, $product );
+						$condition['operator'], $condition['value'], $parent_condition, $product, $parent_conditions );
 
 					if ( false == $child_match_conditions ) :
 						$child_match = false;

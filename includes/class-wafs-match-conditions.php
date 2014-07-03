@@ -9,9 +9,6 @@
  *	@package 	WooCommerce Advanced Product Labels
  *	@version    1.0.0
  */
-
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
 class Wafs_Match_Conditions {
 
 
@@ -27,7 +24,6 @@ class Wafs_Match_Conditions {
 		add_action( 'wafs_match_condition_tax', array( $this, 'wafs_match_condition_tax' ), 10, 3 );
 		add_action( 'wafs_match_condition_quantity', array( $this, 'wafs_match_condition_quantity' ), 10, 3 );
 		add_action( 'wafs_match_condition_contains_product', array( $this, 'wafs_match_condition_contains_product' ), 10, 3 );
-		add_action( 'wafs_match_condition_only_contains', array( $this, 'wafs_match_condition_only_contains' ), 10, 4 );
 		add_action( 'wafs_match_condition_coupon', array( $this, 'wafs_match_condition_coupon' ), 10, 3 );
 		
 		add_action( 'wafs_match_condition_zipcode', array( $this, 'wafs_match_condition_zipcode' ), 10, 3 );
@@ -36,14 +32,12 @@ class Wafs_Match_Conditions {
 		add_action( 'wafs_match_condition_country', array( $this, 'wafs_match_condition_country' ), 10, 3 );
 		add_action( 'wafs_match_condition_role', array( $this, 'wafs_match_condition_role' ), 10, 3 );
 		
-		add_action( 'wafs_match_condition_shipping_class', array( $this, 'wafs_match_condition_shipping_class' ), 10, 3 );
 		add_action( 'wafs_match_condition_width', array( $this, 'wafs_match_condition_width' ), 10, 3 );
 		add_action( 'wafs_match_condition_height', array( $this, 'wafs_match_condition_height' ), 10, 3 );
 		add_action( 'wafs_match_condition_length', array( $this, 'wafs_match_condition_length' ), 10, 3 );
 		add_action( 'wafs_match_condition_weight', array( $this, 'wafs_match_condition_weight' ), 10, 3 );
 		add_action( 'wafs_match_condition_stock', array( $this, 'wafs_match_condition_stock' ), 10, 3 );
 		add_action( 'wafs_match_condition_stock_status', array( $this, 'wafs_match_condition_stock_status' ), 10, 3 );
-		add_action( 'wafs_match_condition_backorder', array( $this, 'wafs_match_condition_backorder' ), 10, 3 );
 		add_action( 'wafs_match_condition_category', array( $this, 'wafs_match_condition_category' ), 10, 3 );
 		
 	}
@@ -191,52 +185,6 @@ class Wafs_Match_Conditions {
 	}
 		
 
-	/* Match only contains
-	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
-	 */
-	public function wafs_match_condition_only_contains( $match, $operator, $value, $conditions ) {
-
-		global $woocommerce;
-
-		// Only get values of 'only_contains' conditions
-		foreach ( $conditions as $id => $condition ) :
-			if ( 'only_contains' == $condition['condition'] ) :
-				$only_contains[] = $condition['value'];
-			endif;
-		endforeach;
-		
-		
-		
-		$match = true;		
-		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
-		
-		if ( '==' == $operator ) :
-		
-			foreach ( $woocommerce->cart->cart_contents as $product ) :
-				if ( ! in_array( $product['product_id'], $only_contains ) ) :
-					$match = false;
-				endif;
-			endforeach;
-			
-		elseif ( '!=' == $operator ) :
-			
-			foreach ( $woocommerce->cart->cart_contents as $product ) :
-				if ( in_array( $product['product_id'], $only_contains ) ) :
-					$match = false;
-				endif;
-			endforeach;
-			
-		endif;
-		
-		return $match;
-		
-	}
-	
-
 	/* Match coupon
 	 *
 	 * @param bool $match
@@ -286,7 +234,7 @@ class Wafs_Match_Conditions {
 
 		if ( '==' == $operator ) :
 
-			if ( preg_match( '/\,/', $value ) ) :
+			if ( preg_match( '/\,(\s)?/', $value ) ) :
 				$match = ( in_array( $woocommerce->customer->get_shipping_postcode(), explode( ',', $value ) ) );
 			else :
 				$match = ( $woocommerce->customer->get_shipping_postcode() == $value );
@@ -336,8 +284,6 @@ class Wafs_Match_Conditions {
 	
 	
 	/* Match state
-	 * 
-	 * @since 1.0.2; States in all countries are available
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -350,12 +296,10 @@ class Wafs_Match_Conditions {
 		
 		if ( ! isset( $woocommerce->customer ) ) return;
 		
-		$state = $woocommerce->customer->get_shipping_country() . '_' . $woocommerce->customer->get_shipping_state();
-		
 		if ( '==' == $operator ) :
-			$match = ( $state == $value );
+			$match = ( $woocommerce->customer->get_shipping_state() == $value );
 		elseif ( '!=' == $operator ) :
-			$match = ( $state != $value );
+			$match = ( $woocommerce->customer->get_shipping_state() != $value );
 		endif;
 			
 		return $match;
@@ -415,50 +359,6 @@ class Wafs_Match_Conditions {
  *
  ***************************
 */
-
-
-	/* Match Shipping class
-	 *
-	 * Match the product shipping class
-	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
-	 */
-	public function wafs_match_condition_shipping_class( $match, $operator, $value ) {
-
-		global $woocommerce;
-		
-		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
-
-
-		foreach ( $woocommerce->cart->cart_contents as $product ) :
-
-			if ( ! empty( $product['variation_id'] ) ) :
-				$product = get_product( $product['variation_id'] );
-			else :
-				$product = get_product( $product['product_id'] );
-			endif;
-			
-			$shipping_classes[] = $product->get_shipping_class_id();
-
-		endforeach;
-		
-		
-		if ( '==' == $operator ) :
-			if ( in_array( $value, $shipping_classes ) ) :
-				$match = true;
-			endif;
-		elseif ( '!=' == $operator ) :
-			if ( ! in_array( $value, $shipping_classes ) ) :
-				$match = true;
-			endif;
-		endif;
-
-		return $match;
-		
-	}
 
 
 	/* Match width
@@ -693,43 +593,6 @@ class Wafs_Match_Conditions {
 	}	
 	
 
-	/* Match all products backorder
-	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
-	 */
-	public function wafs_match_condition_backorder( $match, $operator, $value ) {
-
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
-		
-		$match = true;
-		
-		if ( '==' == $operator ) :
-			
-			foreach ( $woocommerce->cart->cart_contents as $product ) :
-				if ( get_post_meta( $product['product_id'], '_backorders', true ) != $value ) :
-					$match = false;
-				endif;
-			endforeach;
-			
-		elseif ( '!=' == $operator ) :
-		
-			foreach ( $woocommerce->cart->cart_contents as $product ) :
-				if ( get_post_meta( $product['product_id'], '_backorders', true ) == $value )
-					$match = false;
-			endforeach;
-		
-		endif;
-
-		return $match;
-		
-	}
-	
-	
 	/* Match category
 	 *
 	 * @param bool $match

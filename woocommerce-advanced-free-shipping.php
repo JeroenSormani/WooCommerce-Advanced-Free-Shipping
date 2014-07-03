@@ -4,10 +4,10 @@ Plugin Name: Woocommerce Advanced Free Shipping
 Plugin URI: http://www.jeroensormani.com/
 Donate link: http://www.jeroensormani.com/donate/
 Description: WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
-Version: 1.1.0
+Version: 1.0.1
 Author: Jeroen Sormani
 Author URI: http://www.jeroensormani.com/
-Text Domain: woocommerce-advanced-free-shipping
+Text Domain: wafs
 
  * Copyright Jeroen Sormani
  *
@@ -39,9 +39,6 @@ Text Domain: woocommerce-advanced-free-shipping
  *	@version     1.0.0
  *	@author      Jeroen Sormani
  */
-
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
 class Woocommerce_Advanced_Free_Shipping {
 
 
@@ -50,18 +47,10 @@ class Woocommerce_Advanced_Free_Shipping {
 	 */
 	public function __construct() {
 		
-		if ( ! function_exists( 'is_plugin_active_for_network' ) ) :
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-		endif;
-
 		// check if woocommerce is activated
-		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) :
-			if ( ! is_plugin_active_for_network( 'woocommerce/woocommerce.php' ) ) :
-				return;
-			endif;
-		endif;
-
-
+		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
+			return;
+		
 		$this->wafs_hooks();
 
 	}
@@ -96,7 +85,7 @@ class Woocommerce_Advanced_Free_Shipping {
 	 */
 	public function wafs_free_shipping() {
 		
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wafs-free-shipping-method.php';
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wafs-method.php';
 		
 	}
 	
@@ -145,5 +134,4 @@ $wafs = new Woocommerce_Advanced_Free_Shipping();
  * Require matching conditions hooks
  */
 require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-match-conditions.php';
-require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-match-child-conditions.php';
 ?>

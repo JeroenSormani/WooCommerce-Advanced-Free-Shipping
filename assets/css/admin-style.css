@@ -42,35 +42,6 @@
 #wafs_conditions p + p {
 	display: none;
 }
-/* Child condition button */
-.add-child-condition {
-	width: 20px;
-	height: 20px !important;
-	line-height: 20px !important;
-	padding: 0 5px 1px !important;
-	vertical-align: bottom !important;
-	margin-bottom: 2px !important;
-}
-.child-condition {
-	margin-left: 20px;
-	margin-top: 0px;
-}
-.child-condition:before {
-	content: " ";
-	border-width: 0px 0px 1px 1px;
-	width: 10px;
-	height: 10px;
-	display: block;
-	float: left;
-	border-color: #000;
-	border-style: solid;
-	margin-right: 10px;
-	margin-top: 5px;
-}
-.child-condition .wafs-child-condition {
-	width: 25%;
-}
-
 /* Description */
 .wafs_desc {
 	display: none;
@@ -122,14 +93,12 @@
 	margin: 0 1px;
 }
 
-.condition-delete,
-.child-condition-delete {
+.condition-delete {
 	display: none;
 	opacity: 0;
 	transition: opacity .3s ease-in-out;
 }
-.wafs-condition-wrap:hover .condition-delete,
-.wafs-condition-wrap:hover .child-condition-delete {
+.wafs-condition-wrap:hover .condition-delete {
 	display: inline-block;
 	opacity: 1;
 }

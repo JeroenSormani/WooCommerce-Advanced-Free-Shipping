@@ -14,6 +14,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions. 
 
 *Conditions like:*
+
 - Cart total
 - Country
 - Zipcode
@@ -23,9 +24,9 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 - Coupon
 - many, many more...
 
-** Look at the screenshots! **
+**Look at the screenshots!**
 
-** Translations, feature requests, ratings and donations are welcome! **
+**Translations, feature requests, ratings and donations are welcome and appreciated!**
 
 == Installation ==
 
@@ -41,17 +42,11 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 == Changelog ==
 
-= 1.1.0 =
+= 1.0.2 = 07/03/2014
 * Added - support for comma separated zipcodes
-* Added - support for states in all countries
-* Tweak - Better file security
-* Fix - Backorder condition
 * Added - filter for condition values
-* Added - 'Must contain' condition
-* Added - 'Shipping class' condition
-* Added - Child conditions
-* 
-* IMPORTANT NOTE: If you have used state conditions, please reassign the value!
+* Added - filter for condition descriptions
+
 
 = 1.0.1 =
 * Fix - Wrongful url for sub-domain websites

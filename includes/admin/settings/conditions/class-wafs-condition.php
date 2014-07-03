@@ -10,8 +10,6 @@
  * @version		1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
 class Wafs_Condition {
 	
 	public $condition;
@@ -47,7 +45,7 @@ class Wafs_Condition {
 	 */
 	public function wafs_create_object() {
 		
-		?><div class='wafs-condition-wrap' data-id='<?php echo $this->id; ?>'><?php
+		?><div class='wafs-condition-wrap'><?php
 
 			do_action( 'wafs_before_condition' );
 			
@@ -103,40 +101,21 @@ class Wafs_Condition {
 	}
 	
 	public function wafs_add_condition_button() {	
-	
 		?>
-		<a class='button condition-add' data-group='<?php echo $this->group; ?>' title='<?php _e( 'Add condition', 'woocommerce-advanced-free-shipping' ); ?>' href='javascript:void(0);'>+</a>
+		<a class='button condition-add' data-group='<?php echo $this->group; ?>' href='javascript:void(0);'>+</a>
 		<?php
-		$this->wafs_add_child_condition_button();
-	}
-	
-	public function wafs_add_child_condition_button() {
-		
-		$has_child = array(
-			'contains_product',
-			'only_contains',
-		);
-
-		if ( in_array( $this->condition, $has_child ) ) :
-
-			?><a class='button add-child-condition' data-group='<?php echo $this->group; ?>' title='<?php _e( 'Add child condition', 'woocommerce-advanced-free-shipping' ); ?>' href='javascript:void(0);'>+</a><?php		
-			
-		endif;
-
 	}
 	
 	public function wafs_remove_condition_button() {
-
 		?>
 		<a class='button condition-delete' href='javascript:void(0);'>-</a>
 		<?php
-
 	}
 	
 	public function wafs_condition_description() {
-
+		
 		wafs_condition_description( $this->condition );
-
+		
 	}
 	
 }

@@ -1,7 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
 if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 
 
@@ -17,9 +15,9 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		public function __construct() {
 
 			$this->id                	= 'advanced_free_shipping';
-			$this->title  				= __( 'Free Shipping <small>(may change at user configuration)</small>', 'woocommerce-advanced-free-shipping' );
-			$this->method_title  		= __( 'Advanced Free Shipping', 'woocommerce-advanced-free-shipping' );
-			$this->method_description 	= __( 'Configure WooCommerce Advanced Free Shipping', 'woocommerce-advanced-free-shipping' ); // 
+			$this->title  				= __( 'Free Shipping <small>(may change at user configuration)</small>', 'wafs' );
+			$this->method_title  		= __( 'Advanced Free Shipping', 'wafs' );
+			$this->method_description 	= __( 'Configure WooCommerce Advanced Free Shipping' ); // 
 
 			$this->matched_methods	 	= $this->wafs_match_methods();
 			
@@ -52,6 +50,7 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 			else :
 				add_filter( 'woocommerce_package_rates', array( $this, 'hide_all_shipping_when_free_is_available' ) );
 			endif;
+
 			
 		}
 		
@@ -62,13 +61,13 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		 * Checks if methods matches conditions
 		 *
 		 * @access public
-		 * @return Array
+		 * @return void
 		 */
 		public function wafs_match_methods() {
 
-			$matched_methods = '';
 			$methods = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'wafs' ) );
 			
+			$matched_methods = '';
 			foreach ( $methods as $method ) :
 
 				$condition_groups = get_post_meta( $method->ID, '_wafs_shipping_method_conditions', true );
@@ -92,26 +91,19 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		 * Match conditions
 		 *
 		 * @access public
-		 * @return BOOL
+		 * @return void
 		 */
 		public function wafs_match_conditions( $condition_groups = array() ) {
 
 			if ( empty( $condition_groups ) ) return false;
 
-			// All condition groups
 			foreach ( $condition_groups as $condition_group => $conditions ) :
 
 				$match_condition_group = true;
+				
+				foreach ( $conditions as $condition ) :
 
-				// Single conditions
-				foreach ( $conditions as $id => $condition ) :
-
-					$match = apply_filters( 'wafs_match_condition_' . $condition['condition'], false, $condition['operator'], $condition['value'], $conditions );		
-
-					// Child conditions
-					if ( isset( $condition['child_conditions'] ) && true == $match ) : // Only if parent condition is true
-						$match = $this->wafs_match_child_conditions( $condition, $conditions );
-					endif;
+					$match = apply_filters( 'wafs_match_condition_' . $condition['condition'], false, $condition['operator'], $condition['value'] );
 
 					if ( false == $match ) :
 						$match_condition_group = false;
@@ -130,51 +122,7 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 			
 		}
 		
-
-		/**
-		 * Match child conditions
-		 *
-		 * @access public
-		 * @return BOOL
-		 */
-		public function wafs_match_child_conditions( $parent_condition, $parent_conditions ) {
-
-			global $woocommerce;
-
-			if ( ! isset( $woocommerce->cart ) || ! is_array( $woocommerce->cart->cart_contents ) ) :
-				return;
-			endif;
-			
-			foreach ( $woocommerce->cart->cart_contents as $id => $product ) :
-			
-				$child_match = true;			
-				$child_match_conditions = true;
-				foreach ( $parent_condition['child_conditions'] as $condition ) :
-					
-					if ( ! isset( $condition['condition'] ) || ! isset( $condition['operator'] ) || ! isset( $condition['value'] ) ) :
-						return false;
-					endif;
-					
-					$child_match_conditions = apply_filters( 'wafs_match_child_condition_' . $condition['condition'], false, 
-						$condition['operator'], $condition['value'], $parent_condition, $product, $parent_conditions );
-
-					if ( false == $child_match_conditions ) :
-						$child_match = false;
-					endif;
-
-				endforeach;
-
-				if ( true == $child_match ) :
-					return true;
-				endif;
-				
-			endforeach;
-			
-			return $child_match;
-			
-		}
-
-
+		
 		/**
 		 * Init form fields
 		 *
@@ -187,13 +135,13 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 				'enabled' => array(
 					'title' 		=> __( 'Enable/Disable', 'woocommerce' ),
 					'type' 			=> 'checkbox',
-					'label' 		=> __( 'Enable Advanced Free Shipping', 'woocommerce-advanced-free-shipping' ),
+					'label' 		=> __( 'Enable Advanced Free Shipping', 'wafs' ),
 					'default' 		=> 'yes'
 				),
 				'hide_other_shipping_when_available' => array(
-					'title' 		=> __( 'Hide other shipping', 'woocommerce-advanced-free-shipping' ),
+					'title' 		=> __( 'Hide other shipping', 'wafs' ),
 					'type' 			=> 'checkbox',
-					'label' 		=> __( 'Hide other shipping methods when free shipping is available', 'woocommerce-advanced-free-shipping' ),
+					'label' 		=> __( 'Hide other shipping methods when free shipping is available', 'wafs' ),
 					'default' 		=> 'no'
 				),
 				'conditions' => array(
@@ -249,12 +197,12 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 			if ( false == $this->matched_methods || 'no' == $this->enabled ) return;
 			
 			$match_details 	= get_post_meta( $this->matched_methods, '_wafs_shipping_method', true );
-			$label 			= @$match_details['shipping_title'];
+			$label 			= $match_details['shipping_title'];
 			$calc_tax 		= @$match_details['calc_tax'];
 			
 			$rate = array(
 				'id'       => $this->id,
-				'label'    => ( null == $label ) ? __( 'Free Shipping', 'woocommerce-advanced-free-shipping' ) : $label,
+				'label'    => ( null == $label ) ? __( 'Free Shipping', 'wafs' ) : $label,
 				'cost'     => '0',
 				'calc_tax' => ( null == $calc_tax ) ? 'per_order' : $calc_tax
 			);

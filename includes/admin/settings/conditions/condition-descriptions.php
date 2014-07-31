@@ -4,17 +4,17 @@ function wafs_condition_description( $condition ) {
 
 	global $woocommerce;
 
-	$descriptions = array(
-		'state' 			=> __( 'States are only available in the U.S.', 'wafs' ),
-		'weight' 			=> __( 'Weight calculated on all the cart contents', 'wafs' ),
-		'length' 			=> __( 'Compared to lengthiest product in cart', 'wafs' ),
-		'width' 			=> __( 'Compared to widest product in cart', 'wafs' ),
-		'height'			=> __( 'Compared to highest product in cart', 'wafs' ),
-		'stock_status' 		=> __( 'All products in cart must match stock status', 'wafs' ),
-		'backorder' 		=> __( 'All products in cart must match backorder', 'wafs' ),
-		'category' 			=> __( 'All products in cart must match category', 'wafs' ),
-		'contains_product' 	=> __( 'Cart must contain one of this product', 'wafs' ),
-	);
+	$descriptions = apply_filters( 'wafs_description', array(
+		'state' 			=> __( 'States are only available in the U.S.', 'woocommerce-advanced-free-shipping' ),
+		'weight' 			=> __( 'Weight calculated on all the cart contents', 'woocommerce-advanced-free-shipping' ),
+		'length' 			=> __( 'Compared to lengthiest product in cart', 'woocommerce-advanced-free-shipping' ),
+		'width' 			=> __( 'Compared to widest product in cart', 'woocommerce-advanced-free-shipping' ),
+		'height'			=> __( 'Compared to highest product in cart', 'woocommerce-advanced-free-shipping' ),
+		'stock_status' 		=> __( 'All products in cart must match stock status', 'woocommerce-advanced-free-shipping' ),
+		'backorder' 		=> __( 'All products in cart must match backorder', 'woocommerce-advanced-free-shipping' ),
+		'category' 			=> __( 'All products in cart must match category', 'woocommerce-advanced-free-shipping' ),
+		'contains_product' 	=> __( 'Cart must contain one of this product', 'woocommerce-advanced-free-shipping' ),
+	) );
 	
 	// Display description
 	if ( !isset( $descriptions[ $condition ] ) ) :

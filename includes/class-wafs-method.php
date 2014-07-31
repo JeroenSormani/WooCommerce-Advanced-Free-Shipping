@@ -15,8 +15,8 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		public function __construct() {
 
 			$this->id                	= 'advanced_free_shipping';
-			$this->title  				= __( 'Free Shipping <small>(may change at user configuration)</small>', 'wafs' );
-			$this->method_title  		= __( 'Advanced Free Shipping', 'wafs' );
+			$this->title  				= __( 'Free Shipping <small>(may change at user configuration)</small>', 'woocommerce-advanced-free-shipping' );
+			$this->method_title  		= __( 'Advanced Free Shipping', 'woocommerce-advanced-free-shipping' );
 			$this->method_description 	= __( 'Configure WooCommerce Advanced Free Shipping' ); // 
 
 			$this->matched_methods	 	= $this->wafs_match_methods();
@@ -135,13 +135,13 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 				'enabled' => array(
 					'title' 		=> __( 'Enable/Disable', 'woocommerce' ),
 					'type' 			=> 'checkbox',
-					'label' 		=> __( 'Enable Advanced Free Shipping', 'wafs' ),
+					'label' 		=> __( 'Enable Advanced Free Shipping', 'woocommerce-advanced-free-shipping' ),
 					'default' 		=> 'yes'
 				),
 				'hide_other_shipping_when_available' => array(
-					'title' 		=> __( 'Hide other shipping', 'wafs' ),
+					'title' 		=> __( 'Hide other shipping', 'woocommerce-advanced-free-shipping' ),
 					'type' 			=> 'checkbox',
-					'label' 		=> __( 'Hide other shipping methods when free shipping is available', 'wafs' ),
+					'label' 		=> __( 'Hide other shipping methods when free shipping is available', 'woocommerce-advanced-free-shipping' ),
 					'default' 		=> 'no'
 				),
 				'conditions' => array(
@@ -202,7 +202,7 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 			
 			$rate = array(
 				'id'       => $this->id,
-				'label'    => ( null == $label ) ? __( 'Free Shipping', 'wafs' ) : $label,
+				'label'    => ( null == $label ) ? __( 'Free Shipping', 'woocommerce-advanced-free-shipping' ) : $label,
 				'cost'     => '0',
 				'calc_tax' => ( null == $calc_tax ) ? 'per_order' : $calc_tax
 			);

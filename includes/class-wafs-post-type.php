@@ -71,8 +71,8 @@ class Wafs_post_type {
 	 */
 	public function wafs_post_type_meta_box() {
 		
-		add_meta_box( 'wafs_conditions', __( 'Advanced Free Shipping conditions', 'wafs' ), array( $this, 'render_wafs_conditions' ), 'wafs', 'normal' );
-		add_meta_box( 'wafs_settings', __( 'Shipping settings', 'wafs' ), array( $this, 'render_wafs_settings' ), 'wafs', 'normal' );
+		add_meta_box( 'wafs_conditions', __( 'Advanced Free Shipping conditions', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_conditions' ), 'wafs', 'normal' );
+		add_meta_box( 'wafs_settings', __( 'Shipping settings', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_settings' ), 'wafs', 'normal' );
 		
 	}
 	

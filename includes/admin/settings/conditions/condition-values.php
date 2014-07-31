@@ -126,8 +126,8 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 			
 			$values['field'] = 'select';
 			$values['values'] = array(
-				'instock' 		=> __( 'In stock', 'wafs' ),
-				'outofstock'	=> __( 'Out of stock', 'wafs' ),
+				'instock' 		=> __( 'In stock', 'woocommerce-advanced-free-shipping' ),
+				'outofstock'	=> __( 'Out of stock', 'woocommerce-advanced-free-shipping' ),
 			);
 			
 		break;

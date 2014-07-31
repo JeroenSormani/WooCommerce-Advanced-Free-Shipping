@@ -3,10 +3,10 @@
 function wafs_condition_operator( $id, $group = 0, $current_value = '==' ) {
 	
 	$operators = array(
-		'==' => __( 'Equal to', 'wafs' ),
-		'!=' => __( 'Not equal to', 'wafs' ),
-		'>=' => __( 'Greater or equal to', 'wafs' ),
-		'<=' => __( 'Less or equal to ', 'wafs' ),
+		'==' => __( 'Equal to', 'woocommerce-advanced-free-shipping' ),
+		'!=' => __( 'Not equal to', 'woocommerce-advanced-free-shipping' ),
+		'>=' => __( 'Greater or equal to', 'woocommerce-advanced-free-shipping' ),
+		'<=' => __( 'Less or equal to ', 'woocommerce-advanced-free-shipping' ),
 	);
 	
 	$operators = apply_filters( 'wafs_operators', $operators );

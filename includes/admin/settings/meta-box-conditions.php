@@ -17,7 +17,7 @@ $conditions = get_post_meta( $post->ID, '_wafs_shipping_method_conditions', true
 ?>
 <div class='wafs wafs_conditions wafs_meta_box wafs_conditions_meta_box'>
 
-	<p><strong><?php _e( 'Match all of the following rules to allow free shipping:', 'wafs' ); ?></strong></p>
+	<p><strong><?php _e( 'Match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' ); ?></strong></p>
 	
 	<?php
 	if ( !empty( $conditions ) ) :
@@ -26,7 +26,7 @@ $conditions = get_post_meta( $post->ID, '_wafs_shipping_method_conditions', true
 			?>
 			<div class='condition-group condition-group-<?php echo $condition_group; ?>' data-group='<?php echo $condition_group; ?>'>
 
-				<p class='or_match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'wafs' );?></p>
+				<p class='or_match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?></p>
 				<?php
 				foreach ( $conditions as $condition_id => $condition ) :
 	
@@ -36,7 +36,7 @@ $conditions = get_post_meta( $post->ID, '_wafs_shipping_method_conditions', true
 				?>
 			</div>
 			
-			<p><strong><?php _e( 'Or', 'wafs' ); ?></strong></p>
+			<p><strong><?php _e( 'Or', 'woocommerce-advanced-free-shipping' ); ?></strong></p>
 			<?php
 		endforeach;
 		
@@ -51,4 +51,4 @@ $conditions = get_post_meta( $post->ID, '_wafs_shipping_method_conditions', true
 
 </div>
 
-<a class='button condition-group-add' href='javascript:void(0);'><?php _e( 'Add \'Or\' group', 'wafs' ); ?></a>
+<a class='button condition-group-add' href='javascript:void(0);'><?php _e( 'Add \'Or\' group', 'woocommerce-advanced-free-shipping' ); ?></a>

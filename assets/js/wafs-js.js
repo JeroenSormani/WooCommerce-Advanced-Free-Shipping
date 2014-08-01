@@ -1,6 +1,6 @@
 jQuery( function( $ ) {
 	
-	var loading_icon = '<span class="loading-icon"><img src="/wp-admin/images/wpspin_light.gif"/></span>';
+	var loading_icon = '<span class="loading-icon"><img src="images/wpspin_light.gif"/></span>';
 	
 	// Add condition
 	$( '#wafs_conditions' ).on( 'click', '.condition-add', function() {

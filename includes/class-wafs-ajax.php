@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Class Wafs_post_type
  *
@@ -12,9 +13,12 @@
 class Wafs_Ajax {
 
 
-	/* Construct.
+	/**
+	 * Construct.
 	 *
 	 * Add ajax actions in order to work.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		
@@ -28,8 +32,10 @@ class Wafs_Ajax {
 		
 	}
 	
-	/* 
-	 * Render new condition
+	/**
+	 * Render new condition.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_add_condition() {
 
@@ -38,8 +44,12 @@ class Wafs_Ajax {
 		
 	}
 	
-	/*
-	 * Render new condition group.
+	/**
+	 * New condition group.
+	 *
+	 * Display a new condition group.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_add_condition_group() {
 		?>
@@ -58,9 +68,10 @@ class Wafs_Ajax {
 		die();
 	}
 	
-	/* Update condition values.
+	/**
+	 * Update condition values.
 	 *
-	 * Retreive and render the new condition values according to the condition key
+	 * Retreive and render the new condition values according to the condition key.
 	 */
 	public function wafs_update_condition_value() {
 
@@ -69,9 +80,12 @@ class Wafs_Ajax {
 		
 	}
 	
-	/* Update condition description
+	/**
+	 * Update condition description.
 	 *
-	 * Render the corresponding description for the condition key
+	 * Render the corresponding description for the condition key.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_update_condition_description() {
 	

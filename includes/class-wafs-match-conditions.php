@@ -1,19 +1,22 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- *	Class Wafs_Match_Conditions
+ * Class Wafs_Match_Conditions
  *
- *	The WAFS Match Conditions class handles the matching rules for Free Shipping
+ * The WAFS Match Conditions class handles the matching rules for Free Shipping
  *
- *	@class      Wapl_Conditions
- *	@author     Jeroen Sormani
- *	@package 	WooCommerce Advanced Product Labels
- *	@version    1.0.0
+ * @class      Wapl_Conditions
+ * @author     Jeroen Sormani
+ * @package 	WooCommerce Advanced Product Labels
+ * @version    1.0.0
  */
 class Wafs_Match_Conditions {
 
 
 	/**
-	 * __construct functon.
+	 * __construct function.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		
@@ -43,7 +46,12 @@ class Wafs_Match_Conditions {
 	}
 
 
-	/* Match subtotal
+	/**
+	 * Match subtotal.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -71,7 +79,12 @@ class Wafs_Match_Conditions {
 	}
 
 
-	/* Match subtotal excluding taxes
+	/**
+	 * Match subtotal excluding taxes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -99,7 +112,12 @@ class Wafs_Match_Conditions {
 	}
 	
 
-	/* Match taxes
+	/**
+	 * Match taxes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -129,7 +147,12 @@ class Wafs_Match_Conditions {
 	}
 	
 
-	/* Match quantity
+	/**
+	 * Match quantity.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -157,7 +180,12 @@ class Wafs_Match_Conditions {
 	}
 	
 
-	/* Match quantity
+	/**
+	 * Match quantity.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -185,7 +213,12 @@ class Wafs_Match_Conditions {
 	}
 		
 
-	/* Match coupon
+	/**
+	 * Match coupon.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -211,15 +244,17 @@ class Wafs_Match_Conditions {
 	
 /***************************
  *	
- *				User details
+ * User details
  *
- ***************************
-*/
+ **************************/
 
 
-	/* Match zipcode
+	/**
+	 * Match zipcode.
 	 *
-	 * @since 1.0.2; $value may contain single or comma (,) separated zipcodes
+	 * @since 1.0.2; $value may contain single or comma (,) separated zipcodes.
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -259,7 +294,12 @@ class Wafs_Match_Conditions {
 	}
 
 
-	/* Match city
+	/**
+	 * Match city.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -283,7 +323,12 @@ class Wafs_Match_Conditions {
 	}
 	
 	
-	/* Match state
+	/**
+	 * Match state.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -307,7 +352,12 @@ class Wafs_Match_Conditions {
 	}
 	
 	
-	/* Match city
+	/**
+	 * Match city.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -331,7 +381,13 @@ class Wafs_Match_Conditions {
 	}
 	
 
-	/* Match role
+	/**
+	 * Match role.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
+	 * @global object $current_user Current user object for capabilities.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -355,15 +411,19 @@ class Wafs_Match_Conditions {
 
 /***************************
  *	
- *					 Product
+ * Product
  *
- ***************************
-*/
+ **************************/
 
 
-	/* Match width
+	/**
+	 * Match width.
 	 *
-	 * Match the user value to the widest product 
+	 * Match the user value to the widest product.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -403,9 +463,14 @@ class Wafs_Match_Conditions {
 	}
 
 	
-	/* Match height
+	/**
+	 * Match height.
 	 *
 	 * Match the user value to the highest product 
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -446,9 +511,14 @@ class Wafs_Match_Conditions {
 	}
 	
 	
-	/* Match length
+	/**
+	 * Match length.
 	 *
-	 * Match the user value to the biggest product 
+	 * Match the user value to the biggest product.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -489,7 +559,12 @@ class Wafs_Match_Conditions {
 	}
 	
 	
-	/* Match weight
+	/**
+	 * Match weight.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -517,7 +592,12 @@ class Wafs_Match_Conditions {
 	}
 	
 	
-	/* Match all product stock
+	/**
+	 * Match all product stock.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -557,7 +637,12 @@ class Wafs_Match_Conditions {
 	}
 
 
-	/* Match all product stock statusses
+	/**
+	 * Match all product stock statusses.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 *
 	 * @param bool $match
 	 * @param string $operator
@@ -593,8 +678,12 @@ class Wafs_Match_Conditions {
 	}	
 	
 
-	/* Match category
+	/**
+	 * Match category.
 	 *
+	 * @since 1.0.0
+	 *
+	 * @global object $woocommerce WooCommerce object.
 	 * @param bool $match
 	 * @param string $operator
 	 * @param mixed $value
@@ -622,7 +711,7 @@ class Wafs_Match_Conditions {
 			
 			foreach ( $woocommerce->cart->cart_contents as $product ) :
 			
-				if ( has_term( $value, 'product_cat', $post->ID ) ) :
+				if ( has_term( $value, 'product_cat', $product['product_id'] ) ) :
 					$match = false;
 				endif;
 				

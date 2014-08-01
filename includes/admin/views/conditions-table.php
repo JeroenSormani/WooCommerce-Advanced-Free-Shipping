@@ -1,8 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * Conditions table
+ * Conditions table.
  *
- * Display table with all the user configured Free shipping conditions
+ * Display table with all the user configured Free shipping conditions.
  *
  * @author		Jeroen Sormani
  * @package 	WooCommerce Advanced Free Shipping
@@ -21,8 +22,8 @@ $method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 
 			<thead>
 				<tr>
 					<th style='padding-left: 10px;'><?php _e( 'Title', 'woocommerce-advanced-free-shipping' ); ?></th>
-					<th><?php _e( 'Shipping title', 'woocommerce-advanced-free-shipping' ); ?></th>
-					<th><?php _e( 'Condition groups', 'woocommerce-advanced-free-shipping' ); ?></th>
+					<th style='padding-left: 10px;'><?php _e( 'Shipping title', 'woocommerce-advanced-free-shipping' ); ?></th>
+					<th style='padding-left: 10px;'><?php _e( 'Condition groups', 'woocommerce-advanced-free-shipping' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>

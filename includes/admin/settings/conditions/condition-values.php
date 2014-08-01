@@ -1,5 +1,19 @@
 <?php
-
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+/**
+ * Create value input.
+ *
+ * Set all value and create an input field for it.
+ *
+ * @since 1.0.0
+ *
+ * @global object $woocommerce WooCommerce object.
+ *
+ * @param int id Throw in the condition ID.
+ * @param int $group Condition group ID.
+ * @param string $condition Condition where the value input is used for.
+ * @param string $current_value Current chosen slug.
+ */
 function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $current_value = '' ) {
 
 	global $woocommerce;
@@ -171,14 +185,32 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 			
 			default :
 			case 'select' :
-				?><select class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][value]'><?php
+				?><select class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][value]'>
+				<option <?php selected( '', $current_value ); ?>><?php _e( 'Select option' , 'woocommerce-advanced-free-shipping' ); ?></option><?php
 				foreach ( $values['values'] as $key => $value ) :
-					$selected = ( $key == $current_value ) ? 'SELECTED' : null;
-					?><option value='<?php echo $key; ?>' <?php echo $selected; ?>><?php echo $value; ?></option><?php
+
+					if ( ! is_array( $value ) ) :
+						?><option value='<?php echo $key; ?>' <?php selected( $key, $current_value ); ?>><?php echo $value; ?></option><?php
+					else :
+						?><optgroup label='<?php echo $key ?>'><?php
+							foreach ( $value as $k => $v ) :
+								?><option value='<?php echo $k; ?>' <?php selected( $k, $current_value ); ?>><?php echo $v; ?></option><?php
+							endforeach;
+						?></optgroup><?php
+					endif;
+				
 				endforeach;
+				
+				
+				if ( empty( $values['values'] ) ) :
+					?><option readonly disabled><?php
+						_e( 'There are no options available', 'woocommerce-advanced-free-shipping' ); 
+					?></option><?php
+				endif;
+
 				?></select><?php
+				
 			break;
-			
 		endswitch;
 		
 		?>

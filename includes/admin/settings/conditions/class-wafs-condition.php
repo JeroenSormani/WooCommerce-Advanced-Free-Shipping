@@ -1,8 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * Class Wafs_Condition
+ * Class Wafs_Condition.
  *
- * Create a condition rule
+ * Create a condition rule.
  *
  * @class       Wafs_Condition
  * @author     	Jeroen Sormani
@@ -12,15 +13,56 @@
 
 class Wafs_Condition {
 	
+	/**
+	 * Condition.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var string $condition Condition slug.
+	 */
 	public $condition;
+
+	/**
+	 * Operator.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var string $operaor operator slug.
+	 */
 	public $operator;
+
+	/**
+	 * Value.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var string $value Condition value.
+	 */
 	public $value;
+
+	/**
+	 * Group ID.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var string $group Condition grou ID.
+	 */
 	public $group;
+
+	/**
+	 * Condition id.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var string $id Condition id.
+	 */
 	public $id;
 
 
 	/**
-	 * __construct functon.
+	 * __construct function.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct( $id = null, $group = 0, $condition = null, $operator = null, $value = null ) {
 		 
@@ -41,7 +83,9 @@ class Wafs_Condition {
 	/**
 	 * Create condition.
 	 *
-	 * Created a condition rule object
+	 * Created a condition rule object.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_create_object() {
 		
@@ -68,7 +112,9 @@ class Wafs_Condition {
 	/**
 	 * Condition dropdown.
 	 *
-	 * Render and load condition dropdown
+	 * Render and load condition dropdown.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_condition_conditions() {
 
@@ -80,7 +126,9 @@ class Wafs_Condition {
 	/**
 	 * Operator dropdown.
 	 *
-	 * Render and load operator dropdown
+	 * Render and load operator dropdown.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_condition_operator() {
 		
@@ -92,7 +140,9 @@ class Wafs_Condition {
 	/**
 	 * Value dropdown.
 	 *
-	 * Render and load value dropdown
+	 * Render and load value dropdown.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_condition_values() {
 
@@ -100,18 +150,36 @@ class Wafs_Condition {
 		
 	}
 	
+	
+	/**
+	 * Add button.
+	 *
+	 * @since 1.0.0
+	 */
 	public function wafs_add_condition_button() {	
 		?>
 		<a class='button condition-add' data-group='<?php echo $this->group; ?>' href='javascript:void(0);'>+</a>
 		<?php
 	}
 	
+
+	/**
+	 * Delete button.
+	 *
+	 * @since 1.0.0
+	 */
 	public function wafs_remove_condition_button() {
 		?>
 		<a class='button condition-delete' href='javascript:void(0);'>-</a>
 		<?php
 	}
 	
+
+	/**
+	 * Description.
+	 *
+	 * @since 1.0.0
+	 */
 	public function wafs_condition_description() {
 		
 		wafs_condition_description( $this->condition );

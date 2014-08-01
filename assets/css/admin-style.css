@@ -104,7 +104,7 @@
 }
 
 
-/* © WooCommerce Add icon */
+/* WooCommerce Add icon */
 .add.button:before {
 	font-family: WooCommerce;
 	speak: none;
@@ -115,4 +115,11 @@
 	-webkit-font-smoothing: antialiased;
 	margin-right: 7px;
 	content: "\e007";
+}
+/* Overview row actions */
+#advanced_free_shipping_flat_rates tr .row-actions {
+	visibility: hidden;
+}
+#advanced_free_shipping_flat_rates tr:hover > td > .row-actions {
+	visibility: visible !important;
 }

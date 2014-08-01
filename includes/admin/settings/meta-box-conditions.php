@@ -1,8 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * WAFS meta box conditions
+ * WAFS meta box conditions.
  *
- * Display the shipping conditions in the meta box
+ * Display the shipping conditions in the meta box.
  *
  * @author		Jeroen Sormani
  * @package		WooCommerce Advanced Free Shipping

@@ -1,4 +1,14 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+/**
+ * Create description question.
+ *
+ * Select and create descriptino question at the end of a condition row.
+ *
+ * @since 1.0.0
+ *
+ * @param string $condition Condition to show description for.
+ */
 
 function wafs_condition_description( $condition ) {
 
@@ -17,24 +27,21 @@ function wafs_condition_description( $condition ) {
 	) );
 	
 	// Display description
-	if ( !isset( $descriptions[ $condition ] ) ) :
+	if ( ! isset( $descriptions[ $condition ] ) ) :
+		?><span class='wafs-description no-description'></span><?php
 		return;
 	endif;
 	?>
-	<span class='wafs-description <?php echo $descriptions[ $condition ]; ?>-description'>
+	<span class='wafs-description <?php echo $condition; ?>-description'>
 
 		<div class='description'>
-			
-			<?php if ( isset( $descriptions[ $condition ] ) ) : ?>
-			
-				<img class='wafs_tip' src='<?php echo $woocommerce->plugin_url(); ?>/assets/images/help.png' height='24' width='24' />
-	
-				<div class='wafs_desc'>
-					<?php echo $descriptions[ $condition ]; ?>
-				</div>
-			
-			<?php endif; ?>
-			
+
+			<img class='wafs_tip' src='<?php echo $woocommerce->plugin_url(); ?>/assets/images/help.png' height='24' width='24' />
+
+			<div class='wafs_desc'>
+				<?php echo $descriptions[ $condition ]; ?>
+			</div>
+
 		</div>
 		
 	</span>

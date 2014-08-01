@@ -7,7 +7,7 @@ Description: WooCommerce Advanced Free Shipping is an plugin which allows you to
 Version: 1.0.1
 Author: Jeroen Sormani
 Author URI: http://www.jeroensormani.com/
-Text Domain: wafs
+Text Domain: woocommerce-advanced-free-shipping
 
  * Copyright Jeroen Sormani
  *
@@ -29,37 +29,42 @@ Text Domain: wafs
  *     along with WordPress. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- *	Class Woocommerce_Advanced_Free_Shipping
+ * Class Woocommerce_Advanced_Free_Shipping
  *
- *	Main WAFS class, add filters and handling all other files
+ * Main WAFS class, add filters and handling all other files
  *
- *	@class       Woocommerce_Advanced_Free_Shipping
- *	@version     1.0.0
- *	@author      Jeroen Sormani
+ * @class       Woocommerce_Advanced_Free_Shipping
+ * @version     1.0.0
+ * @author      Jeroen Sormani
  */
 class Woocommerce_Advanced_Free_Shipping {
 
 
 	/**
-	 * __construct functon.
+	 * __construct function.
 	 */
 	public function __construct() {
 		
-		// check if woocommerce is activated
-		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
-			return;
-		
+		// Check if WooCommerce is active
+		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) :
+			if ( ! is_plugin_active_for_network( 'woocommerce/woocommerce.php' ) ) :
+				return;
+			endif;
+		endif;
+				
 		$this->wafs_hooks();
 
 	}
 	
 	
 	/**
-	 * wafs_hooks functon.
+	 * wafs_hooks function.
 	 *
-	 * Initialize all hooks
+	 * Initialize all class hooks.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_hooks() {
 		
@@ -79,9 +84,11 @@ class Woocommerce_Advanced_Free_Shipping {
 	
 	
 	/**
-	 * wafs_free_shipping functon.
+	 * Shipping method.
 	 *
-	 * 
+	 * Include the WooCommerce shipping method class.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_free_shipping() {
 		
@@ -91,14 +98,17 @@ class Woocommerce_Advanced_Free_Shipping {
 	
 	
 	/**
-	 * wafs_add_shipping_method functon.
+	 * Add shipping method.
 	 *
-	 * 
+	 * Add shipping method to WooCommerce.
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_add_shipping_method( $methods ) {
 		
-		if ( class_exists( 'Wafs_Free_Shipping_Method' ) )
+		if ( class_exists( 'Wafs_Free_Shipping_Method' ) ) :
 			$methods[] = 'Wafs_Free_Shipping_Method';
+		endif;
 
 		return $methods;
 		
@@ -106,19 +116,25 @@ class Woocommerce_Advanced_Free_Shipping {
 	
 	
 	/**
-	 * Register post type 'wafs'.
+	 * WAFS post type.
+	 *
+	 * Class to handle post type and everything around that. 
+	 *
+	 * @since 1.0.0
 	 */
 	public function wafs_register_post_type() {
 
 		/**
-		 * Require file with settings
+		 * Require file with settings.
 		 */
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wafs-post-type.php';
 
 	}
 	
 	/**
-	 * Enqueue style and java scripts.
+	 * Enqueue scripts.
+	 *
+	 * @since 1.0.0
 	 */	
 	public function wafs_admin_enqueue_scripts() {
 		
@@ -131,7 +147,7 @@ class Woocommerce_Advanced_Free_Shipping {
 $wafs = new Woocommerce_Advanced_Free_Shipping();
 
 /**
- * Require matching conditions hooks
+ * Require matching conditions hooks.
  */
 require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-match-conditions.php';
 ?>

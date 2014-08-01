@@ -1,6 +1,17 @@
 <?php
-
-function wafs_condition_conditions( $id, $group = 0, $current_value = 'total' ) {
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+/**
+ * Create condition dropdown.
+ *
+ * Set all conditions and create dropdown for it.
+ *
+ * @since 1.0.0
+ *
+ * @param int id Throw in the condition ID.
+ * @param int $group Condition group ID.
+ * @param string $current_value Current chosen slug.
+ */
+function wafs_condition_conditions( $id, $group = 0, $current_value = 'subtotal' ) {
 
 	$conditions = array(
 		__( 'Cart', 'woocommerce-advanced-free-shipping' ) => array( 
@@ -32,22 +43,19 @@ function wafs_condition_conditions( $id, $group = 0, $current_value = 'total' ) 
 	$conditions = apply_filters( 'wafs_conditions', $conditions );
 	
 	?>
-	
 	<span class='wafs-condition-wrap wafs-condition-wrap-<?php echo $id; ?>'>
 		
 		<select class='wafs-condition' data-group='<?php echo $group; ?>' data-id='<?php echo $id; ?>' 
 			name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][condition]'>
 			
-			<?php echo $selected;
+			<?php
 			foreach ( $conditions as $option_group => $values ) :
 			
 				?><optgroup label='<?php echo $option_group; ?>'><?php
 				
 				foreach ( $values as $key => $value ) :
-				
-					$selected = ( $key == $current_value ) ? "SELECTED" : null;
-					
-					?><option value='<?php echo $key; ?>' <?php echo $selected; ?>><?php echo $value; ?></option><?php
+
+					?><option value='<?php echo $key; ?>' <?php selected( $key, $current_value ); ?>><?php echo $value; ?></option><?php
 				
 				endforeach;
 				

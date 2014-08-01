@@ -1,5 +1,5 @@
 <?php
-
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 
 
@@ -7,10 +7,9 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 	
 	
 		/**
-		 * Constructor for your shipping class
+		 * Constructor.
 		 *
-		 * @access public
-		 * @return void
+		 * @since 1.0.0
 		 */
 		public function __construct() {
 
@@ -27,10 +26,9 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 
 
 		/**
-		 * Init your settings
+		 * Init settings.
 		 *
-		 * @access public
-		 * @return void
+		 * @since 1.0.0
 		 */
 		function init() {
 		
@@ -56,12 +54,13 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		
 	
 		/**
-		 * Match methods
+		 * Match methods.
 		 *
-		 * Checks if methods matches conditions
+		 * Checks if methods matches conditions.
 		 *
-		 * @access public
-		 * @return void
+		 * @since 1.0.0
+		 *
+		 * @return array Only the first matched method (since you won't need two free shippings).
 		 */
 		public function wafs_match_methods() {
 
@@ -88,10 +87,14 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		
 		
 		/**
-		 * Match conditions
+		 * Match conditions.
 		 *
-		 * @access public
-		 * @return void
+		 * Method to check all condition groups and conditions if they match their rules.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $condition_groups All condition groups set by the user.
+		 * @return BOOL True if one of the conditions groups matches.
 		 */
 		public function wafs_match_conditions( $condition_groups = array() ) {
 
@@ -124,10 +127,9 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		
 		
 		/**
-		 * Init form fields
+		 * Init form fields.
 		 *
-		 * @access public
-		 * @return void
+		 * @since 1.0.0
 		 */
 		public function init_form_fields() {
 		
@@ -152,7 +154,8 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 			
 		}
 		
-		/* Settings tab table.
+		/**
+		 * Settings tab table.
 		 *
 		 * Load and render the table on the Advanced Free Shipping settings tab.
 		 *
@@ -175,7 +178,8 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		/**
 		 * validate_additional_conditions_table_field function.
 		 *
-		 * @access public
+		 * @since 1.0.0
+		 *
 		 * @param mixed $key
 		 * @return bool
 		 */
@@ -186,9 +190,12 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 
 
 		/**
-		 * calculate_shipping function.
+		 * Calculate shipping.
 		 *
-		 * @access public
+		 * Calculate shipping costs (which is always free).
+		 *
+		 * @since 1.0.0
+		 *
 		 * @param mixed $package
 		 * @return void
 		 */
@@ -210,14 +217,15 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 			// Register the rate
 			$this->add_rate( $rate );
 
-			
 		}
 		
 		
 		/**
 		 * Hide shipping.
 		 *
-		 * Hide Shipping methods when regular or advanced free shipping is available
+		 * Hide Shipping methods when regular or advanced free shipping is available.
+		 *
+		 * @since 1.0.0
 		 *
 		 * @param array $available_methods
 		 * @return array
@@ -239,8 +247,7 @@ if ( ! class_exists( 'Wafs_Free_Shipping_Method' ) ) {
 		 		return $available_methods;
 		 		
 		 	endif;
-		 	
-		  	
+
 		}
 		
 		

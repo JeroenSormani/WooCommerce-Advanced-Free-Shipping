@@ -5,10 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * The WAFS Match Conditions class handles the matching rules for Free Shipping
  *
- * @class      Wapl_Conditions
- * @author     Jeroen Sormani
- * @package 	WooCommerce Advanced Product Labels
- * @version    1.0.0
+ * @class 		Wapl_Conditions
+ * @author		Jeroen Sormani
+ * @package		WooCommerce Advanced Product Labels
+ * @version		1.0.0
  */
 class Wafs_Match_Conditions {
 
@@ -53,10 +53,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_subtotal( $match, $operator, $value ) {
 
@@ -86,10 +86,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_subtotal_ex_tax( $match, $operator, $value ) {
 
@@ -119,10 +119,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_tax( $match, $operator, $value ) {
 
@@ -154,10 +154,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_quantity( $match, $operator, $value ) {
 
@@ -187,10 +187,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_contains_product( $match, $operator, $value ) {
 
@@ -220,10 +220,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_coupon( $match, $operator, $value ) {
 
@@ -256,10 +256,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_zipcode( $match, $operator, $value ) {
 
@@ -301,10 +301,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_city( $match, $operator, $value ) {
 
@@ -330,10 +330,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_state( $match, $operator, $value ) {
 
@@ -359,10 +359,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_country( $match, $operator, $value ) {
 
@@ -389,10 +389,10 @@ class Wafs_Match_Conditions {
 	 * @global object $woocommerce WooCommerce object.
 	 * @global object $current_user Current user object for capabilities.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_role( $match, $operator, $value ) {
 
@@ -425,10 +425,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_width( $match, $operator, $value ) {
 
@@ -472,12 +472,11 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
-
 	public function wafs_match_condition_height( $match, $operator, $value ) {
 
 		global $woocommerce;
@@ -520,12 +519,11 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
-
 	public function wafs_match_condition_length( $match, $operator, $value ) {
 
 		global $woocommerce;
@@ -566,10 +564,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_weight( $match, $operator, $value ) {
 
@@ -599,10 +597,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_stock( $match, $operator, $value ) {
 
@@ -644,10 +642,10 @@ class Wafs_Match_Conditions {
 	 *
 	 * @global object $woocommerce WooCommerce object.
 	 *
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_stock_status( $match, $operator, $value ) {
 
@@ -684,10 +682,10 @@ class Wafs_Match_Conditions {
 	 * @since 1.0.0
 	 *
 	 * @global object $woocommerce WooCommerce object.
-	 * @param bool $match
-	 * @param string $operator
-	 * @param mixed $value
-	 * @return bool
+	 * @param bool 		$match 		Default match value.
+	 * @param string 	$operator	Chosen operator by the user.
+	 * @param mixed 	$value		Value given bij the user.
+	 * @return bool		True if this condition matches, false if condition doesn't match.
 	 */
 	public function wafs_match_condition_category( $match, $operator, $value ) {
 

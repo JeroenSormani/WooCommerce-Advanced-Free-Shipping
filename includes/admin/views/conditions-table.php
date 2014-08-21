@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @package 	WooCommerce Advanced Free Shipping
  * @version		1.0.0
  */
-$method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'wafs' ) );
+$method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'wafs', 'post_status' => array( 'draft', 'publish' ) ) );
 ?>
 <tr valign="top">
 	<th scope="row" class="titledesc">

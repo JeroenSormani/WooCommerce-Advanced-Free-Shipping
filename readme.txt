@@ -46,11 +46,13 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 * Improvement - Customized user messages when saving shipping method
 * Improvement - Updated some comments to comment standards
 * Improvement - Overview not showing all actions when hovering only one
-* Improvement - Added ABSPATH to each file
+* Improvement - Added ABSPATH check to each file
+* Improvement - Comments in matching file up to coding standards
 * Fix - No notice on shipping title in DEBUG mode
 * Fix - Loading icon on sub directory websites
 * Fix - Condition description didn't show sometimes
 * Fix - 'Category' - 'Not equal to' error
+* Fix - Showing drafts in overview
 * Removed - Author from overview, who needs that?
 
 

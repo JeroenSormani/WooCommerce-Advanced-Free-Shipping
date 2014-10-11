@@ -117,9 +117,9 @@
 	content: "\e007";
 }
 /* Overview row actions */
-#advanced_free_shipping_flat_rates tr .row-actions {
+#advanced_free_shipping_shipping_methods tr .row-actions {
 	visibility: hidden;
 }
-#advanced_free_shipping_flat_rates tr:hover > td > .row-actions {
+#advanced_free_shipping_shipping_methods tr:hover > td > .row-actions {
 	visibility: visible !important;
 }

@@ -1,31 +1,32 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * Class Wafs_post_type
+ * Class WAFS_post_type
  *
  * Initialize the WAFS post type
  *
- * @class       Wafs_post_type
+ * @class       WAFS_post_type
  * @author     	Jeroen Sormani
  * @package		WooCommerce Advanced Free Shipping
  * @version		1.0.0
  */
-class Wafs_post_type {
-	
-	
+class WAFS_post_type {
+
+
 	/**
-	 * __construct function.
+	 * Constructor.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		 
+
 		 $this->wafs_register_post_type();
 
+		 // Add/save meta boxes
 		 add_action( 'add_meta_boxes', array( $this, 'wafs_post_type_meta_box' ) );
 		 add_action( 'save_post', array( $this, 'wafs_save_meta' ) );
 		 add_action( 'save_post', array( $this, 'wafs_save_condition_meta' ) );
-		 
+
  		 // Edit user messages
 		 add_filter( 'post_updated_messages', array( $this, 'wafs_custom_post_type_messages' ) );
 
@@ -33,17 +34,17 @@ class Wafs_post_type {
 		 add_action('load-edit.php', array( $this, 'wafs_redirect_after_trash' ) );
 
 	 }
-	 
-	 
+
+
 	/**
-	 * Register post type.
+	 * Post type.
 	 *
 	 * Register 'wafs' post type.
 	 *
 	 * @since 1.0.0
 	 */
 	public function wafs_register_post_type() {
-		
+
 		$labels = array(
 		    'name' 					=> __( 'Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
 			'singular_name' 		=> __( 'Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
@@ -69,16 +70,19 @@ class Wafs_post_type {
 			'supports' 				=> array( 'title' ),
 			'labels' 				=> $labels,
 		) );
-		
+
 	}
 
 
 	/**
-	 * Edit user messages.
+	 * Messages.
+	 *
+	 * Modify the notice messages text for the 'was' post type.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array User messages.
+	 * @param 	array $messages Existing list of messages.
+	 * @return 	array			Modified list of messages.
 	 */
 	function wafs_custom_post_type_messages( $messages ) {
 
@@ -92,8 +96,8 @@ class Wafs_post_type {
 			2  => __( 'Custom field updated.', 'woocommerce-advanced-free-shipping' ),
 			3  => __( 'Custom field deleted.', 'woocommerce-advanced-free-shipping' ),
 			4  => __( 'Free shipping method updated.', 'woocommerce-advanced-free-shipping' ),
-			5  => isset( $_GET['revision'] ) ? 
-				sprintf( __( 'Free shipping method restored to revision from %s', 'woocommerce-advanced-free-shipping' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) 
+			5  => isset( $_GET['revision'] ) ?
+				sprintf( __( 'Free shipping method restored to revision from %s', 'woocommerce-advanced-free-shipping' ), wp_post_revision_title( (int) $_GET['revision'], false ) )
 				: false,
 			6  => __( 'Free shipping method published.', 'woocommerce-advanced-free-shipping' ),
 			7  => __( 'Free shipping method saved.', 'woocommerce-advanced-free-shipping' ),
@@ -104,10 +108,10 @@ class Wafs_post_type {
 			),
 			10 => __( 'Free shipping method draft updated.', 'woocommerce-advanced-free-shipping' ),
 		);
-		
+
 		if ( 'wafs' == $post_type ) :
 			$overview_link = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=wafs_free_shipping_method' );
-	
+
 			$overview = sprintf( ' <a href="%s">%s</a>', esc_url( $overview_link ), __( 'Return to overview.', 'woocommerce-advanced-free-shipping' ) );
 			$messages[ $post_type ][1] .= $overview;
 			$messages[ $post_type ][6] .= $overview;
@@ -116,9 +120,9 @@ class Wafs_post_type {
 			$messages[ $post_type ][10] .= $overview;
 
 		endif;
-		
+
 		return $messages;
-		
+
 	}
 
 
@@ -130,47 +134,47 @@ class Wafs_post_type {
 	 * @since 1.0.0
 	 */
 	public function wafs_post_type_meta_box() {
-		
+
 		add_meta_box( 'wafs_conditions', __( 'Advanced Free Shipping conditions', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_conditions' ), 'wafs', 'normal' );
 		add_meta_box( 'wafs_settings', __( 'Shipping settings', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_settings' ), 'wafs', 'normal' );
-		
+
 	}
-	
-	
+
+
 	/**
-	 * Render conditions meta box.
+	 * Render meta box.
 	 *
 	 * Render and display the condition meta box contents.
 	 *
 	 * @since 1.0.0
 	 */
 	public function render_wafs_conditions() {
-		
+
 		/**
 		 * Load meta box conditions view.
 		 */
 		require_once plugin_dir_path( __FILE__ ) . 'admin/settings/meta-box-conditions.php';
-		
+
 	}
-	
-	
+
+
 	/**
-	 * Render settings meta box.
+	 * Render meta box.
 	 *
 	 * Render and display the settings meta box conditions.
 	 *
 	 * @since 1.0.0
 	 */
 	public function render_wafs_settings() {
-		
+
 		/**
 		 * Load meta box settings view
 		 */
 		require_once plugin_dir_path( __FILE__ ) . 'admin/settings/meta-box-settings.php';
-		
+
 	}
-		
-	
+
+
 	/**
 	 * Save conditions meta box.
 	 *
@@ -179,21 +183,21 @@ class Wafs_post_type {
 	 * @since 1.0.0
 	 */
 	public function wafs_save_condition_meta( $post_id ) {
-		
-		if ( !isset( $_POST['wafs_conditions_meta_box_nonce'] ) )
+
+		if ( ! isset( $_POST['wafs_conditions_meta_box_nonce'] ) )
 			return $post_id;
-			
+
 		$nonce = $_POST['wafs_conditions_meta_box_nonce'];
-		
+
 		if ( ! wp_verify_nonce( $nonce, 'wafs_conditions_meta_box' ) )
 			return $post_id;
-			
+
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return $post_id;
-			
+
 		if ( ! current_user_can( 'manage_woocommerce' ) )
 			return $post_id;
-		
+
 		$shipping_method_conditions = $_POST['_wafs_shipping_method_conditions'];
 
 		update_post_meta( $post_id, '_wafs_shipping_method_conditions', $shipping_method_conditions );
@@ -209,32 +213,32 @@ class Wafs_post_type {
 	 * @since 1.0.0
 	 */
 	public function wafs_save_meta( $post_id ) {
-		
+
 		if ( !isset( $_POST['wafs_settings_meta_box_nonce'] ) )
 			return $post_id;
-			
+
 		$nonce = $_POST['wafs_settings_meta_box_nonce'];
-		
+
 		if ( ! wp_verify_nonce( $nonce, 'wafs_settings_meta_box' ) )
 			return $post_id;
-			
+
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return $post_id;
-			
+
 		if ( ! current_user_can( 'manage_woocommerce' ) )
 			return $post_id;
-		
+
 		$shipping_method = $_POST['_wafs_shipping_method'];
 
 		update_post_meta( $post_id, '_wafs_shipping_method', $shipping_method );
-		
+
 	}
 
 
 	/**
-	 * Trash redirect.
+	 * Redirect trash.
 	 *
-	 * Redirect to overview when a method is deleted.
+	 * Redirect user after trashing a WAFS post.
 	 *
 	 * @since 1.0.0
 	 */
@@ -243,7 +247,7 @@ class Wafs_post_type {
 		$screen = get_current_screen();
 
 		if( 'edit-wafs' == $screen->id ) :
-		
+
 			if( isset( $_GET['trashed'] ) &&  intval( $_GET['trashed'] ) > 0 ) :
 
 				$redirect = admin_url( '/admin.php?page=wc-settings&tab=shipping&section=wafs_free_shipping_method' );
@@ -251,14 +255,14 @@ class Wafs_post_type {
 				exit();
 
 			endif;
-			
+
 		endif;
 
-		
+
 	}
-	
+
 }
-$wafs_post_type = new Wafs_post_type();
+$wafs_post_type = new WAFS_post_type();
 
 /**
  * Load condition object
@@ -268,5 +272,3 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/settings/conditions/class-wafs
  * Load ajax methods
  */
 require_once plugin_dir_path( __FILE__ ) . '/class-wafs-ajax.php';
-
-?>

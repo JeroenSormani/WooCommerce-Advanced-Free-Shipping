@@ -4,7 +4,7 @@ Donate link: http://www.jeroensormani.com/donate/
 Tags: woocommerce, shipping, woocommerce shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 3.6
 Tested up to: 3.9
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,9 +47,11 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 * Improvement - Updated some comments to comment standards
 * Improvement - Overview not showing all actions when hovering only one
 * Improvement - Added ABSPATH check to each file
-* Improvement - Comments in matching file up to coding standards
+* Improvement - Improved code comments
 * Improvement - Remove globals, use WAFS() function now
+* Improvement - Zipcodes are now better detected (only integer values)
 * Improvement - Load textdomains
+* Improvement - Add compatibility for custom value fields
 * Fix - No notice on shipping title in DEBUG mode
 * Fix - Loading icon on sub directory websites
 * Fix - Condition description didn't show sometimes

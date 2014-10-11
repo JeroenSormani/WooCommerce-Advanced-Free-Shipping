@@ -101,7 +101,19 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 		case 'state' :
 
 			$values['field'] = 'select';
-			$values['options'] = $woocommerce->countries->get_states( 'US' );
+
+	        foreach ( $woocommerce->countries->states as $country => $states ) :
+
+	            if ( empty( $states ) ) continue; // Don't show country if it has no states
+	            if ( ! array_key_exists( $country, $woocommerce->countries->get_allowed_countries() ) ) continue; // Skip unallowed countries
+
+	            foreach ( $states as $state_key => $state ) :
+	                $country_states[ $woocommerce->countries->countries[ $country ] ][ $country . '_' . $state_key ] = $state;
+	            endforeach;
+
+	            $values['options'] = $country_states;
+
+	        endforeach;
 
 		break;
 

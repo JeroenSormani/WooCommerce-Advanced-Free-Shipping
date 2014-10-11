@@ -56,6 +56,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 * Improvement - Zipcodes are now better detected (only integer values)
 * Improvement - Load textdomains
 * Improvement - Add compatibility for custom value fields
+* Improvement - Add world wide state support
 * Fix - No notice on shipping title in DEBUG mode
 * Fix - Loading icon on sub directory websites
 * Fix - Condition description didn't show sometimes

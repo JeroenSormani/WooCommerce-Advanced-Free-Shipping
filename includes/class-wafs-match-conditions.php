@@ -435,10 +435,12 @@ class WAFS_Match_Conditions {
 
 		if ( ! isset( $woocommerce->customer ) ) return;
 
+		$state = $woocommerce->customer->get_shipping_country() . '_' . $woocommerce->customer->get_shipping_state();
+
 		if ( '==' == $operator ) :
-			$match = ( $woocommerce->customer->get_shipping_state() == $value );
+			$match = ( $state == $value );
 		elseif ( '!=' == $operator ) :
-			$match = ( $woocommerce->customer->get_shipping_state() != $value );
+			$match = ( $state != $value );
 		endif;
 
 		return $match;

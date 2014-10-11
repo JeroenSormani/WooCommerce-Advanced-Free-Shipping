@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
 
 == Description ==
-WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions. 
+WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
 
 *Conditions like:*
 
@@ -48,6 +48,8 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 * Improvement - Overview not showing all actions when hovering only one
 * Improvement - Added ABSPATH check to each file
 * Improvement - Comments in matching file up to coding standards
+* Improvement - Remove globals, use WAFS() function now
+* Improvement - Load textdomains
 * Fix - No notice on shipping title in DEBUG mode
 * Fix - Loading icon on sub directory websites
 * Fix - Condition description didn't show sometimes

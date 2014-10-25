@@ -242,11 +242,11 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 
 	 	if ( isset( $available_methods['advanced_free_shipping'] ) ) :
 
-			return array( $available_methods['advanced_free_shipping'] );
+			return array( 'advanced_free_shipping' => $available_methods['advanced_free_shipping'] );
 
 	 	elseif ( isset( $available_methods['free_shipping'] ) ) :
 
-	 		return array( $available_methods['free_shipping'] );
+	 		return array( 'free_shipping' => $available_methods['free_shipping'] );
 
 	 	else :
 

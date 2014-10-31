@@ -46,6 +46,11 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 == Changelog ==
 
+= 1.0.4 =
+* Fix - Weight condition wasn't working
+* Fix - Cash On Delivery for WAFS
+* Added - Added languages files for Portugese - Brazil pt_BR
+
 = 1.0.3 =
 * Improvement - Customized user messages when saving shipping method
 * Improvement - Updated some comments to comment standards

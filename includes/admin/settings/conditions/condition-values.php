@@ -240,7 +240,7 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 			break;
 
 			default :
-				do_action( 'wafs_conditino_value_field_type_' . $values['field'], $values );
+				do_action( 'wafs_condition_value_field_type_' . $values['field'], $values );
 			break;
 
 		endswitch;

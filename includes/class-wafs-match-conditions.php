@@ -16,7 +16,8 @@ class WAFS_Match_Conditions {
 	/**
 	 * Constructor.
 	 *
-	 * @since 1.0.0	 */
+	 * @since 1.0.0
+	 */
 	public function __construct() {
 
 		global $woocommerce;
@@ -27,6 +28,7 @@ class WAFS_Match_Conditions {
 		add_filter( 'wafs_match_condition_quantity', array( $this, 'wafs_match_condition_quantity' ), 10, 3 );
 		add_filter( 'wafs_match_condition_contains_product', array( $this, 'wafs_match_condition_contains_product' ), 10, 3 );
 		add_filter( 'wafs_match_condition_coupon', array( $this, 'wafs_match_condition_coupon' ), 10, 3 );
+		add_filter( 'wafs_match_condition_weight', array( $this, 'wafs_match_condition_weight' ), 10, 3 );
 		add_filter( 'wafs_match_condition_contains_shipping_class', array( $this, 'wafs_match_condition_contains_shipping_class' ), 10, 3 );
 
 		add_filter( 'wafs_match_condition_zipcode', array( $this, 'wafs_match_condition_zipcode' ), 10, 3 );

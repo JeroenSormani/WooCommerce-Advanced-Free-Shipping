@@ -105,6 +105,39 @@ class WooCommerce_Advanced_Free_Shipping {
 
 
 	/**
+	 * Update.
+	 *
+	 * Update function.
+	 *
+	 * @since 1.0.3
+	 */
+	public function update() {
+
+		$db_version = get_option( 'wafs_plugin_version', '1.0.0' );
+
+		// Stop current version is up to date
+		if ( $db_version >= $this->version ) :
+			return;
+		endif;
+
+		// Update functions for 1.0.3
+		if ( version_compare( '1.0.3', $db_version ) ) :
+
+			$wafs_method_settings = get_option( 'woocommerce_advanced_free_shipping_settings' );
+			if ( isset( $wafs_method_settings['hide_other_shipping_when_available'] ) ) :
+				$wafs_method_settings['hide_other_shipping'] = $wafs_method_settings['hide_other_shipping_when_available'];
+				update_option( 'woocommerce_advanced_free_shipping_settings', $wafs_method_settings );
+			endif;
+
+		endif;
+
+		update_option( 'wafs_plugin_version', $this->version );
+
+
+	}
+
+
+	/**
 	 * Init.
 	 *
 	 * Initialize plugin parts.

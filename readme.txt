@@ -46,7 +46,8 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 == Changelog ==
 
-= 1.0.5 - 14-12-2014
+= 1.0.5 - 14-12-2014 =
+
 * Fix - Hide other shipping doesn't save in rare cases
 * Improvement - Use of WC() singleton instead of $woocommerce global
 * Improvement - Add background color to overview table every other row

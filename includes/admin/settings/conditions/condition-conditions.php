@@ -43,14 +43,12 @@ function wafs_condition_conditions( $id, $group = 0, $current_value = 'subtotal'
 	);
 
 	$conditions = apply_filters( 'wafs_conditions', $conditions );
-	?>
 
-	<span class='wafs-condition-wrap wafs-condition-wrap-<?php echo $id; ?>'>
+	?><span class='wafs-condition-wrap wafs-condition-wrap-<?php echo $id; ?>'>
 
 		<select class='wafs-condition' data-group='<?php echo $group; ?>' data-id='<?php echo $id; ?>'
-			name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][condition]'>
+			name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][condition]'><?php
 
-			<?php
 			foreach ( $conditions as $option_group => $values ) :
 
 				?><optgroup label='<?php echo $option_group; ?>'><?php
@@ -64,9 +62,8 @@ function wafs_condition_conditions( $id, $group = 0, $current_value = 'subtotal'
 				?></optgroup><?php
 
 			endforeach;
-			?>
 
-		</select>
+		?></select>
 
 	</span><?php
 

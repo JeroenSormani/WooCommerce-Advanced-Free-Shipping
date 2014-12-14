@@ -20,29 +20,27 @@ class WAFS_Match_Conditions {
 	 */
 	public function __construct() {
 
-		global $woocommerce;
+		add_filter( 'wafs_match_condition_subtotal', 				array( $this, 'wafs_match_condition_subtotal' ), 10, 3 );
+		add_filter( 'wafs_match_condition_subtotal_ex_tax', 		array( $this, 'wafs_match_condition_subtotal_ex_tax' ), 10, 3 );
+		add_filter( 'wafs_match_condition_tax', 					array( $this, 'wafs_match_condition_tax' ), 10, 3 );
+		add_filter( 'wafs_match_condition_quantity', 				array( $this, 'wafs_match_condition_quantity' ), 10, 3 );
+		add_filter( 'wafs_match_condition_contains_product', 		array( $this, 'wafs_match_condition_contains_product' ), 10, 3 );
+		add_filter( 'wafs_match_condition_coupon',					array( $this, 'wafs_match_condition_coupon' ), 10, 3 );
+		add_filter( 'wafs_match_condition_weight',					array( $this, 'wafs_match_condition_weight' ), 10, 3 );
+		add_filter( 'wafs_match_condition_contains_shipping_class',	array( $this, 'wafs_match_condition_contains_shipping_class' ), 10, 3 );
 
-		add_filter( 'wafs_match_condition_subtotal', array( $this, 'wafs_match_condition_subtotal' ), 10, 3 );
-		add_filter( 'wafs_match_condition_subtotal_ex_tax', array( $this, 'wafs_match_condition_subtotal_ex_tax' ), 10, 3 );
-		add_filter( 'wafs_match_condition_tax', array( $this, 'wafs_match_condition_tax' ), 10, 3 );
-		add_filter( 'wafs_match_condition_quantity', array( $this, 'wafs_match_condition_quantity' ), 10, 3 );
-		add_filter( 'wafs_match_condition_contains_product', array( $this, 'wafs_match_condition_contains_product' ), 10, 3 );
-		add_filter( 'wafs_match_condition_coupon', array( $this, 'wafs_match_condition_coupon' ), 10, 3 );
-		add_filter( 'wafs_match_condition_weight', array( $this, 'wafs_match_condition_weight' ), 10, 3 );
-		add_filter( 'wafs_match_condition_contains_shipping_class', array( $this, 'wafs_match_condition_contains_shipping_class' ), 10, 3 );
+		add_filter( 'wafs_match_condition_zipcode',					array( $this, 'wafs_match_condition_zipcode' ), 10, 3 );
+		add_filter( 'wafs_match_condition_city',					array( $this, 'wafs_match_condition_city' ), 10, 3 );
+		add_filter( 'wafs_match_condition_state',					array( $this, 'wafs_match_condition_state' ), 10, 3 );
+		add_filter( 'wafs_match_condition_country',					array( $this, 'wafs_match_condition_country' ), 10, 3 );
+		add_filter( 'wafs_match_condition_role',					array( $this, 'wafs_match_condition_role' ), 10, 3 );
 
-		add_filter( 'wafs_match_condition_zipcode', array( $this, 'wafs_match_condition_zipcode' ), 10, 3 );
-		add_filter( 'wafs_match_condition_city', array( $this, 'wafs_match_condition_city' ), 10, 3 );
-		add_filter( 'wafs_match_condition_state', array( $this, 'wafs_match_condition_state' ), 10, 3 );
-		add_filter( 'wafs_match_condition_country', array( $this, 'wafs_match_condition_country' ), 10, 3 );
-		add_filter( 'wafs_match_condition_role', array( $this, 'wafs_match_condition_role' ), 10, 3 );
-
-		add_filter( 'wafs_match_condition_width', array( $this, 'wafs_match_condition_width' ), 10, 3 );
-		add_filter( 'wafs_match_condition_height', array( $this, 'wafs_match_condition_height' ), 10, 3 );
-		add_filter( 'wafs_match_condition_length', array( $this, 'wafs_match_condition_length' ), 10, 3 );
-		add_filter( 'wafs_match_condition_stock', array( $this, 'wafs_match_condition_stock' ), 10, 3 );
-		add_filter( 'wafs_match_condition_stock_status', array( $this, 'wafs_match_condition_stock_status' ), 10, 3 );
-		add_filter( 'wafs_match_condition_category', array( $this, 'wafs_match_condition_category' ), 10, 3 );
+		add_filter( 'wafs_match_condition_width',					array( $this, 'wafs_match_condition_width' ), 10, 3 );
+		add_filter( 'wafs_match_condition_height',					array( $this, 'wafs_match_condition_height' ), 10, 3 );
+		add_filter( 'wafs_match_condition_length',					array( $this, 'wafs_match_condition_length' ), 10, 3 );
+		add_filter( 'wafs_match_condition_stock',					array( $this, 'wafs_match_condition_stock' ), 10, 3 );
+		add_filter( 'wafs_match_condition_stock_status',			array( $this, 'wafs_match_condition_stock_status' ), 10, 3 );
+		add_filter( 'wafs_match_condition_category',				array( $this, 'wafs_match_condition_category' ), 10, 3 );
 
 	}
 
@@ -54,8 +52,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -63,18 +59,16 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_subtotal( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
+		if ( ! isset( WC()->cart ) ) return;
 
 		if ( '==' == $operator ) :
-			$match = ( $woocommerce->cart->subtotal == $value );
+			$match = ( WC()->cart->subtotal == $value );
 		elseif ( '!=' == $operator ) :
-			$match = ( $woocommerce->cart->subtotal != $value );
+			$match = ( WC()->cart->subtotal != $value );
 		elseif ( '>=' == $operator ) :
-			$match = ( $woocommerce->cart->subtotal >= $value );
+			$match = ( WC()->cart->subtotal >= $value );
 		elseif ( '<=' == $operator ) :
-			$match = ( $woocommerce->cart->subtotal <= $value );
+			$match = ( WC()->cart->subtotal <= $value );
 		endif;
 
 		return $match;
@@ -89,8 +83,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -98,18 +90,16 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_subtotal_ex_tax( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
+		if ( ! isset( WC()->cart ) ) return;
 
 		if ( '==' == $operator ) :
-			$match = ( $woocommerce->cart->subtotal_ex_tax == $value );
+			$match = ( WC()->cart->subtotal_ex_tax == $value );
 		elseif ( '!=' == $operator ) :
-			$match = ( $woocommerce->cart->subtotal_ex_tax != $value );
+			$match = ( WC()->cart->subtotal_ex_tax != $value );
 		elseif ( '>=' == $operator ) :
-			$match = ( $woocommerce->cart->subtotal_ex_tax >= $value );
+			$match = ( WC()->cart->subtotal_ex_tax >= $value );
 		elseif ( '<=' == $operator ) :
-			$match = ( $woocommerce->cart->subtotal_ex_tax <= $value );
+			$match = ( WC()->cart->subtotal_ex_tax <= $value );
 		endif;
 
 		return $match;
@@ -124,8 +114,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -133,11 +121,9 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_tax( $match, $operator, $value ) {
 
-		global $woocommerce;
+		if ( ! isset( WC()->cart ) ) return;
 
-		if ( ! isset( $woocommerce->cart ) ) return;
-
-		$taxes = array_sum( (array) $woocommerce->cart->taxes );
+		$taxes = array_sum( (array) WC()->cart->taxes );
 
 		if ( '==' == $operator ) :
 			$match = ( $taxes == $value );
@@ -162,8 +148,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -171,18 +155,16 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_quantity( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
+		if ( ! isset( WC()->cart ) ) return;
 
 		if ( '==' == $operator ) :
-			$match = ( $woocommerce->cart->cart_contents_count == $value );
+			$match = ( WC()->cart->cart_contents_count == $value );
 		elseif ( '!=' == $operator ) :
-			$match = ( $woocommerce->cart->cart_contents_count != $value );
+			$match = ( WC()->cart->cart_contents_count != $value );
 		elseif ( '>=' == $operator ) :
-			$match = ( $woocommerce->cart->cart_contents_count >= $value );
+			$match = ( WC()->cart->cart_contents_count >= $value );
 		elseif ( '<=' == $operator ) :
-			$match = ( $woocommerce->cart->cart_contents_count <= $value );
+			$match = ( WC()->cart->cart_contents_count <= $value );
 		endif;
 
 		return $match;
@@ -197,8 +179,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -206,11 +186,9 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_contains_product( $match, $operator, $value ) {
 
-		global $woocommerce;
+		if ( ! isset( WC()->cart ) || empty( WC()->cart->cart_contents ) ) return;
 
-		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
-
-		foreach ( $woocommerce->cart->cart_contents as $product ) :
+		foreach ( WC()->cart->cart_contents as $product ) :
 			$product_ids[] = $product['product_id'];
 		endforeach;
 
@@ -232,8 +210,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -241,14 +217,12 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_coupon( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
+		if ( ! isset( WC()->cart ) ) return;
 
 		if ( '==' == $operator ) :
-			$match = ( in_array( $value, $woocommerce->cart->applied_coupons ) );
+			$match = ( in_array( $value, WC()->cart->applied_coupons ) );
 		elseif ( '!=' == $operator ) :
-			$match = ( ! in_array( $value, $woocommerce->cart->applied_coupons ) );
+			$match = ( ! in_array( $value, WC()->cart->applied_coupons ) );
 		endif;
 
 		return $match;
@@ -263,8 +237,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -272,18 +244,16 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_weight( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
+		if ( ! isset( WC()->cart ) ) return;
 
 		if ( '==' == $operator ) :
-			$match = ( $woocommerce->cart->cart_contents_weight == $value );
+			$match = ( WC()->cart->cart_contents_weight == $value );
 		elseif ( '!=' == $operator ) :
-			$match = ( $woocommerce->cart->cart_contents_weight != $value );
+			$match = ( WC()->cart->cart_contents_weight != $value );
 		elseif ( '>=' == $operator ) :
-			$match = ( $woocommerce->cart->cart_contents_weight >= $value );
+			$match = ( WC()->cart->cart_contents_weight >= $value );
 		elseif ( '<=' == $operator ) :
-			$match = ( $woocommerce->cart->cart_contents_weight <= $value );
+			$match = ( WC()->cart->cart_contents_weight <= $value );
 		endif;
 
 		return $match;
@@ -304,16 +274,14 @@ class WAFS_Match_Conditions {
 	 * @return 	BOOL 				Matching result, TRUE if results match, otherwise FALSE.	 */
 	public function wafs_match_condition_contains_shipping_class( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
+		if ( ! isset( WC()->cart ) ) return;
 
 		if ( $operator == '!=' ) :
 			// True until proven false
 			$match = true;
 		endif;
 
-		foreach ( $woocommerce->cart->cart_contents as $product ) :
+		foreach ( WC()->cart->cart_contents as $product ) :
 
 			$product = get_product( $product['product_id'] );
 
@@ -346,8 +314,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.2; $value may contain single or comma (,) separated zipcodes.
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -355,30 +321,28 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_zipcode( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->customer ) ) return;
+		if ( ! isset( WC()->customer ) ) return;
 
 		if ( '==' == $operator ) :
 
 			if ( preg_match( '/\, ?/', $value ) ) :
-				$match = ( in_array( (int) $woocommerce->customer->get_shipping_postcode(), array_map( 'intval', explode( ',', $value ) ) ) );
+				$match = ( in_array( (int) WC()->customer->get_shipping_postcode(), array_map( 'intval', explode( ',', $value ) ) ) );
 			else :
-				$match = ( (int) $woocommerce->customer->get_shipping_postcode() == (int) $value );
+				$match = ( (int) WC()->customer->get_shipping_postcode() == (int) $value );
 			endif;
 
 		elseif ( '!=' == $operator ) :
 
 			if ( preg_match( '/\, ?/', $value ) ) :
-				$match = ( ! in_array( (int) $woocommerce->customer->get_shipping_postcode(), array_map( 'intval', explode( ',', $value ) ) ) );
+				$match = ( ! in_array( (int) WC()->customer->get_shipping_postcode(), array_map( 'intval', explode( ',', $value ) ) ) );
 			else :
-				$match = ( (int) $woocommerce->customer->get_shipping_postcode() != (int) $value );
+				$match = ( (int) WC()->customer->get_shipping_postcode() != (int) $value );
 			endif;
 
 		elseif ( '>=' == $operator ) :
-			$match = ( (int) $woocommerce->customer->get_shipping_postcode() >= (int) $value );
+			$match = ( (int) WC()->customer->get_shipping_postcode() >= (int) $value );
 		elseif ( '<=' == $operator ) :
-			$match = ( (int) $woocommerce->customer->get_shipping_postcode() <= (int) $value );
+			$match = ( (int) WC()->customer->get_shipping_postcode() <= (int) $value );
 		endif;
 
 		return $match;
@@ -393,8 +357,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -402,14 +364,12 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_city( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->customer ) ) return;
+		if ( ! isset( WC()->customer ) ) return;
 
 		if ( '==' == $operator ) :
-			$match = ( preg_match( "/^$value$/i", $woocommerce->customer->get_shipping_city() ) );
+			$match = ( preg_match( "/^$value$/i", WC()->customer->get_shipping_city() ) );
 		elseif ( '!=' == $operator ) :
-			$match = ( ! preg_match( "/^$value$/i", $woocommerce->customer->get_shipping_city() ) );
+			$match = ( ! preg_match( "/^$value$/i", WC()->customer->get_shipping_city() ) );
 		endif;
 
 		return $match;
@@ -424,8 +384,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -433,11 +391,9 @@ class WAFS_Match_Conditions {
 		True if this condition matches, false if condition doesn't match.	 */
 	public function wafs_match_condition_state( $match, $operator, $value ) {
 
-		global $woocommerce;
+		if ( ! isset( WC()->customer ) ) return;
 
-		if ( ! isset( $woocommerce->customer ) ) return;
-
-		$state = $woocommerce->customer->get_shipping_country() . '_' . $woocommerce->customer->get_shipping_state();
+		$state = WC()->customer->get_shipping_country() . '_' . WC()->customer->get_shipping_state();
 
 		if ( '==' == $operator ) :
 			$match = ( $state == $value );
@@ -457,8 +413,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -466,14 +420,12 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_country( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->customer ) ) return;
+		if ( ! isset( WC()->customer ) ) return;
 
 		if ( '==' == $operator ) :
-			$match = ( preg_match( "/^$value$/i", $woocommerce->customer->get_shipping_country() ) );
+			$match = ( preg_match( "/^$value$/i", WC()->customer->get_shipping_country() ) );
 		elseif ( '!=' == $operator ) :
-			$match = ( ! preg_match( "/^$value$/i", $woocommerce->customer->get_shipping_country() ) );
+			$match = ( ! preg_match( "/^$value$/i", WC()->customer->get_shipping_country() ) );
 		endif;
 
 		return $match;
@@ -487,8 +439,6 @@ class WAFS_Match_Conditions {
 	 * Match the condition value against the users role.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @global object $woocommerce WooCommerce object.
 	 * @global object $current_user Current user object for capabilities.
 	 *
 	 * @param 	bool 	$match		Current match value.
@@ -498,7 +448,7 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_role( $match, $operator, $value ) {
 
-		global $woocommerce, $current_user;
+		global $current_user;
 
 		if ( '==' == $operator ) :
 			$match = ( array_key_exists( $value, $current_user->caps ) );
@@ -523,8 +473,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -532,11 +480,9 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_width( $match, $operator, $value ) {
 
-		global $woocommerce;
+		if ( ! isset( WC()->cart ) || empty( WC()->cart->cart_contents ) ) return;
 
-		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
-
-		foreach ( $woocommerce->cart->cart_contents as $product ) :
+		foreach ( WC()->cart->cart_contents as $product ) :
 
 			if ( true == $product['data']->variation_has_width ) :
 				$width[] = ( get_post_meta( $product['data']->variation_id, '_width', true ) );
@@ -570,8 +516,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -579,11 +523,9 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_height( $match, $operator, $value ) {
 
-		global $woocommerce;
+		if ( ! isset( WC()->cart ) || empty( WC()->cart->cart_contents ) ) return;
 
-		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
-
-		foreach ( $woocommerce->cart->cart_contents as $product ) :
+		foreach ( WC()->cart->cart_contents as $product ) :
 
 			if ( true == $product['data']->variation_has_height ) :
 				$height[] = ( get_post_meta( $product['data']->variation_id, '_height', true ) );
@@ -617,8 +559,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -626,11 +566,9 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_length( $match, $operator, $value ) {
 
-		global $woocommerce;
+		if ( ! isset( WC()->cart ) || empty( WC()->cart->cart_contents ) ) return;
 
-		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
-
-		foreach ( $woocommerce->cart->cart_contents as $product ) :
+		foreach ( WC()->cart->cart_contents as $product ) :
 
 			if ( true == $product['data']->variation_has_length ) :
 				$length[] = ( get_post_meta( $product['data']->variation_id, '_length', true ) );
@@ -664,8 +602,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -673,11 +609,9 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_stock( $match, $operator, $value ) {
 
-		global $woocommerce;
+		if ( ! isset( WC()->cart ) || empty( WC()->cart->cart_contents ) ) return;
 
-		if ( ! isset( $woocommerce->cart ) || empty( $woocommerce->cart->cart_contents ) ) return;
-
-		foreach ( $woocommerce->cart->cart_contents as $product ) :
+		foreach ( WC()->cart->cart_contents as $product ) :
 
 			if ( true == $product['data']->variation_has_stock ) :
 				$stock[] = ( get_post_meta( $product['data']->variation_id, '_stock', true ) );
@@ -711,8 +645,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -720,14 +652,12 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_stock_status( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
+		if ( ! isset( WC()->cart ) ) return;
 
 		if ( '==' == $operator ) :
 
 			$match = true;
-			foreach ( $woocommerce->cart->cart_contents as $product ) :
+			foreach ( WC()->cart->cart_contents as $product ) :
 				if ( get_post_meta( $product['product_id'], '_stock_status', true ) != $value )
 					$match = false;
 			endforeach;
@@ -735,7 +665,7 @@ class WAFS_Match_Conditions {
 		elseif ( '!=' == $operator ) :
 
 			$match = true;
-			foreach ( $woocommerce->cart->cart_contents as $product ) :
+			foreach ( WC()->cart->cart_contents as $product ) :
 				if ( get_post_meta( $product['product_id'], '_stock_status', true ) == $value )
 					$match = false;
 			endforeach;
@@ -755,8 +685,6 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global object $woocommerce WooCommerce object.
-	 *
 	 * @param 	bool 	$match		Current match value.
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
@@ -764,15 +692,13 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_category( $match, $operator, $value ) {
 
-		global $woocommerce;
-
-		if ( ! isset( $woocommerce->cart ) ) return;
+		if ( ! isset( WC()->cart ) ) return;
 
 		$match = true;
 
 		if ( '==' == $operator ) :
 
-			foreach ( $woocommerce->cart->cart_contents as $product ) :
+			foreach ( WC()->cart->cart_contents as $product ) :
 
 				if ( ! has_term( $value, 'product_cat', $product['product_id'] ) ) :
 					$match = false;
@@ -782,7 +708,7 @@ class WAFS_Match_Conditions {
 
 		elseif ( '!=' == $operator ) :
 
-			foreach ( $woocommerce->cart->cart_contents as $product ) :
+			foreach ( WC()->cart->cart_contents as $product ) :
 
 				if ( has_term( $value, 'product_cat', $product['product_id'] ) ) :
 					$match = false;
@@ -798,5 +724,3 @@ class WAFS_Match_Conditions {
 
 }
 new Wafs_Match_Conditions();
-
-?>

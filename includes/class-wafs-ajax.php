@@ -56,19 +56,17 @@ class WAFS_Ajax {
 	 * @since 1.0.0
 	 */
 	public function wafs_add_condition_group() {
-		?>
-		<div class='condition-group condition-group-<?php echo $_POST['group']; ?>' data-group='<?php echo $_POST['group']; ?>'>
 
-			<p class='or_match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?></p>
-			<?php
+		?><div class='condition-group condition-group-<?php echo $_POST['group']; ?>' data-group='<?php echo $_POST['group']; ?>'>
+
+			<p class='or_match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?></p><?php
+
 			new WAFS_Condition( null, $_POST['group'] );
-			?>
 
-		</div>
+		?></div>
 
-		<p><strong><?php _e( 'Or', 'woocommerce-advanced-free-shipping' ); ?></strong></p>
+		<p><strong><?php _e( 'Or', 'woocommerce-advanced-free-shipping' ); ?></strong></p><?php
 
-		<?php
 		die();
 	}
 

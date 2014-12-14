@@ -193,7 +193,9 @@ class WAFS_Condition {
 
 	}
 
+
 }
+
 /**
  * Load condition keys dropdown.
  */

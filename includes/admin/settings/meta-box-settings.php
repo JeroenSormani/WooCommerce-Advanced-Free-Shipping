@@ -15,8 +15,8 @@ wp_nonce_field( 'wafs_settings_meta_box', 'wafs_settings_meta_box_nonce' );
 
 global $post;
 $settings = get_post_meta( $post->ID, '_wafs_shipping_method', true );
-?>
-<div class='wafs wafs_settings wafs_meta_box wafs_settings_meta_box'>
+
+?><div class='wafs wafs_settings wafs_meta_box wafs_settings_meta_box'>
 
 	<p class='wafs-option'>
 

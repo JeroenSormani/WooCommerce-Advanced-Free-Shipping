@@ -1,13 +1,13 @@
 <?PHP
 /*
-Plugin Name: Woocommerce Advanced Free Shipping
-Plugin URI: http://www.jeroensormani.com/
-Donate link: http://www.jeroensormani.com/donate/
-Description: WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
-Version: 1.0.4
-Author: Jeroen Sormani
-Author URI: http://www.jeroensormani.com/
-Text Domain: woocommerce-advanced-free-shipping
+ * Plugin Name: 	Woocommerce Advanced Free Shipping
+ * Plugin URI: 		http://www.jeroensormani.com/
+ * Donate link: 	http://www.jeroensormani.com/donate/
+ * Description: 	WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
+ * Version: 		1.0.5
+ * Author: 			Jeroen Sormani
+ * Author URI: 		http://www.jeroensormani.com/
+ * Text Domain: 	woocommerce-advanced-free-shipping
 
  * Copyright Jeroen Sormani
  *
@@ -48,7 +48,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	 * @since 1.0.4
 	 * @var string $version Plugin version number.
 	 */
-	public $version = '1.0.4';
+	public $version = '1.0.5';
 
 
 	/**
@@ -105,6 +105,45 @@ class WooCommerce_Advanced_Free_Shipping {
 
 
 	/**
+	 * Init.
+	 *
+	 * Initialize plugin parts.
+	 *
+	 * @since 1.1.0
+	 */
+	public function init() {
+
+		// Add hooks/filters
+		$this->hooks();
+
+		// Load textdomain
+		$this->load_textdomain();
+
+		// Updater
+		$this->update();
+
+		/**
+		 * Require matching conditions hooks.
+		 */
+		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-match-conditions.php';
+		$this->matcher = new Wafs_Match_Conditions();
+
+		/**
+		 * Require file with settings.
+		 */
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wafs-post-type.php';
+		$this->post_type = new WAFS_post_type();
+
+		/**
+		 * Load ajax methods
+		 */
+		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-ajax.php';
+		$this->ajax = new WAFS_Ajax();
+
+	}
+
+
+	/**
 	 * Update.
 	 *
 	 * Update function.
@@ -120,8 +159,8 @@ class WooCommerce_Advanced_Free_Shipping {
 			return;
 		endif;
 
-		// Update functions for 1.0.3
-		if ( version_compare( '1.0.3', $db_version ) ) :
+		// Update functions for 1.0.3/1.0.5
+		if ( version_compare( '1.0.3', $db_version ) || version_compare( '1.0.5', $db_version ) ) :
 
 			$wafs_method_settings = get_option( 'woocommerce_advanced_free_shipping_settings' );
 			if ( isset( $wafs_method_settings['hide_other_shipping_when_available'] ) ) :
@@ -132,31 +171,6 @@ class WooCommerce_Advanced_Free_Shipping {
 		endif;
 
 		update_option( 'wafs_plugin_version', $this->version );
-
-
-	}
-
-
-	/**
-	 * Init.
-	 *
-	 * Initialize plugin parts.
-	 *
-	 * @since 1.1.0
-	 */
-	public function init() {
-
-		// Add hooks/filters
-		$this->hooks();
-
-		// Load textdomain
-		$this->load_textdomain();
-
-
-		/**
-		 * Require matching conditions hooks.
-		 */
-		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-match-conditions.php';
 
 	}
 
@@ -175,9 +189,6 @@ class WooCommerce_Advanced_Free_Shipping {
 
 		// Add shipping method
 		add_action( 'woocommerce_shipping_methods', array( $this, 'wafs_add_shipping_method' ) );
-
-		// Register post type
-		add_action( 'init', array( $this, 'wafs_register_post_type' ) );
 
 		// Enqueue scripts
 		add_action( 'admin_enqueue_scripts', array( $this, 'wafs_admin_enqueue_scripts' ) );
@@ -209,7 +220,11 @@ class WooCommerce_Advanced_Free_Shipping {
 	 */
 	public function wafs_free_shipping() {
 
+		/**
+		 * WAFS shipping method
+		 */
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wafs-method.php';
+		$this->was_method = new Wafs_Free_Shipping_Method();
 
 	}
 
@@ -233,24 +248,9 @@ class WooCommerce_Advanced_Free_Shipping {
 
 
 	/**
-	 * WAFS post type.
-	 *
-	 * Class to handle post type and everything around that.
-	 *
-	 * @since 1.0.0
-	 */
-	public function wafs_register_post_type() {
-
-		/**
-		 * Require file with settings.
-		 */
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wafs-post-type.php';
-
-	}
-
-
-	/**
 	 * Enqueue scripts.
+	 *
+	 * Enqueue javascript and stylesheets to the admin area.
 	 *
 	 * @since 1.0.0
 	 */

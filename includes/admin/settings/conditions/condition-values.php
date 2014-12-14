@@ -15,8 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $current_value = '' ) {
 
-	global $woocommerce;
-
 	// Defaults
 	$values = array( 'placeholder' => '', 'min' => '', 'max' => '', 'field' => 'text', 'options' => array() );
 
@@ -102,13 +100,13 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 			$values['field'] = 'select';
 
-	        foreach ( $woocommerce->countries->states as $country => $states ) :
+	        foreach ( WC()->countries->states as $country => $states ) :
 
 	            if ( empty( $states ) ) continue; // Don't show country if it has no states
-	            if ( ! array_key_exists( $country, $woocommerce->countries->get_allowed_countries() ) ) continue; // Skip unallowed countries
+	            if ( ! array_key_exists( $country, WC()->countries->get_allowed_countries() ) ) continue; // Skip unallowed countries
 
 	            foreach ( $states as $state_key => $state ) :
-	                $country_states[ $woocommerce->countries->countries[ $country ] ][ $country . '_' . $state_key ] = $state;
+	                $country_states[ WC()->countries->countries[ $country ] ][ $country . '_' . $state_key ] = $state;
 	            endforeach;
 
 	            $values['options'] = $country_states;
@@ -120,7 +118,7 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 		case 'country' :
 
 			$values['field'] = 'select';
-			$values['options'] = $woocommerce->countries->get_allowed_countries();
+			$values['options'] = WC()->countries->get_allowed_countries();
 
 		break;
 

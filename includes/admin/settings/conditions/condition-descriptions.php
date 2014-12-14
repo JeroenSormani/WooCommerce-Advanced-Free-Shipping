@@ -38,9 +38,9 @@ function wafs_condition_description( $condition ) {
 
 			<img class='wafs_tip' src='<?php echo WC()->plugin_url(); ?>/assets/images/help.png' height='24' width='24' />
 
-			<div class='wafs_desc'>
-				<?php echo $descriptions[ $condition ]; ?>
-			</div>
+			<div class='wafs_desc'><?php
+				echo $descriptions[ $condition ];
+			?></div>
 
 		</div>
 

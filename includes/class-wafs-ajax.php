@@ -102,4 +102,3 @@ class WAFS_Ajax {
 
 
 }
-new WAFS_Ajax();

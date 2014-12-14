@@ -723,4 +723,3 @@ class WAFS_Match_Conditions {
 	}
 
 }
-new Wafs_Match_Conditions();

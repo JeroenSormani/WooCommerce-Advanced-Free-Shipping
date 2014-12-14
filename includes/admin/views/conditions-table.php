@@ -12,8 +12,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'wafs', 'post_status' => array( 'draft', 'publish' ) ) );
-?>
-<tr valign="top">
+
+?><tr valign="top">
 	<th scope="row" class="titledesc">
 		<?php _e( 'Method conditions', 'woocommerce-advanced-free-shipping' ); ?>:<br />
 <!-- 		<small>Read more</small> -->
@@ -28,14 +28,16 @@ $method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 
 					<th style='padding-left: 10px;'><?php _e( 'Condition groups', 'woocommerce-advanced-free-shipping' ); ?></th>
 				</tr>
 			</thead>
-			<tbody>
-				<?php
+			<tbody><?php
+
+				$i = 0;
 				foreach ( $method_conditions as $method_condition ) :
 
 					$method_details = get_post_meta( $method_condition->ID, '_wafs_shipping_method', true );
 					$conditions 	= get_post_meta( $method_condition->ID, '_wafs_shipping_method_conditions', true );
+					$alt 			= ( $i++ ) % 2 == 0 ? 'alternate' : '';
 
-				?><tr>
+					?><tr class='<?php echo $alt; ?>'>
 						<td>
 							<strong>
 								<a href='<?php echo get_edit_post_link( $method_condition->ID ); ?>' class='row-title' title='<?php _e( 'Edit Method', 'woocommerce-advanced-free-shipping' ); ?>'>
@@ -64,13 +66,13 @@ $method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 
 				endforeach;
 
 				if ( empty( $method_conditions ) ) :
-					?>
-					<tr>
-						<td colspan='2'><?php _e( 'There are no Free Shipping methods. Yet...', 'woocommerce-advanced-free-shipping' ); ?></td>
-					</tr>
-					<?php endif; ?>
 
-			</tbody>
+					?><tr>
+						<td colspan='2'><?php _e( 'There are no Free Shipping methods. Yet...', 'woocommerce-advanced-free-shipping' ); ?></td>
+					</tr><?php
+					endif;
+
+			?></tbody>
 			<tfoot>
 				<tr>
 					<th colspan='4' style='padding-left: 10px;'>

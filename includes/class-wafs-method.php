@@ -257,4 +257,3 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 
 
 }
-$wafs_free_shipping_method = new Wafs_Free_Shipping_Method();

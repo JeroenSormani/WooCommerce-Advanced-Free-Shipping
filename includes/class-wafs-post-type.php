@@ -20,18 +20,19 @@ class WAFS_post_type {
 	 */
 	public function __construct() {
 
-		 $this->wafs_register_post_type();
+		// Register post type
+		add_action( 'init', array( $this, 'wafs_register_post_type' ) );
 
-		 // Add/save meta boxes
-		 add_action( 'add_meta_boxes', array( $this, 'wafs_post_type_meta_box' ) );
-		 add_action( 'save_post', array( $this, 'wafs_save_meta' ) );
-		 add_action( 'save_post', array( $this, 'wafs_save_condition_meta' ) );
+		// Add/save meta boxes
+		add_action( 'add_meta_boxes', array( $this, 'wafs_post_type_meta_box' ) );
+		add_action( 'save_post', array( $this, 'wafs_save_meta' ) );
+		add_action( 'save_post', array( $this, 'wafs_save_condition_meta' ) );
 
- 		 // Edit user messages
-		 add_filter( 'post_updated_messages', array( $this, 'wafs_custom_post_type_messages' ) );
+ 		// Edit user messages
+		add_filter( 'post_updated_messages', array( $this, 'wafs_custom_post_type_messages' ) );
 
-		 // Redirect after delete
-		 add_action('load-edit.php', array( $this, 'wafs_redirect_after_trash' ) );
+		// Redirect after delete
+		add_action('load-edit.php', array( $this, 'wafs_redirect_after_trash' ) );
 
 	 }
 
@@ -46,16 +47,16 @@ class WAFS_post_type {
 	public function wafs_register_post_type() {
 
 		$labels = array(
-		    'name' 					=> __( 'Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
+			'name' 					=> __( 'Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
 			'singular_name' 		=> __( 'Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-		    'add_new' 				=> __( 'Add New', 'woocommerce-advanced-free-shipping' ),
-		    'add_new_item' 			=> __( 'Add New Advanced Free Shipping method' , 'woocommerce-advanced-free-shipping' ),
-		    'edit_item' 			=> __( 'Edit Advanced Free Shipping method' , 'woocommerce-advanced-free-shipping' ),
-		    'new_item' 				=> __( 'New Advanced Free Shipping method' , 'woocommerce-advanced-free-shipping' ),
-		    'view_item' 			=> __( 'View Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-		    'search_items' 			=> __( 'Search Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
-		    'not_found' 			=> __( 'No Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
-		    'not_found_in_trash'	=> __( 'No Advanced Free Shipping methods found in Trash', 'woocommerce-advanced-free-shipping' ),
+			'add_new' 				=> __( 'Add New', 'woocommerce-advanced-free-shipping' ),
+			'add_new_item' 			=> __( 'Add New Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'edit_item' 			=> __( 'Edit Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'new_item' 				=> __( 'New Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'view_item' 			=> __( 'View Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'search_items' 			=> __( 'Search Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
+			'not_found' 			=> __( 'No Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
+			'not_found_in_trash'	=> __( 'No Advanced Free Shipping methods found in Trash', 'woocommerce-advanced-free-shipping' ),
 		);
 
 		register_post_type( 'wafs', array(
@@ -184,19 +185,23 @@ class WAFS_post_type {
 	 */
 	public function wafs_save_condition_meta( $post_id ) {
 
-		if ( ! isset( $_POST['wafs_conditions_meta_box_nonce'] ) )
+		if ( ! isset( $_POST['wafs_conditions_meta_box_nonce'] ) ) :
 			return $post_id;
+		endif;
 
 		$nonce = $_POST['wafs_conditions_meta_box_nonce'];
 
-		if ( ! wp_verify_nonce( $nonce, 'wafs_conditions_meta_box' ) )
+		if ( ! wp_verify_nonce( $nonce, 'wafs_conditions_meta_box' ) ) :
 			return $post_id;
+		endif;
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
 			return $post_id;
+		endif;
 
-		if ( ! current_user_can( 'manage_woocommerce' ) )
+		if ( ! current_user_can( 'manage_woocommerce' ) ) :
 			return $post_id;
+		endif;
 
 		$shipping_method_conditions = $_POST['_wafs_shipping_method_conditions'];
 
@@ -214,19 +219,23 @@ class WAFS_post_type {
 	 */
 	public function wafs_save_meta( $post_id ) {
 
-		if ( !isset( $_POST['wafs_settings_meta_box_nonce'] ) )
+		if ( ! isset( $_POST['wafs_settings_meta_box_nonce'] ) ) :
 			return $post_id;
+		endif;
 
 		$nonce = $_POST['wafs_settings_meta_box_nonce'];
 
-		if ( ! wp_verify_nonce( $nonce, 'wafs_settings_meta_box' ) )
+		if ( ! wp_verify_nonce( $nonce, 'wafs_settings_meta_box' ) ) :
 			return $post_id;
+		endif;
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
 			return $post_id;
+		endif;
 
-		if ( ! current_user_can( 'manage_woocommerce' ) )
+		if ( ! current_user_can( 'manage_woocommerce' ) ) :
 			return $post_id;
+		endif;
 
 		$shipping_method = $_POST['_wafs_shipping_method'];
 
@@ -262,13 +271,8 @@ class WAFS_post_type {
 	}
 
 }
-$wafs_post_type = new WAFS_post_type();
 
 /**
  * Load condition object
  */
 require_once plugin_dir_path( __FILE__ ) . 'admin/settings/conditions/class-wafs-condition.php';
-/**
- * Load ajax methods
- */
-require_once plugin_dir_path( __FILE__ ) . '/class-wafs-ajax.php';

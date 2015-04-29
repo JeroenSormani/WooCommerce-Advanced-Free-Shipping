@@ -388,7 +388,7 @@ class WAFS_Match_Conditions {
 	 * @param 	string 	$operator	Operator selected by the user in the condition row.
 	 * @param 	mixed 	$value		Value given by the user in the condition row.
 	 * @return 	BOOL 				Matching result, TRUE if results match, otherwise FALSE.
-		True if this condition matches, false if condition doesn't match.	 */
+	 */
 	public function wafs_match_condition_state( $match, $operator, $value ) {
 
 		if ( ! isset( WC()->customer ) ) return;

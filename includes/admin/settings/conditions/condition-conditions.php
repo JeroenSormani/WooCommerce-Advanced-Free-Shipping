@@ -47,17 +47,15 @@ function wafs_condition_conditions( $id, $group = 0, $current_value = 'subtotal'
 	?><span class='wafs-condition-wrap wafs-condition-wrap-<?php echo absint( $id ); ?>'>
 
 		<select class='wafs-condition' data-group='<?php echo absint( $group ); ?>' data-id='<?php echo absint( $id ); ?>'
-			name='_wafs_shipping_method_conditions[<?php echo abaint( $group ); ?>][<?php echo absint( $id ); ?>][condition]'><?php
+			name='_wafs_shipping_method_conditions[<?php echo absint( $group ); ?>][<?php echo absint( $id ); ?>][condition]'><?php
 
 			foreach ( $conditions as $option_group => $values ) :
 
 				?><optgroup label='<?php echo esc_attr( $option_group ); ?>'><?php
 
-				foreach ( $values as $key => $value ) :
-
-					?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $key, $current_value ); ?>><?php echo esc_html( $value ); ?></option><?php
-
-				endforeach;
+					foreach ( $values as $key => $value ) :
+						?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $key, $current_value ); ?>><?php echo esc_html( $value ); ?></option><?php
+					endforeach;
 
 				?></optgroup><?php
 

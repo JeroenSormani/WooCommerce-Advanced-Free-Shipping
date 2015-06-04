@@ -63,9 +63,11 @@ class WAFS_post_type {
 			'label' 				=> 'wafs',
 			'show_ui' 				=> true,
 			'show_in_menu' 			=> false,
+			'public' 				=> false,
+			'publicly_queryable'	=> false,
 			'capability_type' 		=> 'post',
 			'map_meta_cap' 			=> true,
-			'rewrite' 				=> array( 'slug' => 'wafs', 'with_front' => true ),
+			'rewrite' 				=> false,
 			'_builtin' 				=> false,
 			'query_var' 			=> true,
 			'supports' 				=> array( 'title' ),
@@ -185,13 +187,7 @@ class WAFS_post_type {
 	 */
 	public function wafs_save_condition_meta( $post_id ) {
 
-		if ( ! isset( $_POST['wafs_conditions_meta_box_nonce'] ) ) :
-			return $post_id;
-		endif;
-
-		$nonce = $_POST['wafs_conditions_meta_box_nonce'];
-
-		if ( ! wp_verify_nonce( $nonce, 'wafs_conditions_meta_box' ) ) :
+		if ( ! isset( $_POST['wafs_conditions_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wafs_conditions_meta_box_nonce'], 'wafs_conditions_meta_box' ) ) :
 			return $post_id;
 		endif;
 
@@ -219,13 +215,7 @@ class WAFS_post_type {
 	 */
 	public function wafs_save_meta( $post_id ) {
 
-		if ( ! isset( $_POST['wafs_settings_meta_box_nonce'] ) ) :
-			return $post_id;
-		endif;
-
-		$nonce = $_POST['wafs_settings_meta_box_nonce'];
-
-		if ( ! wp_verify_nonce( $nonce, 'wafs_settings_meta_box' ) ) :
+		if ( ! isset( $_POST['wafs_settings_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wafs_settings_meta_box_nonce'], 'wafs_settings_meta_box' ) ) :
 			return $post_id;
 		endif;
 
@@ -237,7 +227,7 @@ class WAFS_post_type {
 			return $post_id;
 		endif;
 
-		$shipping_method = $_POST['_wafs_shipping_method'];
+		$shipping_method = array_map( 'sanitize_text_field', $_POST['_wafs_shipping_method'] );
 
 		update_post_meta( $post_id, '_wafs_shipping_method', $shipping_method );
 

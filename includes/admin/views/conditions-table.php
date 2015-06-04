@@ -41,7 +41,7 @@ $method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 
 						<td>
 							<strong>
 								<a href='<?php echo get_edit_post_link( $method_condition->ID ); ?>' class='row-title' title='<?php _e( 'Edit Method', 'woocommerce-advanced-free-shipping' ); ?>'>
-									<?php echo $method_condition->post_title; echo empty( $method_condition->post_title) ? __( 'Untitled', 'woocommerce-advanced-free-shipping' ) : null; ?>
+									<?php echo empty( $method_condition->post_title) ? __( 'Untitled', 'woocommerce-advanced-free-shipping' ) : esc_html( $method_condition->post_title ); ?>
 								</a>
 							</strong>
 							<div class='row-actions'>
@@ -52,13 +52,13 @@ $method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 
 									 |
 								</span>
 								<span class='trash'>
-									<a href='<?php echo get_delete_post_link( $method_condition->ID ); ?>' title='<?php _e( 'Delete Method', 'woocommerce-advanced-free-shipping' ); ?>'>
-										<?php _e( 'Delete', 'woocommerce-advanced-free-shipping' ); ?>
-									</a>
+									<a href='<?php echo get_delete_post_link( $method_condition->ID ); ?>' title='<?php _e( 'Delete Method', 'woocommerce-advanced-free-shipping' ); ?>'><?php
+										_e( 'Delete', 'woocommerce-advanced-free-shipping' );
+									?></a>
 								</span>
 							</div>
 						</td>
-						<td><?php echo empty( $method_details['shipping_title'] ) ? __( 'Free Shipping', 'woocommerce-advanced-free-shipping') : $method_details['shipping_title']; ?></td>
+						<td><?php echo empty( $method_details['shipping_title'] ) ? __( 'Free Shipping', 'woocommerce-advanced-free-shipping') : esc_html( $method_details['shipping_title'] ); ?></td>
 						<td><?php echo count( $conditions ); ?></td>
 						</td>
 					</tr><?php

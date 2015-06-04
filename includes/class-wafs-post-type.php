@@ -1,9 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * Class WAFS_post_type
+ * Class WAFS_post_type.
  *
- * Initialize the WAFS post type
+ * Initialize the WAFS post type.
  *
  * @class       WAFS_post_type
  * @author     	Jeroen Sormani
@@ -259,16 +259,15 @@ class WAFS_post_type {
 
 			if( isset( $_GET['trashed'] ) &&  intval( $_GET['trashed'] ) > 0 ) :
 
-				$redirect = admin_url( '/admin.php?page=wc-settings&tab=shipping&section=wafs_free_shipping_method' );
-				wp_redirect( $redirect );
+				wp_redirect( admin_url( '/admin.php?page=wc-settings&tab=shipping&section=wafs_free_shipping_method' ) );
 				exit();
 
 			endif;
 
 		endif;
 
-
 	}
+
 
 }
 

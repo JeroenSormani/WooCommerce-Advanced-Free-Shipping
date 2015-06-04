@@ -1,9 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * Class Wafs_post_type
+ * Class Wafs_post_type.
  *
- * Initialize the WAFS post type
+ * Initialize the WAFS post type.
  *
  * @class       WAFS_Ajax
  * @author     	Jeroen Sormani
@@ -57,7 +57,7 @@ class WAFS_Ajax {
 	 */
 	public function wafs_add_condition_group() {
 
-		?><div class='condition-group condition-group-<?php echo $_POST['group']; ?>' data-group='<?php echo $_POST['group']; ?>'>
+		?><div class='condition-group condition-group-<?php echo absint( $_POST['group'] ); ?>' data-group='<?php echo absint( $_POST['group'] ); ?>'>
 
 			<p class='or_match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?></p><?php
 

@@ -30,10 +30,11 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
- * Class Woocommerce_Advanced_Free_Shipping
+ * Class Woocommerce_Advanced_Free_Shipping.
  *
- * Main WAFS class, add filters and handling all other files
+ * Main WAFS class, add filters and handling all other files.
  *
  * @class       Woocommerce_Advanced_Free_Shipping
  * @version     1.0.0
@@ -146,7 +147,8 @@ class WooCommerce_Advanced_Free_Shipping {
 	/**
 	 * Update.
 	 *
-	 * Update function.
+	 * Runs when the plugin is updated and checks if there should be
+	 * any data updated to be compatible for the new version.
 	 *
 	 * @since 1.0.3
 	 */

@@ -23,13 +23,13 @@ function wafs_condition_operator( $id, $group = 0, $current_value = '==' ) {
 
 	$operators = apply_filters( 'wafs_operators', $operators );
 
-	?><span class='wafs-operator-wrap wafs-operator-wrap-<?php echo $id; ?>'>
+	?><span class='wafs-operator-wrap wafs-operator-wrap-<?php echo absint( $id ); ?>'>
 
-		<select id='' class='wafs-operator' name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][operator]'>
+		<select id='' class='wafs-operator' name='_wafs_shipping_method_conditions[<?php echo absint( $group ); ?>][<?php echo absint( $id ); ?>][operator]'>
 
 			<?php foreach ( $operators as $key => $value ) :
 
-				?><option value='<?php echo $key; ?>' <?php selected( $key, $current_value ); ?>><?php echo $value; ?></option><?php
+				?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $key, $current_value ); ?>><?php echo esc_html( $value ); ?></option><?php
 
 			endforeach; ?>
 

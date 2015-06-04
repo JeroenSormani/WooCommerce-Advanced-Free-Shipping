@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class WAFS_Condition {
 
+
 	/**
 	 * Condition.
 	 *
@@ -22,6 +23,7 @@ class WAFS_Condition {
 	 * @var string $condition Condition slug.
 	 */
 	public $condition;
+
 
 	/**
 	 * Operator.
@@ -32,6 +34,7 @@ class WAFS_Condition {
 	 */
 	public $operator;
 
+
 	/**
 	 * Value.
 	 *
@@ -41,6 +44,7 @@ class WAFS_Condition {
 	 */
 	public $value;
 
+
 	/**
 	 * Group ID.
 	 *
@@ -49,6 +53,7 @@ class WAFS_Condition {
 	 * @var string $group Condition grou ID.
 	 */
 	public $group;
+
 
 	/**
 	 * Condition id.
@@ -161,7 +166,7 @@ class WAFS_Condition {
 	 */
 	public function wafs_add_condition_button() {
 		?>
-		<a class='button condition-add' data-group='<?php echo $this->group; ?>' href='javascript:void(0);'>+</a>
+		<a class='button condition-add' data-group='<?php echo absint( $this->group ); ?>' href='javascript:void(0);'>+</a>
 		<?php
 	}
 

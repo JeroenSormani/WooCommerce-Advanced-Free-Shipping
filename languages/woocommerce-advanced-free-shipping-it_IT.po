@@ -1,0 +1,317 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Advanced Free Shipping\n"
+"POT-Creation-Date: 2014-04-24 19:17+0100\n"
+"PO-Revision-Date: 2015-04-01 14:53+0100\n"
+"Last-Translator: Stefano Callisto <stefano.callisto@gmail.com>\n"
+"Language-Team: Stefano Callisto <stefano.callisto@gmail.com>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-ajax.php:48
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/meta-box-conditions.php:29
+msgid "Or match all of the following rules to allow free shipping:"
+msgstr "Oppure che soddisfi le seguenti regole per permettere la spedizione gratuita"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-ajax.php:55
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/meta-box-conditions.php:39
+msgid "Or"
+msgstr "Oppure"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-method.php:18
+msgid "Advanced Free Shipping"
+msgstr "Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-method.php:19
+msgid "Configure WooCommerce Advanced Free Shipping"
+msgstr "Configura WooCommerce Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-method.php:128
+msgid "Enable/Disable"
+msgstr "Abilita/Disabilita"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-method.php:130
+msgid "Enable Advanced Free Shipping"
+msgstr "Abilita Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-method.php:134
+msgid "Hide other shipping"
+msgstr "Nascondi gli altri metodi di spedizione"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-method.php:136
+msgid "Hide other shipping methods when free shipping is available"
+msgstr "Nascondi gli altri metodi di spedizione quando è disponibile la spedizione gratuita"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-method.php:197
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:56
+msgid "Free Shipping"
+msgstr "Spedizione gratuita"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:39
+msgid "Advanced Free Shipping methods"
+msgstr "Metodi Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:40
+msgid "Advanced Free Shipping method"
+msgstr "Metodo Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:41
+msgid "Add New"
+msgstr "Aggiungi nuovo"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:42
+msgid "Add New Advanced Free Shipping method"
+msgstr "Aggiungi nuovo metodo Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:43
+msgid "Edit Advanced Free Shipping method"
+msgstr "Modifica metodo Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:44
+msgid "New Advanced Free Shipping method"
+msgstr "Nuovo metodo Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:45
+msgid "View Advanced Free Shipping method"
+msgstr "Vedi metodo Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:46
+msgid "Search Advanced Free Shipping methods"
+msgstr "Cerca metodi Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:47
+msgid "No Advanced Free Shipping methods"
+msgstr "Nessun metodo Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:48
+msgid "No Advanced Free Shipping methods found in Trash"
+msgstr "Nessun metodo Advanced Free Shipping nel cestino"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:74
+msgid "Advanced Free Shipping conditions"
+msgstr "Condizioni Advanced Free Shipping"
+
+#: ../woocommerce-advanced-free-shipping/includes/class-wafs-post-type.php:75
+msgid "Shipping settings"
+msgstr "Metodi di spedizione"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/meta-box-conditions.php:20
+msgid "Match all of the following rules to allow free shipping:"
+msgstr "Condizioni da soddisfare per permettere la spedizione gratuita"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/meta-box-conditions.php:54
+msgid "Add 'Or' group"
+msgstr "Aggiungi condizione \"oppure\""
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/meta-box-settings.php:21
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:24
+msgid "Shipping title"
+msgstr "Nome spedizione"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/meta-box-settings.php:23
+msgid "e.g. Free Shipping"
+msgstr "Es: \"Spedizione gratuita\""
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:6
+msgid "Cart"
+msgstr "Carrello"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:7
+msgid "Subtotal"
+msgstr "Subtotale"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:8
+msgid "Subtotal ex. taxes"
+msgstr "Subtotale tasse escluse"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:9
+msgid "Tax"
+msgstr "Tassa"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:10
+msgid "Quantity"
+msgstr "Quantità"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:11
+msgid "Contains product"
+msgstr "Contiene prodotto"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:12
+msgid "Coupon"
+msgstr "Codice"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:14
+msgid "User Details"
+msgstr "Dettagli utente"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:15
+msgid "Zipcode"
+msgstr "Codice postale/C.A.P."
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:16
+msgid "City"
+msgstr "Città"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:17
+msgid "Country"
+msgstr "Nazione"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:18
+msgid "User role"
+msgstr "Ruolo utente"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:20
+msgid "Product"
+msgstr "Prodotto"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:21
+msgid "Width"
+msgstr "Larghezza"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:22
+msgid "Height"
+msgstr "Altezza"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:23
+msgid "Length"
+msgstr "Lunghezza"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:24
+msgid "Weight"
+msgstr "Peso"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:25
+msgid "Stock"
+msgstr "Magazzino"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:26
+msgid "Stock status"
+msgstr "Stato magazzino"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:27
+msgid "Backorders"
+msgstr "Backorder"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-conditions.php:28
+msgid "Category"
+msgstr "Categoria"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-descriptions.php:8
+msgid "Weight calculated on all the cart contents"
+msgstr "Peso calcolato su tutto ilcontenuto del carrello"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-descriptions.php:9
+msgid "Compared to lengthiest product in cart"
+msgstr "Rispetto al prodotto più lungo nel carrello"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-descriptions.php:10
+msgid "Compared to widest product in cart"
+msgstr "Rispetto al prodotto più largo nel carrello"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-descriptions.php:11
+msgid "Compared to highest product in cart"
+msgstr "Rispetto al prodotto più alto nel carrello"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-descriptions.php:12
+msgid "All products in cart must match stock status"
+msgstr "Tutti i prodotti nel carrello devono appartenere allo stato del magazzino"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-descriptions.php:13
+msgid "All products in cart must match backorder"
+msgstr "Tutti i prodotti nel carrello devono essere in backorder"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-descriptions.php:14
+msgid "All products in cart must match category"
+msgstr "Tutti i prodotti nel carrello devono appartenere alla categoria"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-descriptions.php:15
+msgid "Cart must contain one of this product"
+msgstr "Il carrello deve contenere almeno uno di questo prodotto"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-operators.php:6
+msgid "Equal to"
+msgstr "Uguale a"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-operators.php:7
+msgid "Not equal to"
+msgstr "Diverso da"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-operators.php:8
+msgid "Greater or equal to"
+msgstr "Uguale o maggiore di"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-operators.php:9
+msgid "Less or equal to "
+msgstr "Uguale o minore di"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-values.php:122
+msgid "In stock"
+msgstr "Disponibile"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-values.php:123
+msgid "Out of stock"
+msgstr "Non disponibile"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-values.php:132
+msgid "Do not allow"
+msgstr "Non permettere"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-values.php:133
+msgid "Allow, but notify customer"
+msgstr "Permetti, ma avvisa il cliente"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/settings/conditions/condition-values.php:134
+msgid "Allow"
+msgstr "Permetti"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:15
+msgid "Method conditions"
+msgstr "Condizioni"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:23
+msgid "Title"
+msgstr "Titolo"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:25
+msgid "Condition groups"
+msgstr "Numero di condizioni"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:26
+msgid "Author"
+msgstr "Autore"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:38
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:44
+msgid "Edit Method"
+msgstr "Modifica metodo"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:39
+msgid "Untitled"
+msgstr "Senza titolo"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:45
+msgid "Edit"
+msgstr "Modifica"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:50
+msgid "Delete Method"
+msgstr "Elimina metodo"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:51
+msgid "Delete"
+msgstr "Elimina"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:67
+msgid "There are no Free Shipping conditions. Yet..."
+msgstr "Non ci sono (ancora) condizioni per la spedizione gratuita"
+
+#: ../woocommerce-advanced-free-shipping/includes/admin/views/conditions-table.php:76
+msgid "Add Free Shipping Method"
+msgstr "Aggiungi metodo per spedizione gratuita"

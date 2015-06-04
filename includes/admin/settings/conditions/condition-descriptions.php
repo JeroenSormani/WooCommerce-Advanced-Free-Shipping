@@ -32,14 +32,14 @@ function wafs_condition_description( $condition ) {
 		return;
 	endif;
 
-	?><span class='wafs-description <?php echo $condition; ?>-description'>
+	?><span class='wafs-description <?php echo sanitize_html_class( $condition ); ?>-description'>
 
 		<div class='description'>
 
 			<img class='wafs_tip' src='<?php echo WC()->plugin_url(); ?>/assets/images/help.png' height='24' width='24' />
 
 			<div class='wafs_desc'><?php
-				echo $descriptions[ $condition ];
+				echo esc_html( $descriptions[ $condition ] );
 			?></div>
 
 		</div>

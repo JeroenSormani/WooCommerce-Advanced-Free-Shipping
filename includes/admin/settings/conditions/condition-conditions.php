@@ -44,20 +44,18 @@ function wafs_condition_conditions( $id, $group = 0, $current_value = 'subtotal'
 
 	$conditions = apply_filters( 'wafs_conditions', $conditions );
 
-	?><span class='wafs-condition-wrap wafs-condition-wrap-<?php echo $id; ?>'>
+	?><span class='wafs-condition-wrap wafs-condition-wrap-<?php echo absint( $id ); ?>'>
 
-		<select class='wafs-condition' data-group='<?php echo $group; ?>' data-id='<?php echo $id; ?>'
-			name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][condition]'><?php
+		<select class='wafs-condition' data-group='<?php echo absint( $group ); ?>' data-id='<?php echo absint( $id ); ?>'
+			name='_wafs_shipping_method_conditions[<?php echo absint( $group ); ?>][<?php echo absint( $id ); ?>][condition]'><?php
 
 			foreach ( $conditions as $option_group => $values ) :
 
-				?><optgroup label='<?php echo $option_group; ?>'><?php
+				?><optgroup label='<?php echo esc_attr( $option_group ); ?>'><?php
 
-				foreach ( $values as $key => $value ) :
-
-					?><option value='<?php echo $key; ?>' <?php selected( $key, $current_value ); ?>><?php echo $value; ?></option><?php
-
-				endforeach;
+					foreach ( $values as $key => $value ) :
+						?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $key, $current_value ); ?>><?php echo esc_html( $value ); ?></option><?php
+					endforeach;
 
 				?></optgroup><?php
 

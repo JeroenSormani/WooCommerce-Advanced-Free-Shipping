@@ -24,7 +24,7 @@ $conditions = get_post_meta( $post->ID, '_wafs_shipping_method_conditions', true
 
 		foreach ( $conditions as $condition_group => $conditions ) :
 
-			?><div class='condition-group condition-group-<?php echo $condition_group; ?>' data-group='<?php echo $condition_group; ?>'>
+			?><div class='condition-group condition-group-<?php echo absint( $condition_group ); ?>' data-group='<?php echo absint( $condition_group ); ?>'>
 
 				<p class='or_match'>
 					<?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?>
@@ -45,7 +45,7 @@ $conditions = get_post_meta( $post->ID, '_wafs_shipping_method_conditions', true
 	else :
 
 		?><div class='condition-group condition-group-0' data-group='0'><?php
-		new Wafs_Condition();
+			new Wafs_Condition();
 		?></div><?php
 
 	endif;

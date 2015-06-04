@@ -71,11 +71,11 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 		case 'contains_shipping_class' :
 
 			$values['field'] 			= 'select';
-			$values['options']['-1'] 	= __( 'No shipping class', 'woocommerce' );
+			$values['options'][''] 		= __( 'No shipping class', 'woocommerce' );
 
 			// Get all shipping classes
 			foreach ( get_terms( 'product_shipping_class', array( 'hide_empty' => false ) ) as $shipping_class ) :
-				$values['options'][ $shipping_class->slug ] 	= $shipping_class->name;
+				$values['options'][ $shipping_class->slug ] = $shipping_class->name;
 			endforeach;
 
 		break;
@@ -186,22 +186,22 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 	$values = apply_filters( 'wafs_values', $values, $condition );
 
-	?><span class='wafs-value-wrap wafs-value-wrap-<?php echo $id; ?>'><?php
+	?><span class='wafs-value-wrap wafs-value-wrap-<?php echo absint( $id ); ?>'><?php
 
 		switch ( $values['field'] ) :
 
 			case 'text' :
 
-				?><input type='text' class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][value]'
-					placeholder='<?php echo @$values['placeholder']; ?>' value='<?php echo $current_value; ?>'><?php
+				?><input type='text' class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo absint( $group ); ?>][<?php echo absint( $id ); ?>][value]'
+					placeholder='<?php echo esc_attr( @$values['placeholder'] ); ?>' value='<?php echo esc_attr( $current_value ); ?>'><?php
 
 			break;
 
 			case 'number' :
 
-				?><input type='text' class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][value]'
-					min='<?php echo @$values['min']; ?>' max='<?php echo @$values['max']; ?>' placeholder='<?php echo @$values['placeholder']; ?>'
-					value='<?php echo $current_value; ?>'><?php
+				?><input type='text' class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo absint( $group ); ?>][<?php echo absint( $id ); ?>][value]'
+					min='<?php echo esc_attr( @$values['min'] ); ?>' max='<?php echo esc_attr( @$values['max'] ); ?>' placeholder='<?php echo esc_attr( @$values['placeholder'] ); ?>'
+					value='<?php echo esc_attr( $current_value ); ?>'><?php
 
 			break;
 
@@ -209,17 +209,17 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 				// Backwards compatibility for extensions
 				@array_merge( $values['options'], $values['values'] );
-				?><select class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo $group; ?>][<?php echo $id; ?>][value]'>
+				?><select class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo absint( $group ); ?>][<?php echo absint( $id ); ?>][value]'>
 
 					<option <?php selected( '', $current_value ); ?>><?php _e( 'Select option' , 'woocommerce-advanced-free-shipping' ); ?></option><?php
 					foreach ( $values['options'] as $key => $value ) :
 
 						if ( ! is_array( $value ) ) :
-							?><option value='<?php echo $key; ?>' <?php selected( $key, $current_value ); ?>><?php echo $value; ?></option><?php
+							?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $key, $current_value ); ?>><?php echo esc_html( $value ); ?></option><?php
 						else :
 							?><optgroup label='<?php echo $key ?>'><?php
 								foreach ( $value as $k => $v ) :
-									?><option value='<?php echo $k; ?>' <?php selected( $k, $current_value ); ?>><?php echo $v; ?></option><?php
+									?><option value='<?php echo esc_attr( $k ); ?>' <?php selected( $k, $current_value ); ?>><?php echo esc_html( $v ); ?></option><?php
 								endforeach;
 							?></optgroup><?php
 

@@ -5,7 +5,7 @@ jQuery( function( $ ) {
 	// Add condition
 	$( '#wafs_conditions' ).on( 'click', '.condition-add', function() {
 		
-		var data = { action: 'wafs_add_condition', group: $( this ).attr( 'data-group' ) };
+		var data = { action: 'wafs_add_condition', group: $( this ).attr( 'data-group' ), nonce: wafs.nonce };
 
 		$( '.condition-group-' + data.group ).append( loading_icon ).children( ':last' );
 
@@ -36,7 +36,8 @@ jQuery( function( $ ) {
 		
 		var data = {
 			action: 'wafs_add_condition_group',
-			group: 	parseInt( $( '.condition-group' ).last().attr( 'data-group') ) + 1
+			group: 	parseInt( $( '.condition-group' ).last().attr( 'data-group') ) + 1,
+			nonce:	wafs.nonce
 		};
 		
 		// Insert condition group
@@ -54,7 +55,8 @@ jQuery( function( $ ) {
 			action: 		'wafs_update_condition_value',
 			id:				$( this ).attr( 'data-id' ),
 			group:			$( this ).attr( 'data-group' ),
-			condition: 		$( this ).val()
+			condition: 		$( this ).val(),
+			nonce:			wafs.nonce
 		};
 		
 		var replace = '.wafs-value-wrap-' + data.id;
@@ -68,13 +70,13 @@ jQuery( function( $ ) {
 		// Update condition description
 		var description = {
 			action:		'wafs_update_condition_description',
-			condition: 	data.condition
+			condition: 	data.condition,
+			nonce:		wafs.nonce
 		};
 		
 		$.post( ajaxurl, description, function( description_response ) {
 			$( replace + ' ~ .wafs-description' ).replaceWith( description_response );
-		})
-
+		});
 		
 	});
 	

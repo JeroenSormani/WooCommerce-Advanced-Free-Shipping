@@ -42,6 +42,8 @@ class WAFS_Ajax {
 	 */
 	public function wafs_add_condition() {
 
+		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
+
 		new WAFS_Condition( null, $_POST['group'] );
 		die();
 
@@ -56,6 +58,8 @@ class WAFS_Ajax {
 	 * @since 1.0.0
 	 */
 	public function wafs_add_condition_group() {
+
+		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
 
 		?><div class='condition-group condition-group-<?php echo absint( $_POST['group'] ); ?>' data-group='<?php echo absint( $_POST['group'] ); ?>'>
 
@@ -80,6 +84,8 @@ class WAFS_Ajax {
 	 */
 	public function wafs_update_condition_value() {
 
+		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
+
 		wafs_condition_values( $_POST['id'], $_POST['group'], $_POST['condition'] );
 		die();
 
@@ -94,6 +100,8 @@ class WAFS_Ajax {
 	 * @since 1.0.0
 	 */
 	public function wafs_update_condition_description() {
+
+		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
 
 		wafs_condition_description( $_POST['condition'] );
 		die();

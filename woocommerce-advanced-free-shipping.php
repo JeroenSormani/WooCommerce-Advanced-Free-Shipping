@@ -258,8 +258,23 @@ class WooCommerce_Advanced_Free_Shipping {
 	 */
 	public function wafs_admin_enqueue_scripts() {
 
-		wp_enqueue_style( 'wafs-style', plugins_url( 'assets/css/admin-style.css', __FILE__ ), array(), $this->version );
-		wp_enqueue_script( 'wafs-js', plugins_url( 'assets/js/wafs-js.js', __FILE__ ), array( 'jquery' ), $this->version, true );
+		wp_register_style( 'wafs-style', plugins_url( 'assets/css/admin-style.css', __FILE__ ), array(), $this->version );
+		wp_register_script( 'wafs-js', plugins_url( 'assets/js/wafs-js.js', __FILE__ ), array( 'jquery' ), $this->version, true );
+		wp_localize_script( 'wafs-js', 'wafs', array(
+			'nonce' => wp_create_nonce( 'wafs-ajax-nonce' ),
+		) );
+
+		if (
+			( isset( $_REQUEST['post'] ) && 'wafs' == get_post_type( $_REQUEST['post'] ) ) ||
+			( isset( $_REQUEST['post_type'] ) && 'wafs' == $_REQUEST['post_type'] ) ||
+			( isset( $_REQUEST['tab'] ) && 'wafs_free_shipping_method' == $_REQUEST['tab'] )
+		) :
+
+			wp_enqueue_style( 'wafs-style' );
+			wp_enqueue_script( 'wafs-js' );
+			wp_dequeue_script( 'autosave' );
+
+		endif;
 
 	}
 

@@ -26,12 +26,31 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 **Look at the screenshots!**
 
+> **Applying shipping cost**<br /><br />
+> Have you givin this plugin a shot and like how you can set things up?<br />
+> Another plugin is available that allows you to setup shipping cost with the same conditional logic options as this plugin!<br /><br />
+> **Features:**<br />
+> - Add shipping cost to the shipping rates<br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Per weight*<br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Per item*<br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Extra handling fee*<br />
+> - Setup a percentage based fee<br />
+> - Add Advanced shipping cost via the WAS Advanced Pricing extension<br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Cost per shipping class*<br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Cost per category*<br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Cost per product*<br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Cost per weight (table rate)*<br />
+> - Create shipping zones<br />
+> - Set tax status<br />
+> <br />
+> View [WooCommerce Advanced Shipping](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573)
+
 **Translations, feature requests, ratings and donations are welcome and appreciated!**
 
 **Translations**
 
 - Spanish [(Andres Felipe)](https://wordpress.org/support/profile/naturalworldstm)
-- Italian [(Stefano Callisto)]
+- Italian (Stefano Callisto)
 
 == Installation ==
 

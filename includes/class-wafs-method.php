@@ -15,7 +15,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	public function __construct() {
 
 		$this->id                	= 'advanced_free_shipping';
-		$this->title  				= __( 'Free Shipping <small>(may change at user configuration)</small>', 'woocommerce-advanced-free-shipping' );
+		$this->title  				= __( 'Free Shipping (configurable per rate)', 'woocommerce-advanced-free-shipping' );
 		$this->method_title  		= __( 'Advanced Free Shipping', 'woocommerce-advanced-free-shipping' );
 		$this->method_description 	= __( 'Configure WooCommerce Advanced Free Shipping' ); //
 
@@ -39,17 +39,13 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 		$this->init_settings();
 
 		$this->enabled 			= $this->get_option( 'enabled' );
-		$this->hide_shipping 	= $this->get_option( 'hide_other_shipping' );
+		$this->hide_shipping    = $this->get_option( 'hide_other_shipping' );
 
 		// Save settings in admin if you have any defined
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 
 		// Hide shipping methods
-		if ( version_compare( WC()->version, '2.1', '<' ) ) :
-			add_filter( 'woocommerce_available_shipping_methods', array( $this, 'hide_all_shipping_when_free_is_available' ) );
-		else :
-			add_filter( 'woocommerce_package_rates', array( $this, 'hide_all_shipping_when_free_is_available' ) );
-		endif;
+		add_filter( 'woocommerce_package_rates', array( $this, 'hide_all_shipping_when_free_is_available' ) );
 
 	}
 

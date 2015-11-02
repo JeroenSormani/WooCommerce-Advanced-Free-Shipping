@@ -4,7 +4,7 @@ Donate link: http://www.jeroensormani.com/donate/
 Tags: woocommerce, shipping, woocommerce shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 3.6
 Tested up to: 4.2.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -17,7 +17,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 - Cart total
 - Country
-- Zipcode
+- Zip code
 - Stock / stock status
 - Weight
 - Quantity
@@ -27,7 +27,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 **Look at the screenshots!**
 
 > **Applying shipping cost**<br /><br />
-> Have you givin this plugin a shot and like how you can set things up?<br />
+> Have you given this plugin a shot and like how you can set things up?<br />
 > Another plugin is available that allows you to setup shipping cost with the same conditional logic options as this plugin!<br /><br />
 > **Features:**<br />
 > - Add shipping cost to the shipping rates<br />
@@ -66,6 +66,12 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 == Changelog ==
 
+= 1.0.7 - 02-11-2015 =
+
+* [Improvement] - Conditional load resources in admin
+* [Improvement] - Add AJAX nonce verification
+* [Remove] - WooCommerce 2.1 is no longer supported. Please update WC if you're still on a older version.
+
 = 1.0.6 - 04-06-2015 =
 
 * [Add] - Escaping/sanitizing to different elements
@@ -81,7 +87,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 = 1.0.4 =
 * Fix - Weight condition wasn't working
 * Fix - Cash On Delivery for WAFS
-* Added - Added languages files for Portugese - Brazil pt_BR
+* Added - Added languages files for Portuguese - Brazil pt_BR
 
 = 1.0.3 =
 * Improvement - Customized user messages when saving shipping method
@@ -90,7 +96,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 * Improvement - Added ABSPATH check to each file
 * Improvement - Improved code comments
 * Improvement - Remove globals, use WAFS() function now
-* Improvement - Zipcodes are now better detected (only integer values)
+* Improvement - Zip codes are now better detected (only integer values)
 * Improvement - Load textdomains
 * Improvement - Add compatibility for custom value fields
 * Improvement - Add world wide state support
@@ -103,7 +109,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 
 = 1.0.2 = 07/03/2014
-* Added - support for comma separated zipcodes
+* Added - support for comma separated zip codes
 * Added - filter for condition values
 * Added - filter for condition descriptions
 

@@ -198,7 +198,6 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	 * @since 1.0.0
 	 *
 	 * @param mixed $package
-	 * @return void
 	 */
 	public function calculate_shipping( $package ) {
 

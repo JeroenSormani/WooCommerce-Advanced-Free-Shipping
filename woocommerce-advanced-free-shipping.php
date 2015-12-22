@@ -53,7 +53,7 @@ class WooCommerce_Advanced_Free_Shipping {
 
 
 	/**
-	 * Instace of WooCommerce_Advanced_Shipping.
+	 * Instance of WooCommerce_Advanced_Shipping.
 	 *
 	 * @since 1.0.3
 	 * @access private

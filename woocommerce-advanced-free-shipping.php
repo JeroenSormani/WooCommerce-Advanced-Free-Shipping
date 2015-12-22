@@ -141,6 +141,14 @@ class WooCommerce_Advanced_Free_Shipping {
 		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-ajax.php';
 		$this->ajax = new WAFS_Ajax();
 
+		/**
+		 * Admin class
+		 */
+		if ( is_admin() ) :
+			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/class-wafs-admin.php';
+			$this->admin = new WAFS_Admin();
+		endif;
+
 	}
 
 

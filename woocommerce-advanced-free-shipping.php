@@ -200,9 +200,6 @@ class WooCommerce_Advanced_Free_Shipping {
 		// Add shipping method
 		add_action( 'woocommerce_shipping_methods', array( $this, 'wafs_add_shipping_method' ) );
 
-		// Enqueue scripts
-		add_action( 'admin_enqueue_scripts', array( $this, 'wafs_admin_enqueue_scripts' ) );
-
 	}
 
 

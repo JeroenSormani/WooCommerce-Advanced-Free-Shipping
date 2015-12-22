@@ -15,9 +15,9 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	public function __construct() {
 
 		$this->id                	= 'advanced_free_shipping';
-		$this->title  				= __( 'Free Shipping <small>(may change at user configuration)</small>', 'woocommerce-advanced-free-shipping' );
+		$this->title  				= __( 'Free Shipping (configurable per rate)', 'woocommerce-advanced-free-shipping' );
 		$this->method_title  		= __( 'Advanced Free Shipping', 'woocommerce-advanced-free-shipping' );
-		$this->method_description 	= __( 'Configure WooCommerce Advanced Free Shipping' ); //
+		$this->method_description 	= __( 'Configure WooCommerce Advanced Free Shipping' );
 
 		$this->matched_methods	 	= $this->wafs_match_methods();
 
@@ -39,17 +39,13 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 		$this->init_settings();
 
 		$this->enabled 			= $this->get_option( 'enabled' );
-		$this->hide_shipping 	= $this->get_option( 'hide_other_shipping' );
+		$this->hide_shipping    = $this->get_option( 'hide_other_shipping' );
 
 		// Save settings in admin if you have any defined
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 
 		// Hide shipping methods
-		if ( version_compare( WC()->version, '2.1', '<' ) ) :
-			add_filter( 'woocommerce_available_shipping_methods', array( $this, 'hide_all_shipping_when_free_is_available' ) );
-		else :
-			add_filter( 'woocommerce_package_rates', array( $this, 'hide_all_shipping_when_free_is_available' ) );
-		endif;
+		add_filter( 'woocommerce_package_rates', array( $this, 'hide_all_shipping_when_free_is_available' ) );
 
 	}
 
@@ -61,7 +57,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array Only the first matched method (since you won't need two free shippings).
+	 * @return array Only the first matched method (since you won't need two free shipping).
 	 */
 	public function wafs_match_methods() {
 
@@ -202,21 +198,18 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	 * @since 1.0.0
 	 *
 	 * @param mixed $package
-	 * @return void
 	 */
 	public function calculate_shipping( $package ) {
 
 		if ( false == $this->matched_methods || 'no' == $this->enabled ) return;
 
-		$match_details 	= get_post_meta( $this->matched_methods, '_wafs_shipping_method', true );
-		$label 			= $match_details['shipping_title'];
-		$calc_tax 		= @$match_details['calc_tax'];
+		$method_args 	= get_post_meta( $this->matched_methods, '_wafs_shipping_method', true );
+		$label          = ! empty( $method_args['shipping_title'] ) ? $method_args['shipping_title'] : __( 'Free Shipping', 'woocommerce-advanced-free-shipping' );
 
 		$rate = array(
 			'id'       => $this->id,
-			'label'    => ( null == $label ) ? __( 'Free Shipping', 'woocommerce-advanced-free-shipping' ) : $label,
+			'label'    => $label,
 			'cost'     => '0',
-			'calc_tax' => ( null == $calc_tax ) ? 'per_order' : $calc_tax
 		);
 
 		// Register the rate

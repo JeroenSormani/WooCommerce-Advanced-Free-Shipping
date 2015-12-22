@@ -1,12 +1,12 @@
 <?PHP
 /*
  * Plugin Name: 	Woocommerce Advanced Free Shipping
- * Plugin URI: 		http://www.jeroensormani.com/
- * Donate link: 	http://www.jeroensormani.com/donate/
+ * Plugin URI: 		https://wordpress.org/plugins/woocommerce-advanced-free-shipping/
+ * Donate link: 	http://jeroensormani.com/donate/
  * Description: 	WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
- * Version: 		1.0.6
+ * Version: 		1.0.8
  * Author: 			Jeroen Sormani
- * Author URI: 		http://www.jeroensormani.com/
+ * Author URI: 		http://jeroensormani.com/
  * Text Domain: 	woocommerce-advanced-free-shipping
 
  * Copyright Jeroen Sormani
@@ -49,15 +49,24 @@ class WooCommerce_Advanced_Free_Shipping {
 	 * @since 1.0.4
 	 * @var string $version Plugin version number.
 	 */
-	public $version = '1.0.6';
+	public $version = '1.0.8';
 
 
 	/**
-	 * Instace of WooCommerce_Advanced_Shipping.
+	 * File.
+	 *
+	 * @since 1.0.8
+	 * @var string $file Main plugin file path.
+	 */
+	public $file = __FILE__;
+
+
+	/**
+	 * Instance of WooCommerce_Advanced_Free_Shipping.
 	 *
 	 * @since 1.0.3
 	 * @access private
-	 * @var object $instance The instance of WAS.
+	 * @var object $instance The instance of WAFS.
 	 */
 	private static $instance;
 
@@ -110,7 +119,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	 *
 	 * Initialize plugin parts.
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 */
 	public function init() {
 
@@ -140,6 +149,14 @@ class WooCommerce_Advanced_Free_Shipping {
 		 */
 		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-ajax.php';
 		$this->ajax = new WAFS_Ajax();
+
+		/**
+		 * Admin class
+		 */
+		if ( is_admin() ) :
+			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/class-wafs-admin.php';
+			$this->admin = new WAFS_Admin();
+		endif;
 
 	}
 
@@ -191,9 +208,6 @@ class WooCommerce_Advanced_Free_Shipping {
 
 		// Add shipping method
 		add_action( 'woocommerce_shipping_methods', array( $this, 'wafs_add_shipping_method' ) );
-
-		// Enqueue scripts
-		add_action( 'admin_enqueue_scripts', array( $this, 'wafs_admin_enqueue_scripts' ) );
 
 	}
 
@@ -257,10 +271,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	 * @since 1.0.0
 	 */
 	public function wafs_admin_enqueue_scripts() {
-
-		wp_enqueue_style( 'wafs-style', plugins_url( 'assets/css/admin-style.css', __FILE__ ), array(), $this->version );
-		wp_enqueue_script( 'wafs-js', plugins_url( 'assets/js/wafs-js.js', __FILE__ ), array( 'jquery' ), $this->version, true );
-
+		_deprecated_function( __FUNCTION__, '1.0.8', 'WAFS()->admin->admin_enqueue_script()' );
 	}
 
 

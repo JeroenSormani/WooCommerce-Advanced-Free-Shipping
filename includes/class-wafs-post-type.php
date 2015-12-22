@@ -21,18 +21,18 @@ class WAFS_post_type {
 	public function __construct() {
 
 		// Register post type
-		add_action( 'init', array( $this, 'wafs_register_post_type' ) );
+		add_action( 'init', array( $this, 'register_post_type' ) );
 
 		// Add/save meta boxes
-		add_action( 'add_meta_boxes', array( $this, 'wafs_post_type_meta_box' ) );
-		add_action( 'save_post', array( $this, 'wafs_save_meta' ) );
-		add_action( 'save_post', array( $this, 'wafs_save_condition_meta' ) );
+		add_action( 'add_meta_boxes', array( $this, 'post_type_meta_box' ) );
+		add_action( 'save_post', array( $this, 'save_meta' ) );
+		add_action( 'save_post', array( $this, 'save_condition_meta' ) );
 
  		// Edit user messages
-		add_filter( 'post_updated_messages', array( $this, 'wafs_custom_post_type_messages' ) );
+		add_filter( 'post_updated_messages', array( $this, 'custom_post_type_messages' ) );
 
 		// Redirect after delete
-		add_action('load-edit.php', array( $this, 'wafs_redirect_after_trash' ) );
+		add_action('load-edit.php', array( $this, 'redirect_after_trash' ) );
 
 	 }
 
@@ -44,7 +44,7 @@ class WAFS_post_type {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_register_post_type() {
+	public function register_post_type() {
 
 		$labels = array(
 			'name' 					=> __( 'Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
@@ -80,18 +80,17 @@ class WAFS_post_type {
 	/**
 	 * Messages.
 	 *
-	 * Modify the notice messages text for the 'was' post type.
+	 * Modify the notice messages text for the 'wafs' post type.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param 	array $messages Existing list of messages.
 	 * @return 	array			Modified list of messages.
 	 */
-	function wafs_custom_post_type_messages( $messages ) {
+	function custom_post_type_messages( $messages ) {
 
 		$post 				= get_post();
 		$post_type			= get_post_type( $post );
-		$post_type_object	= get_post_type_object( $post_type );
 
 		$messages['wafs'] = array(
 			0  => '',
@@ -99,9 +98,6 @@ class WAFS_post_type {
 			2  => __( 'Custom field updated.', 'woocommerce-advanced-free-shipping' ),
 			3  => __( 'Custom field deleted.', 'woocommerce-advanced-free-shipping' ),
 			4  => __( 'Free shipping method updated.', 'woocommerce-advanced-free-shipping' ),
-			5  => isset( $_GET['revision'] ) ?
-				sprintf( __( 'Free shipping method restored to revision from %s', 'woocommerce-advanced-free-shipping' ), wp_post_revision_title( (int) $_GET['revision'], false ) )
-				: false,
 			6  => __( 'Free shipping method published.', 'woocommerce-advanced-free-shipping' ),
 			7  => __( 'Free shipping method saved.', 'woocommerce-advanced-free-shipping' ),
 			8  => __( 'Free shipping method submitted.', 'woocommerce-advanced-free-shipping' ),
@@ -136,7 +132,7 @@ class WAFS_post_type {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_post_type_meta_box() {
+	public function post_type_meta_box() {
 
 		add_meta_box( 'wafs_conditions', __( 'Advanced Free Shipping conditions', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_conditions' ), 'wafs', 'normal' );
 		add_meta_box( 'wafs_settings', __( 'Shipping settings', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_settings' ), 'wafs', 'normal' );
@@ -185,7 +181,7 @@ class WAFS_post_type {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_save_condition_meta( $post_id ) {
+	public function save_condition_meta( $post_id ) {
 
 		if ( ! isset( $_POST['wafs_conditions_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wafs_conditions_meta_box_nonce'], 'wafs_conditions_meta_box' ) ) :
 			return $post_id;
@@ -213,7 +209,7 @@ class WAFS_post_type {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_save_meta( $post_id ) {
+	public function save_meta( $post_id ) {
 
 		if ( ! isset( $_POST['wafs_settings_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wafs_settings_meta_box_nonce'], 'wafs_settings_meta_box' ) ) :
 			return $post_id;
@@ -241,7 +237,7 @@ class WAFS_post_type {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_redirect_after_trash() {
+	public function redirect_after_trash() {
 
 		$screen = get_current_screen();
 

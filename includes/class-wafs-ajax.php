@@ -1,9 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * Class Wafs_post_type.
+ * Class WAFS_Ajax.
  *
- * Initialize the WAFS post type.
+ * AJAX class handles all ajax calls.
  *
  * @class       WAFS_Ajax
  * @author     	Jeroen Sormani
@@ -23,12 +23,12 @@ class WAFS_Ajax {
 	public function __construct() {
 
 		// Add elements
-		add_action( 'wp_ajax_wafs_add_condition', array( $this, 'wafs_add_condition' ) );
-		add_action( 'wp_ajax_wafs_add_condition_group', array( $this, 'wafs_add_condition_group' ) );
+		add_action( 'wp_ajax_wafs_add_condition', array( $this, 'add_condition' ) );
+		add_action( 'wp_ajax_wafs_add_condition_group', array( $this, 'add_condition_group' ) );
 
 		// Update elements
-		add_action( 'wp_ajax_wafs_update_condition_value', array( $this, 'wafs_update_condition_value' ) );
-		add_action( 'wp_ajax_wafs_update_condition_description', array( $this, 'wafs_update_condition_description' ) );
+		add_action( 'wp_ajax_wafs_update_condition_value', array( $this, 'update_condition_value' ) );
+		add_action( 'wp_ajax_wafs_update_condition_description', array( $this, 'update_condition_description' ) );
 
 	}
 
@@ -36,11 +36,13 @@ class WAFS_Ajax {
 	/**
 	 * Add condition.
 	 *
-	 * Create a new WAS_Condition class and render.
+	 * Create a new WAFS_Condition class and render.
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_add_condition() {
+	public function add_condition() {
+
+		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
 
 		new WAFS_Condition( null, $_POST['group'] );
 		die();
@@ -55,7 +57,9 @@ class WAFS_Ajax {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_add_condition_group() {
+	public function add_condition_group() {
+
+		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
 
 		?><div class='condition-group condition-group-<?php echo absint( $_POST['group'] ); ?>' data-group='<?php echo absint( $_POST['group'] ); ?>'>
 
@@ -78,7 +82,9 @@ class WAFS_Ajax {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_update_condition_value() {
+	public function update_condition_value() {
+
+		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
 
 		wafs_condition_values( $_POST['id'], $_POST['group'], $_POST['condition'] );
 		die();
@@ -93,7 +99,9 @@ class WAFS_Ajax {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wafs_update_condition_description() {
+	public function update_condition_description() {
+
+		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
 
 		wafs_condition_description( $_POST['condition'] );
 		die();

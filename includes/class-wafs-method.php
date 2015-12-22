@@ -203,15 +203,13 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 
 		if ( false == $this->matched_methods || 'no' == $this->enabled ) return;
 
-		$match_details 	= get_post_meta( $this->matched_methods, '_wafs_shipping_method', true );
-		$label 			= $match_details['shipping_title'];
-		$calc_tax 		= @$match_details['calc_tax'];
+		$method_args 	= get_post_meta( $this->matched_methods, '_wafs_shipping_method', true );
+		$label          = ! empty( $method_args['shipping_title'] ) ? $method_args['shipping_title'] : __( 'Free Shipping', 'woocommerce-advanced-free-shipping' );
 
 		$rate = array(
 			'id'       => $this->id,
-			'label'    => ( null == $label ) ? __( 'Free Shipping', 'woocommerce-advanced-free-shipping' ) : $label,
+			'label'    => $label,
 			'cost'     => '0',
-			'calc_tax' => ( null == $calc_tax ) ? 'per_order' : $calc_tax
 		);
 
 		// Register the rate

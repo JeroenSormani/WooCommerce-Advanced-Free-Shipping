@@ -53,11 +53,20 @@ class WooCommerce_Advanced_Free_Shipping {
 
 
 	/**
-	 * Instance of WooCommerce_Advanced_Shipping.
+	 * File.
+	 *
+	 * @since 1.0.8
+	 * @var string $file Main plugin file path.
+	 */
+	public $file = __FILE__;
+
+
+	/**
+	 * Instance of WooCommerce_Advanced_Free_Shipping.
 	 *
 	 * @since 1.0.3
 	 * @access private
-	 * @var object $instance The instance of WAS.
+	 * @var object $instance The instance of WAFS.
 	 */
 	private static $instance;
 
@@ -110,7 +119,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	 *
 	 * Initialize plugin parts.
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 */
 	public function init() {
 
@@ -262,25 +271,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	 * @since 1.0.0
 	 */
 	public function wafs_admin_enqueue_scripts() {
-
-		wp_register_style( 'wafs-style', plugins_url( 'assets/css/admin-style.css', __FILE__ ), array(), $this->version );
-		wp_register_script( 'wafs-js', plugins_url( 'assets/js/wafs-js.js', __FILE__ ), array( 'jquery' ), $this->version, true );
-		wp_localize_script( 'wafs-js', 'wafs', array(
-			'nonce' => wp_create_nonce( 'wafs-ajax-nonce' ),
-		) );
-
-		if (
-			( isset( $_REQUEST['post'] ) && 'wafs' == get_post_type( $_REQUEST['post'] ) ) ||
-			( isset( $_REQUEST['post_type'] ) && 'wafs' == $_REQUEST['post_type'] ) ||
-			( isset( $_REQUEST['tab'] ) && 'wafs_free_shipping_method' == $_REQUEST['tab'] )
-		) :
-
-			wp_enqueue_style( 'wafs-style' );
-			wp_enqueue_script( 'wafs-js' );
-			wp_dequeue_script( 'autosave' );
-
-		endif;
-
+		_deprecated_function( __FUNCTION__, '1.0.8', 'WAFS()->admin->admin_enqueue_script()' );
 	}
 
 

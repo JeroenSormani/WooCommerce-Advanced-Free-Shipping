@@ -82,8 +82,8 @@ class WAFS_Admin {
 	 *
 	 * @since 1.0.8
 	 *
-	 * @param 	array	$screen_ids	List of existing screen IDs.
-	 * @return 	array 				List of modified screen IDs.
+	 * @param   array  $screen_ids  List of existing screen IDs.
+	 * @return  array               List of modified screen IDs.
 	 */
 	public function add_screen_ids( $screen_ids ) {
 
@@ -106,7 +106,7 @@ class WAFS_Admin {
 		global $parent_file, $submenu_file, $post_type;
 
 		if ( 'wafs' == $post_type ) :
-			$parent_file = 'woocommerce';
+			$parent_file  = 'woocommerce';
 			$submenu_file = 'wc-settings';
 		endif;
 

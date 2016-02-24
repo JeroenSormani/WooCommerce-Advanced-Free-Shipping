@@ -20,7 +20,7 @@ $conditions = get_post_meta( $post->ID, '_wafs_shipping_method_conditions', true
 
 	<p><strong><?php _e( 'Match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' ); ?></strong></p><?php
 
-	if ( !empty( $conditions ) ) :
+	if ( ! empty( $conditions ) ) :
 
 		foreach ( $conditions as $condition_group => $conditions ) :
 

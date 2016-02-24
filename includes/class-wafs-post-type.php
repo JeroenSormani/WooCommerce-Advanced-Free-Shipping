@@ -28,13 +28,13 @@ class WAFS_post_type {
 		add_action( 'save_post', array( $this, 'save_meta' ) );
 		add_action( 'save_post', array( $this, 'save_condition_meta' ) );
 
- 		// Edit user messages
+		// Edit user messages
 		add_filter( 'post_updated_messages', array( $this, 'custom_post_type_messages' ) );
 
 		// Redirect after delete
-		add_action('load-edit.php', array( $this, 'redirect_after_trash' ) );
+		add_action( 'load-edit.php', array( $this, 'redirect_after_trash' ) );
 
-	 }
+	}
 
 
 	/**
@@ -47,31 +47,31 @@ class WAFS_post_type {
 	public function register_post_type() {
 
 		$labels = array(
-			'name' 					=> __( 'Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
-			'singular_name' 		=> __( 'Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'add_new' 				=> __( 'Add New', 'woocommerce-advanced-free-shipping' ),
-			'add_new_item' 			=> __( 'Add New Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'edit_item' 			=> __( 'Edit Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'new_item' 				=> __( 'New Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'view_item' 			=> __( 'View Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'search_items' 			=> __( 'Search Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
-			'not_found' 			=> __( 'No Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
-			'not_found_in_trash'	=> __( 'No Advanced Free Shipping methods found in Trash', 'woocommerce-advanced-free-shipping' ),
+			'name'               => __( 'Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
+			'singular_name'      => __( 'Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'add_new'            => __( 'Add New', 'woocommerce-advanced-free-shipping' ),
+			'add_new_item'       => __( 'Add New Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'edit_item'          => __( 'Edit Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'new_item'           => __( 'New Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'view_item'          => __( 'View Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'search_items'       => __( 'Search Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
+			'not_found'          => __( 'No Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
+			'not_found_in_trash' => __( 'No Advanced Free Shipping methods found in Trash', 'woocommerce-advanced-free-shipping' ),
 		);
 
 		register_post_type( 'wafs', array(
-			'label' 				=> 'wafs',
-			'show_ui' 				=> true,
-			'show_in_menu' 			=> false,
-			'public' 				=> false,
-			'publicly_queryable'	=> false,
-			'capability_type' 		=> 'post',
-			'map_meta_cap' 			=> true,
-			'rewrite' 				=> false,
-			'_builtin' 				=> false,
-			'query_var' 			=> true,
-			'supports' 				=> array( 'title' ),
-			'labels' 				=> $labels,
+			'label'              => 'wafs',
+			'show_ui'            => true,
+			'show_in_menu'       => false,
+			'public'             => false,
+			'publicly_queryable' => false,
+			'capability_type'    => 'post',
+			'map_meta_cap'       => true,
+			'rewrite'            => false,
+			'_builtin'           => false,
+			'query_var'          => true,
+			'supports'           => array( 'title' ),
+			'labels'             => $labels,
 		) );
 
 	}
@@ -84,13 +84,13 @@ class WAFS_post_type {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	array $messages Existing list of messages.
-	 * @return 	array			Modified list of messages.
+	 * @param   array  $messages  Existing list of messages.
+	 * @return  array             Modified list of messages.
 	 */
 	function custom_post_type_messages( $messages ) {
 
-		$post 				= get_post();
-		$post_type			= get_post_type( $post );
+		$post      = get_post();
+		$post_type = get_post_type( $post );
 
 		$messages['wafs'] = array(
 			0  => '',
@@ -241,9 +241,9 @@ class WAFS_post_type {
 
 		$screen = get_current_screen();
 
-		if( 'edit-wafs' == $screen->id ) :
+		if ( 'edit-wafs' == $screen->id ) :
 
-			if( isset( $_GET['trashed'] ) &&  intval( $_GET['trashed'] ) > 0 ) :
+			if ( isset( $_GET['trashed'] ) &&  intval( $_GET['trashed'] ) > 0 ) :
 
 				wp_redirect( admin_url( '/admin.php?page=wc-settings&tab=shipping&section=wafs_free_shipping_method' ) );
 				exit();

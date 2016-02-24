@@ -72,6 +72,7 @@ class WAFS_Ajax {
 		<p><strong><?php _e( 'Or', 'woocommerce-advanced-free-shipping' ); ?></strong></p><?php
 
 		die();
+
 	}
 
 

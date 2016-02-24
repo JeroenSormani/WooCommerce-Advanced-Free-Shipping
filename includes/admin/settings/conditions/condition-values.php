@@ -8,10 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  *
- * @param int 		$id 			Throw in the condition ID.
- * @param int 		$group 			Condition group ID.
- * @param string 	$condition 		Condition where the value input is used for.
- * @param string 	$current_value 	Current chosen slug.
+ * @param  int     $id             Throw in the condition ID.
+ * @param  int     $group          Condition group ID.
+ * @param  string  $condition      Condition where the value input is used for.
+ * @param  string  $current_value  Current chosen slug.
  */
 function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $current_value = '' ) {
 
@@ -51,7 +51,7 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 			$products = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'product', 'order' => 'asc', 'orderby' => 'title' ) );
 			foreach ( $products as $product ) :
-				$values['options'][$product->ID ] = $product->post_title;
+				$values['options'][ $product->ID ] = $product->post_title;
 			endforeach;
 
 		break;
@@ -100,18 +100,18 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 			$values['field'] = 'select';
 
-	        foreach ( WC()->countries->states as $country => $states ) :
+			foreach ( WC()->countries->states as $country => $states ) :
 
-	            if ( empty( $states ) ) continue; // Don't show country if it has no states
-	            if ( ! array_key_exists( $country, WC()->countries->get_allowed_countries() ) ) continue; // Skip unallowed countries
+				if ( empty( $states ) ) continue; // Don't show country if it has no states
+				if ( ! array_key_exists( $country, WC()->countries->get_allowed_countries() ) ) continue; // Skip unallowed countries
 
-	            foreach ( $states as $state_key => $state ) :
-	                $country_states[ WC()->countries->countries[ $country ] ][ $country . '_' . $state_key ] = $state;
-	            endforeach;
+				foreach ( $states as $state_key => $state ) :
+					$country_states[ WC()->countries->countries[ $country ] ][ $country . '_' . $state_key ] = $state;
+				endforeach;
 
-	            $values['options'] = $country_states;
+				$values['options'] = $country_states;
 
-	        endforeach;
+			endforeach;
 
 		break;
 
@@ -164,8 +164,8 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 			$values['field'] = 'select';
 			$values['options'] = array(
-				'instock' 		=> __( 'In stock', 'woocommerce-advanced-free-shipping' ),
-				'outofstock'	=> __( 'Out of stock', 'woocommerce-advanced-free-shipping' ),
+				'instock'    => __( 'In stock', 'woocommerce-advanced-free-shipping' ),
+				'outofstock' => __( 'Out of stock', 'woocommerce-advanced-free-shipping' ),
 			);
 
 		break;
@@ -211,13 +211,13 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 				@array_merge( $values['options'], $values['values'] );
 				?><select class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo absint( $group ); ?>][<?php echo absint( $id ); ?>][value]'>
 
-					<option <?php selected( '', $current_value ); ?>><?php _e( 'Select option' , 'woocommerce-advanced-free-shipping' ); ?></option><?php
+					<option <?php selected( '', $current_value ); ?>><?php _e( 'Select option', 'woocommerce-advanced-free-shipping' ); ?></option><?php
 					foreach ( $values['options'] as $key => $value ) :
 
 						if ( ! is_array( $value ) ) :
 							?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $key, $current_value ); ?>><?php echo esc_html( $value ); ?></option><?php
 						else :
-							?><optgroup label='<?php echo $key ?>'><?php
+							?><optgroup label='<?php echo $key; ?>'><?php
 								foreach ( $value as $k => $v ) :
 									?><option value='<?php echo esc_attr( $k ); ?>' <?php selected( $k, $current_value ); ?>><?php echo esc_html( $v ); ?></option><?php
 								endforeach;

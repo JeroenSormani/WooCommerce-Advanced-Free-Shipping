@@ -34,7 +34,7 @@ class WAFS_post_type {
 		// Redirect after delete
 		add_action( 'load-edit.php', array( $this, 'redirect_after_trash' ) );
 
-		}
+	}
 
 
 	/**

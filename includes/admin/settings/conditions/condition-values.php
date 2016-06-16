@@ -208,7 +208,9 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 			case 'select' :
 
 				// Backwards compatibility for extensions
-				@array_merge( $values['options'], $values['values'] );
+				if ( isset( $values['values'] ) ) {
+					@array_merge( $values['options'], $values['values'] );
+				}
 				?><select class='wafs-value' name='_wafs_shipping_method_conditions[<?php echo absint( $group ); ?>][<?php echo absint( $id ); ?>][value]'>
 
 					<option <?php selected( '', $current_value ); ?>><?php _e( 'Select option', 'woocommerce-advanced-free-shipping' ); ?></option><?php

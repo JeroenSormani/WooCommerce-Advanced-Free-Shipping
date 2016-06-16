@@ -202,7 +202,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	 *
 	 * @param  mixed  $package
 	 */
-	public function calculate_shipping( $package ) {
+	public function calculate_shipping( $package = array() ) {
 
 		if ( false == $this->matched_methods || 'no' == $this->enabled ) return;
 

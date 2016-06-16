@@ -1,10 +1,9 @@
 <?php
 /*
- * Plugin Name: 	Woocommerce Advanced Free Shipping
+ * Plugin Name: 	WooCommerce Advanced Free Shipping
  * Plugin URI: 		https://wordpress.org/plugins/woocommerce-advanced-free-shipping/
- * Donate link: 	http://jeroensormani.com/donate/
  * Description: 	WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
- * Version: 		1.0.8
+ * Version: 		1.0.9
  * Author: 			Jeroen Sormani
  * Author URI: 		http://jeroensormani.com/
  * Text Domain: 	woocommerce-advanced-free-shipping
@@ -49,7 +48,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	 * @since 1.0.4
 	 * @var string $version Plugin version number.
 	 */
-	public $version = '1.0.8';
+	public $version = '1.0.9';
 
 
 	/**

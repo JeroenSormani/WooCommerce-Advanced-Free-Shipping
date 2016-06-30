@@ -70,8 +70,8 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 		case 'contains_shipping_class' :
 
-			$values['field'] 			= 'select';
-			$values['options'][''] 		= __( 'No shipping class', 'woocommerce' );
+			$values['field']       = 'select';
+			$values['options'][''] = __( 'No shipping class', 'woocommerce' );
 
 			// Get all shipping classes
 			foreach ( get_terms( 'product_shipping_class', array( 'hide_empty' => false ) ) as $shipping_class ) :
@@ -117,15 +117,15 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 		case 'country' :
 
-			$values['field'] = 'select';
+			$values['field']   = 'select';
 			$values['options'] = WC()->countries->get_allowed_countries();
 
 		break;
 
 		case 'role' :
 
-			$values['field'] = 'select';
-			$roles = array_keys( get_editable_roles() );
+			$values['field']   = 'select';
+			$roles             = array_keys( get_editable_roles() );
 			$values['options'] = array_combine( $roles, $roles );
 
 		break;
@@ -162,7 +162,7 @@ function wafs_condition_values( $id, $group = 0, $condition = 'subtotal', $curre
 
 		case 'stock_status' :
 
-			$values['field'] = 'select';
+			$values['field']   = 'select';
 			$values['options'] = array(
 				'instock'    => __( 'In stock', 'woocommerce-advanced-free-shipping' ),
 				'outofstock' => __( 'Out of stock', 'woocommerce-advanced-free-shipping' ),

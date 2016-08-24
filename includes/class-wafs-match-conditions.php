@@ -224,8 +224,8 @@ class WAFS_Match_Conditions {
 
 		$coupons = array( 'percent' => array(), 'fixed' => array() );
 		foreach ( WC()->cart->get_coupons() as $coupon ) {
-			$type = str_replace( '_product', '', $coupon->discount_type );
-			$type = str_replace( '_cart', '', $type );
+			$type               = str_replace( '_product', '', $coupon->discount_type );
+			$type               = str_replace( '_cart', '', $type );
 			$coupons[ $type ][] = $coupon->coupon_amount;
 		}
 
@@ -311,10 +311,10 @@ class WAFS_Match_Conditions {
 	 *
 	 * @since 1.1.0
 	 *
-	 * @param 	bool 	$match		Current match value.
-	 * @param 	string 	$operator	Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value		Value given by the user in the condition row.
-	 * @return 	BOOL 				Matching result, TRUE if results match, otherwise FALSE.	 */
+	 * @param   bool    $match     Current match value.
+	 * @param   string  $operator  Operator selected by the user in the condition row.
+	 * @param   mixed   $value     Value given by the user in the condition row.
+	 * @return  BOOL               Matching result, TRUE if results match, otherwise FALSE.	 */
 	public function wafs_match_condition_contains_shipping_class( $match, $operator, $value ) {
 
 		if ( ! isset( WC()->cart ) ) return $match;

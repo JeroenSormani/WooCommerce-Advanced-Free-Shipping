@@ -22,7 +22,7 @@ function wafs_get_rates( $args = array() ) {
 		'update_post_term_cache' => false
 	) );
 
-	$rates_query = new WP_Query( $query_args );
+	$rates_query    = new WP_Query( $query_args );
 	$shipping_rates = $rates_query->get_posts();
 
 	return apply_filters( 'woocommerce_advanced_free_shipping_get_rates', $shipping_rates );

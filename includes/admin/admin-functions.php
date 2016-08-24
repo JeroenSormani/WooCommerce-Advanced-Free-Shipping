@@ -10,25 +10,25 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 	 *
 	 * @since 1.1.6
 	 *
-	 * @param array $args
+	 * @param  array  $args
 	 */
 	function wpc_html_field( $args = array() ) {
 
 		$args = wp_parse_args( $args, array(
-			'id'          => '',
-			'type'        => 'text',
-			'name'        => '',
-			'class'       => '',
-			'value'       => null,
-			'default'     => '',
-			'placeholder' => '',
+			'id'                => '',
+			'type'              => 'text',
+			'name'              => '',
+			'class'             => '',
+			'value'             => null,
+			'default'           => '',
+			'placeholder'       => '',
 			'custom_attributes' => isset( $args['custom_attr'] ) ? $args['custom_attr'] : array(), // BC
 		) );
 
-		$type = ! empty( $args['field'] ) ? $args['field'] : $args['type'];
-		$class = is_array( $args['class'] ) ? implode( ' ', array_map( 'sanitize_html_class', $args['class'] ) ) : sanitize_html_class( $args['class'] );
-		$value = isset( $args['value'] ) ? $args['value'] : '';
-		$name = isset( $args['name'] ) ? $args['name'] : $args['id'];
+		$type              = ! empty( $args['field'] ) ? $args['field'] : $args['type'];
+		$class             = is_array( $args['class'] ) ? implode( ' ', array_map( 'sanitize_html_class', $args['class'] ) ) : sanitize_html_class( $args['class'] );
+		$value             = isset( $args['value'] ) ? $args['value'] : '';
+		$name              = isset( $args['name'] ) ? $args['name'] : $args['id'];
 		$custom_attributes = array();
 		if ( ! empty( $args['custom_attributes'] ) && is_array( $args['custom_attributes'] ) ) {
 			foreach ( $args['custom_attributes'] as $k => $v ) {
@@ -95,5 +95,6 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 		endswitch;
 
 	}
+
 
 }

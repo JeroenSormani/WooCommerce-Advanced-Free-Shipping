@@ -16,7 +16,7 @@ $condition_groups = get_post_meta( $post->ID, '_wafs_shipping_method_conditions'
 
 			?><div class='wpc-condition-group wpc-condition-group-<?php echo absint( $condition_group ); ?>' data-group='<?php echo absint( $condition_group ); ?>'>
 
-				<p class='or-text'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?></p><?php
+				<p class='or-text'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' ); ?></p><?php
 
 				foreach ( $conditions as $condition_id => $condition ) :
 					$wp_condition = new WAFS_Condition( $condition_id, $condition_group, $condition['condition'], $condition['operator'], $condition['value'] );

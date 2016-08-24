@@ -22,8 +22,13 @@ $settings['shipping_title'] = ! empty( $settings['shipping_title'] ) ? $settings
 	<p class='wafs-option'>
 
 		<label for='shipping_title'><?php _e( 'Shipping title', 'woocommerce-advanced-free-shipping' ); ?></label>
-		<input type='text' class='' id='shipping_title' name='_wafs_shipping_method[shipping_title]'
-			value='<?php echo esc_attr( $settings['shipping_title'] ); ?>' placeholder='<?php _e( 'e.g. Free Shipping', 'woocommerce-advanced-free-shipping' ); ?>'>
+		<input
+			type='text'
+			id='shipping_title'
+			name='_wafs_shipping_method[shipping_title]'
+			value='<?php echo esc_attr( $settings['shipping_title'] ); ?>'
+			placeholder='<?php _e( 'e.g. Free Shipping', 'woocommerce-advanced-free-shipping' ); ?>'
+		>
 
 	</p>
 

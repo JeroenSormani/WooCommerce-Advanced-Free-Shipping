@@ -132,10 +132,13 @@ class WooCommerce_Advanced_Free_Shipping {
 		// Updater
 		$this->update();
 
+		// Functions
+		require_once plugin_dir_path( __FILE__ ) . 'includes/core-functions.php';
+
 		/**
 		 * Require matching conditions hooks.
 		 */
-		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-match-conditions.php';
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wafs-match-conditions.php';
 		$this->matcher = new Wafs_Match_Conditions();
 
 		/**
@@ -147,14 +150,16 @@ class WooCommerce_Advanced_Free_Shipping {
 		/**
 		 * Load ajax methods
 		 */
-		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wafs-ajax.php';
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wafs-ajax.php';
 		$this->ajax = new WAFS_Ajax();
 
 		/**
 		 * Admin class
 		 */
 		if ( is_admin() ) :
-			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/class-wafs-admin.php';
+			require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-functions.php';
+
+			require_once plugin_dir_path( __FILE__ ) . 'includes/admin/class-wafs-admin.php';
 			$this->admin = new WAFS_Admin();
 		endif;
 

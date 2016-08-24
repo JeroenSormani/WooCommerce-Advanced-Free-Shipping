@@ -1,13 +1,12 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
- * Class WAFS_Ajax.
+ * AJAX class.
  *
- * AJAX class handles all ajax calls.
+ * Handles all AJAX related calls.
  *
- * @class       WAFS_Ajax
- * @author     	Jeroen Sormani
- * @package		WooCommerce Advanced Free Shipping
+ * @author		Jeroen Sormani
  * @version		1.0.0
  */
 class WAFS_Ajax {
@@ -15,8 +14,6 @@ class WAFS_Ajax {
 
 	/**
 	 * Constructor.
-	 *
-	 * Add ajax actions in order to work.
 	 *
 	 * @since 1.0.0
 	 */
@@ -36,15 +33,17 @@ class WAFS_Ajax {
 	/**
 	 * Add condition.
 	 *
-	 * Create a new WAFS_Condition class and render.
+	 * Output the HTML of a new condition row.
 	 *
 	 * @since 1.0.0
 	 */
 	public function add_condition() {
 
-		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
+		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
-		new WAFS_Condition( null, $_POST['group'] );
+		$wp_condition = new WAFS_Condition( null, $_POST['group'] );
+		$wp_condition->output_condition_row();
+
 		die();
 
 	}
@@ -53,23 +52,25 @@ class WAFS_Ajax {
 	/**
 	 * Condition group.
 	 *
-	 * Render new condition group.
+	 * Output the HTML of a new condition group.
 	 *
 	 * @since 1.0.0
 	 */
 	public function add_condition_group() {
 
-		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
+		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
+		$group = absint( $_POST['group'] );
 
-		?><div class='condition-group condition-group-<?php echo absint( $_POST['group'] ); ?>' data-group='<?php echo absint( $_POST['group'] ); ?>'>
+		?><div class='wpc-condition-group wpc-condition-group-<?php echo $group; ?>' data-group='<?php echo $group; ?>'>
 
-			<p class='or_match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?></p><?php
+			<p class='or-match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?></p><?php
 
-			new WAFS_Condition( null, $_POST['group'] );
+			$wp_condition = new WAFS_Condition( null, $group );
+			$wp_condition->output_condition_row();
 
 		?></div>
 
-		<p><strong><?php _e( 'Or', 'woocommerce-advanced-free-shipping' ); ?></strong></p><?php
+		<p class='or-text'><strong><?php _e( 'Or', 'woocommerce-advanced-free-shipping' ); ?></strong></p><?php
 
 		die();
 
@@ -77,17 +78,23 @@ class WAFS_Ajax {
 
 
 	/**
-	 * Update values.
+	 * Update condition value field.
 	 *
-	 * Retreive and render the new condition values according to the condition key.
+	 * Output the HTML of the value field according to the condition key..
 	 *
 	 * @since 1.0.0
 	 */
 	public function update_condition_value() {
 
-		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
+		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
-		wafs_condition_values( $_POST['id'], $_POST['group'], $_POST['condition'] );
+		$wp_condition = new WAFS_Condition( $_POST['id'], $_POST['group'], $_POST['condition'] );
+		$value_field_args = $wp_condition->get_value_field_args();
+
+		?><span class='wpc-value-wrap wpc-value-wrap-<?php echo absint( $wp_condition->id ); ?>'><?php
+			wpc_html_field( $value_field_args );
+		?></span><?php
+
 		die();
 
 	}
@@ -102,9 +109,20 @@ class WAFS_Ajax {
 	 */
 	public function update_condition_description() {
 
-		check_ajax_referer( 'wafs-ajax-nonce', 'nonce' );
+		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
-		wafs_condition_description( $_POST['condition'] );
+		$condition = sanitize_text_field( $_POST['condition'] );
+		$wp_condition = new WAFS_Condition( null, null, $condition );
+
+		if ( $desc = $wp_condition->get_description() ) {
+			?><span class='wpc-description wpc-no-description <?php echo $desc; ?>-description'><?php
+			die();
+		}
+
+		?><span class='wpc-description <?php echo $wp_condition->condition; ?>-description'>
+			<img class='help_tip' src='<?php echo WC()->plugin_url(); ?>/assets/images/help.png' height='24' width='24' data-tip="<?php echo esc_html( $wp_condition->get_description() ); ?>" />
+		</span><?php
+
 		die();
 
 	}

@@ -17,7 +17,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 		$this->id                 = 'advanced_free_shipping';
 		$this->title              = __( 'Free Shipping (configurable per rate)', 'woocommerce-advanced-free-shipping' );
 		$this->method_title       = __( 'Advanced Free Shipping', 'woocommerce-advanced-free-shipping' );
-		$this->method_description = __( 'Configure WooCommerce Advanced Free Shipping' );
+		$this->method_description = __( 'Configure Advanced Free Shipping' );
 
 		$this->matched_methods = $this->wafs_match_methods();
 
@@ -61,7 +61,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	 */
 	public function wafs_match_methods() {
 
-		$methods = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'wafs' ) );
+		$methods = wafs_get_rates();
 
 		$matched_methods = '';
 		foreach ( $methods as $method ) :
@@ -136,7 +136,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 			'enabled' => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable Advanced Free Shipping', 'woocommerce-advanced-free-shipping' ),
+				'label'   => __( 'Enable the Advanced Free Shipping rates', 'woocommerce-advanced-free-shipping' ),
 				'default' => 'yes'
 			),
 			'hide_other_shipping' => array(

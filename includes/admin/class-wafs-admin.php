@@ -42,6 +42,13 @@ class WAFS_Admin {
 		// Keep WC menu open while in WAFS edit screen
 		add_action( 'admin_head', array( $this, 'menu_highlight' ) );
 
+		global $pagenow;
+		if ( 'plugins.php' == $pagenow ) :
+			// Plugins page
+			add_filter( 'plugin_action_links_' . plugin_basename( WAFS()->file ), array( $this, 'add_plugin_action_links' ), 10, 2 );
+		endif;
+
+
 	}
 
 
@@ -54,20 +61,24 @@ class WAFS_Admin {
 	 */
 	public function admin_enqueue_scripts() {
 
-		wp_register_style( 'wafs-style', plugins_url( 'assets/css/admin-style.css', WAFS()->file ), array(), WAFS()->version );
-		wp_register_script( 'wafs-js', plugins_url( 'assets/js/wafs-js.js', WAFS()->file ), array( 'jquery' ), WAFS()->version, true );
-		wp_localize_script( 'wafs-js', 'wafs', array(
-			'nonce' => wp_create_nonce( 'wafs-ajax-nonce' ),
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		wp_register_style( 'woocommerce-advanced-free-shipping', plugins_url( 'assets/css/woocommerce-advanced-free-shipping.min.css', WAFS()->file ), array(), WAFS()->version );
+		wp_register_script( 'woocommerce-advanced-free-shipping', plugins_url( 'assets/js/woocommerce-advanced-free-shipping' . $suffix . '.js', WAFS()->file ), array( 'jquery' ), WAFS()->version, true );
+		wp_localize_script( 'woocommerce-advanced-free-shipping', 'wpc', array(
+			'nonce'         => wp_create_nonce( 'wpc-ajax-nonce' ),
+			'action_prefix' => 'wafs_',
+			'asset_url'     => plugins_url( 'assets/', WAFS()->file ),
 		) );
 
 		if (
 			( isset( $_REQUEST['post'] ) && 'wafs' == get_post_type( $_REQUEST['post'] ) ) ||
 			( isset( $_REQUEST['post_type'] ) && 'wafs' == $_REQUEST['post_type'] ) ||
-			( isset( $_REQUEST['section'] ) && 'wafs_free_shipping_method' == $_REQUEST['section'] )
+			( isset( $_REQUEST['section'] ) && 'advanced_free_shipping' == $_REQUEST['section'] )
 		) :
 
-			wp_enqueue_style( 'wafs-style' );
-			wp_enqueue_script( 'wafs-js' );
+			wp_enqueue_style( 'woocommerce-advanced-free-shipping' );
+			wp_enqueue_script( 'woocommerce-advanced-free-shipping' );
 			wp_dequeue_script( 'autosave' );
 
 		endif;
@@ -109,6 +120,31 @@ class WAFS_Admin {
 			$parent_file  = 'woocommerce';
 			$submenu_file = 'wc-settings';
 		endif;
+
+	}
+
+
+	/**
+	 * Plugin action links.
+	 *
+	 * Add links to the plugins.php page below the plugin name
+	 * and besides the 'activate', 'edit', 'delete' action links.
+	 *
+	 * @since 1.0.10
+	 *
+	 * @param  array  $links List of existing links.
+	 * @param  string $file  Name of the current plugin being looped.
+	 * @return array         List of modified links.
+	 */
+	public function add_plugin_action_links( $links, $file ) {
+
+		if ( $file == plugin_basename( WAFS()->file ) ) :
+			$links = array_merge( array(
+				'<a href="' . esc_url( admin_url( '/admin.php?page=wc-settings&tab=shipping&section=advanced_free_shipping' ) ) . '">' . __( 'Settings', 'woocommerce-advanced-free-shipping' ) . '</a>'
+			), $links );
+		endif;
+
+		return $links;
 
 	}
 

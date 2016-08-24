@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.10
  *
- * @param  $args array List of arguments to merge with the default args.
- * @return       array List of 'wafs' posts.
+ * @param  array $args List of arguments to merge with the default args.
+ * @return array       List of 'wafs' posts.
  */
 function wafs_get_rates( $args = array() ) {
 

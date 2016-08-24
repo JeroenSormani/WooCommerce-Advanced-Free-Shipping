@@ -152,7 +152,7 @@ class WAFS_post_type {
 		/**
 		 * Load meta box conditions view.
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'admin/settings/meta-box-conditions.php';
+		require_once plugin_dir_path( __FILE__ ) . 'admin/views/meta-box-conditions.php';
 
 	}
 
@@ -169,7 +169,7 @@ class WAFS_post_type {
 		/**
 		 * Load meta box settings view
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'admin/settings/meta-box-settings.php';
+		require_once plugin_dir_path( __FILE__ ) . 'admin/views/meta-box-settings.php';
 
 	}
 
@@ -183,7 +183,7 @@ class WAFS_post_type {
 	 */
 	public function save_condition_meta( $post_id ) {
 
-		if ( ! isset( $_POST['wafs_conditions_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wafs_conditions_meta_box_nonce'], 'wafs_conditions_meta_box' ) ) :
+		if ( ! isset( $_POST['wafs_settings_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wafs_settings_meta_box_nonce'], 'wafs_settings_meta_box' ) ) :
 			return $post_id;
 		endif;
 
@@ -195,7 +195,7 @@ class WAFS_post_type {
 			return $post_id;
 		endif;
 
-		$shipping_method_conditions = $_POST['_wafs_shipping_method_conditions'];
+		$shipping_method_conditions = $_POST['conditions'];
 
 		update_post_meta( $post_id, '_wafs_shipping_method_conditions', $shipping_method_conditions );
 
@@ -260,4 +260,4 @@ class WAFS_post_type {
 /**
  * Load condition object
  */
-require_once plugin_dir_path( __FILE__ ) . 'admin/settings/conditions/class-wafs-condition.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/class-wafs-condition.php';

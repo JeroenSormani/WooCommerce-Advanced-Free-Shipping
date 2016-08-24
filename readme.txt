@@ -65,6 +65,13 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 == Changelog ==
 
+= 1.0.10 - xx-xx-2016 =
+
+* [Improvement] - Optimized asset scripts
+* [Improvement] - Refactored condition code (backend)
+* [Improvement] - Allow asterisk (*) in zipcode to allow 'begins with' type of matching functionality
+* [Improvement] - Allow dollar and percentage signs in the 'coupon' condition to setup the condition based on the amounts instead of solely coupon codes
+
 = 1.0.9 - 16-06-2016 =
 
 * [Fix] - Fix a notice that was introduced with a change in WooCommerce 2.6

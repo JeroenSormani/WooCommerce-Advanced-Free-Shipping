@@ -11,16 +11,15 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'wafs', 'post_status' => array( 'draft', 'publish' ) ) );
+$shipping_rates = wafs_get_rates( array( 'post_status' => array( 'draft', 'publish' ) ) );
 
 ?><tr valign="top">
 	<th scope="row" class="titledesc">
-		<?php _e( 'Method conditions', 'woocommerce-advanced-free-shipping' ); ?>:<br />
-<!-- 		<small>Read more</small> -->
+		<?php _e( 'Free shipping rates', 'woocommerce-advanced-free-shipping' ); ?><br />
 	</th>
 	<td class="forminp" id="<?php echo $this->id; ?>_shipping_methods">
 
-		<table class='wp-list-table wafs-table widefat'>
+		<table class='wp-list-table wpc-conditions-post-table widefat'>
 			<thead>
 				<tr>
 					<th style='padding-left: 10px;'><?php _e( 'Title', 'woocommerce-advanced-free-shipping' ); ?></th>
@@ -31,28 +30,29 @@ $method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 
 			<tbody><?php
 
 				$i = 0;
-				foreach ( $method_conditions as $method_condition ) :
+				foreach ( $shipping_rates as $post ) :
 
-					$method_details = get_post_meta( $method_condition->ID, '_wafs_shipping_method', true );
-					$conditions     = get_post_meta( $method_condition->ID, '_wafs_shipping_method_conditions', true );
+					$method_details = get_post_meta( $post->ID, '_wafs_shipping_method', true );
+					$conditions     = get_post_meta( $post->ID, '_wafs_shipping_method_conditions', true );
 					$alt            = ( $i++ ) % 2 == 0 ? 'alternate' : '';
 
 					?><tr class='<?php echo $alt; ?>'>
 						<td>
 							<strong>
-								<a href='<?php echo get_edit_post_link( $method_condition->ID ); ?>' class='row-title' title='<?php _e( 'Edit Method', 'woocommerce-advanced-free-shipping' ); ?>'>
-									<?php echo empty( $method_condition->post_title ) ? __( 'Untitled', 'woocommerce-advanced-free-shipping' ) : esc_html( $method_condition->post_title ); ?>
-								</a>
-							</strong>
+								<a href='<?php echo get_edit_post_link( $post->ID ); ?>' class='row-title' title='<?php _e( 'Edit Method', 'woocommerce-advanced-fees' ); ?>'><?php
+									echo _draft_or_post_title( $post->ID );
+								?></a><?php
+								_post_states( $post );
+							?></strong>
 							<div class='row-actions'>
 								<span class='edit'>
-									<a href='<?php echo get_edit_post_link( $method_condition->ID ); ?>' title='<?php _e( 'Edit Method', 'woocommerce-advanced-free-shipping' ); ?>'>
+									<a href='<?php echo get_edit_post_link( $post->ID ); ?>' title='<?php _e( 'Edit Method', 'woocommerce-advanced-free-shipping' ); ?>'>
 										<?php _e( 'Edit', 'woocommerce-advanced-free-shipping' ); ?>
 									</a>
 									|
 								</span>
 								<span class='trash'>
-									<a href='<?php echo get_delete_post_link( $method_condition->ID ); ?>' title='<?php _e( 'Delete Method', 'woocommerce-advanced-free-shipping' ); ?>'><?php
+									<a href='<?php echo get_delete_post_link( $post->ID ); ?>' title='<?php _e( 'Delete Method', 'woocommerce-advanced-free-shipping' ); ?>'><?php
 										_e( 'Delete', 'woocommerce-advanced-free-shipping' );
 									?></a>
 								</span>
@@ -60,23 +60,21 @@ $method_conditions = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 
 						</td>
 						<td><?php echo empty( $method_details['shipping_title'] ) ? __( 'Free Shipping', 'woocommerce-advanced-free-shipping' ) : esc_html( $method_details['shipping_title'] ); ?></td>
 						<td><?php echo count( $conditions ); ?></td>
-						</td>
 					</tr><?php
 
 				endforeach;
 
-				if ( empty( $method_conditions ) ) :
-
+				if ( empty( $shipping_rates ) ) :
 					?><tr>
-						<td colspan='2'><?php _e( 'There are no Free Shipping methods. Yet...', 'woocommerce-advanced-free-shipping' ); ?></td>
+						<td colspan='2'><?php _e( 'There are no Free Shipping rates. Yet...', 'woocommerce-advanced-free-shipping' ); ?></td>
 					</tr><?php
-					endif;
+				endif;
 
 			?></tbody>
 			<tfoot>
 				<tr>
 					<th colspan='4' style='padding-left: 10px;'>
-						<a href='<?php echo admin_url( 'post-new.php?post_type=wafs' ); ?>' class='add button'><?php _e( 'Add Free Shipping Method', 'woocommerce-advanced-free-shipping' ); ?></a>
+						<a href='<?php echo admin_url( 'post-new.php?post_type=wafs' ); ?>' class='add button'><?php _e( 'Add Free Shipping rate', 'woocommerce-advanced-free-shipping' ); ?></a>
 					</th>
 				</tr>
 			</tfoot>

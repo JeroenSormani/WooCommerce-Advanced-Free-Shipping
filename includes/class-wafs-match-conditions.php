@@ -188,6 +188,7 @@ class WAFS_Match_Conditions {
 
 		if ( ! isset( WC()->cart ) || empty( WC()->cart->cart_contents ) ) return $match;
 
+		$product_ids = array();
 		foreach ( WC()->cart->cart_contents as $product ) :
 			$product_ids[] = $product['product_id'];
 		endforeach;
@@ -217,13 +218,55 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_coupon( $match, $operator, $value ) {
 
-		if ( ! isset( WC()->cart ) ) return $match;
-
-		if ( '==' == $operator ) :
-			$match = ( in_array( $value, WC()->cart->applied_coupons ) );
-		elseif ( '!=' == $operator ) :
-			$match = ( ! in_array( $value, WC()->cart->applied_coupons ) );
+		if ( ! isset( WC()->cart ) ) :
+			return $match;
 		endif;
+
+		$coupons = array( 'percent' => array(), 'fixed' => array() );
+		foreach ( WC()->cart->get_coupons() as $coupon ) {
+			$type = str_replace( '_product', '', $coupon->discount_type );
+			$type = str_replace( '_cart', '', $type );
+			$coupons[ $type ][] = $coupon->coupon_amount;
+		}
+
+		// Match against coupon percentage
+		if ( strpos( $value, '%' ) !== false ) {
+
+			$percentage_value = str_replace( '%', '', $value );
+			if ( '==' == $operator ) :
+				$match = in_array( $percentage_value, $coupons['percent'] );
+			elseif ( '!=' == $operator ) :
+				$match = ! in_array( $percentage_value, $coupons['percent'] );
+			elseif ( '>=' == $operator ) :
+				$match = empty( $coupons['percent'] ) ? $match : ( min( $coupons['percent'] ) >= $percentage_value );
+			elseif ( '<=' == $operator ) :
+				$match = ! is_array( $coupons['percent'] ) ? false : ( max( $coupons['percent'] ) <= $percentage_value );
+			endif;
+
+			// Match against coupon amount
+		} elseif( strpos( $value, '$' ) !== false ) {
+
+			$amount_value = str_replace( '$', '', $value );
+			if ( '==' == $operator ) :
+				$match = in_array( $amount_value, $coupons['fixed'] );
+			elseif ( '!=' == $operator ) :
+				$match = ! in_array( $amount_value, $coupons['fixed'] );
+			elseif ( '>=' == $operator ) :
+				$match = empty( $coupons['fixed'] ) ? $match : ( min( $coupons['fixed'] ) >= $amount_value );
+			elseif ( '<=' == $operator ) :
+				$match = ! is_array( $coupons['fixed'] ) ? $match : ( max( $coupons['fixed'] ) <= $amount_value );
+			endif;
+
+			// Match coupon codes
+		} else {
+
+			if ( '==' == $operator ) :
+				$match = ( in_array( $value, WC()->cart->applied_coupons ) );
+			elseif ( '!=' == $operator ) :
+				$match = ( ! in_array( $value, WC()->cart->applied_coupons ) );
+			endif;
+
+		}
 
 		return $match;
 
@@ -324,26 +367,91 @@ class WAFS_Match_Conditions {
 
 		if ( ! isset( WC()->customer ) ) return $match;
 
+		$user_zipcode = WC()->customer->get_shipping_postcode();
+
+		// Prepare allowed values.
+		$zipcodes = (array) preg_split( '/,+ */', $value );
+
+		// Remove all non- letters and numbers
+		foreach ( $zipcodes as $key => $zipcode ) :
+			$zipcodes[ $key ] = preg_replace( '/[^0-9a-zA-Z-\*]/', '', $zipcode );
+		endforeach;
+
 		if ( '==' == $operator ) :
 
-			if ( preg_match( '/\, ?/', $value ) ) :
-				$match = ( in_array( (int) WC()->customer->get_shipping_postcode(), array_map( 'intval', explode( ',', $value ) ) ) );
-			else :
-				$match = ( (int) WC()->customer->get_shipping_postcode() == (int) $value );
-			endif;
+			foreach ( $zipcodes as $zipcode ) :
+
+				// @since 1.0.9 - Wildcard support (*)
+				if ( strpos( $zipcode, '*' ) !== false ) :
+
+					$user_zipcode = preg_replace( '/[^0-9a-zA-Z]/', '', $user_zipcode );
+					$zipcode      = str_replace( '*', '', $zipcode );
+
+					if ( empty( $zipcode ) ) continue;
+
+					$parts = explode( '-', $zipcode );
+					if ( count( $parts ) > 1 ) :
+						$match = ( $user_zipcode >= min( $parts ) && $user_zipcode <= max( $parts ) );
+					else :
+						$match = preg_match( '/^' . preg_quote( $zipcode, '/' ) . '/i', $user_zipcode );
+					endif;
+
+				else :
+
+					// BC when not using asterisk (wildcard)
+					$match = ( (double) $user_zipcode == (double) $zipcode );
+
+				endif;
+
+				if ( $match == true ) {
+					return true;
+				}
+
+			endforeach;
 
 		elseif ( '!=' == $operator ) :
 
-			if ( preg_match( '/\, ?/', $value ) ) :
-				$match = ( ! in_array( (int) WC()->customer->get_shipping_postcode(), array_map( 'intval', explode( ',', $value ) ) ) );
-			else :
-				$match = ( (int) WC()->customer->get_shipping_postcode() != (int) $value );
-			endif;
+			// True until proven false
+			$match = true;
+
+			foreach ( $zipcodes as $zipcode ) :
+
+				// @since 1.0.9 - Wildcard support (*)
+				if ( strpos( $zipcode, '*' ) !== false ) :
+
+					$user_zipcode = preg_replace( '/[^0-9a-zA-Z]/', '', $user_zipcode );
+					$zipcode      = str_replace( '*', '', $zipcode );
+
+					if ( empty( $zipcode ) ) continue;
+
+					$parts = explode( '-', $zipcode );
+					if ( count( $parts ) > 1 ) :
+						$zipcode_match = ( $user_zipcode >= min( $parts ) && $user_zipcode <= max( $parts ) );
+					else :
+						$zipcode_match = preg_match( '/^' . preg_quote( $zipcode, '/' ) . '/i', $user_zipcode );
+					endif;
+
+					if ( $zipcode_match == true ) :
+						return $match = false;
+					endif;
+
+				else :
+
+					// BC when not using asterisk (wildcard)
+					$zipcode_match = ( (double) $user_zipcode == (double) $zipcode );
+
+					if ( $zipcode_match == true ) :
+						return $match = false;
+					endif;
+
+				endif;
+
+			endforeach;
 
 		elseif ( '>=' == $operator ) :
-			$match = ( (int) WC()->customer->get_shipping_postcode() >= (int) $value );
+			$match = ( (double) $user_zipcode >= (double) $value );
 		elseif ( '<=' == $operator ) :
-			$match = ( (int) WC()->customer->get_shipping_postcode() <= (int) $value );
+			$match = ( (double) $user_zipcode <= (double) $value );
 		endif;
 
 		return $match;
@@ -639,7 +747,7 @@ class WAFS_Match_Conditions {
 	/**
 	 * Stock status.
 	 *
-	 * Match the condition value against all cart products stock statusses.
+	 * Match the condition value against all cart products stock statuses.
 	 *
 	 * @since 1.0.0
 	 *

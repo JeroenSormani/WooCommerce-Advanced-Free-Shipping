@@ -7,14 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<span class='wpc-condition-wrap wpc-condition-wrap-<?php echo absint( $wp_condition->id ); ?>'><?php
 
 		$condition_field_args = array(
-			'type' => 'select',
-			'name' => 'conditions[' . absint( $wp_condition->group ) . '][' . absint( $wp_condition->id ) . '][condition]',
-			'class' => array( 'wpc-condition' ),
-			'options' => $wp_condition->get_conditions(),
-			'value' => $wp_condition->condition,
+			'type'        => 'select',
+			'name'        => 'conditions[' . absint( $wp_condition->group ) . '][' . absint( $wp_condition->id ) . '][condition]',
+			'class'       => array( 'wpc-condition' ),
+			'options'     => $wp_condition->get_conditions(),
+			'value'       => $wp_condition->condition,
 			'custom_attr' => array(
 				'data-group' => absint( $wp_condition->group ),
-				'data-id' => absint( $wp_condition->id ),
+				'data-id'    => absint( $wp_condition->id ),
 			),
 		);
 		wpc_html_field( $condition_field_args );
@@ -26,11 +26,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<span class='wpc-operator-wrap wpc-operator-wrap-<?php echo absint( $wp_condition->id ); ?>'><?php
 
 		$operator_field_args = array(
-			'type' => 'select',
-			'name' => 'conditions[' . absint( $wp_condition->group ) . '][' . absint( $wp_condition->id ) . '][operator]',
-			'class' => array( 'wpc-operator' ),
+			'type'    => 'select',
+			'name'    => 'conditions[' . absint( $wp_condition->group ) . '][' . absint( $wp_condition->id ) . '][operator]',
+			'class'   => array( 'wpc-operator' ),
 			'options' => $wp_condition->get_operators(),
-			'value' => $wp_condition->operator,
+			'value'   => $wp_condition->operator,
 		);
 		wpc_html_field( $operator_field_args );
 

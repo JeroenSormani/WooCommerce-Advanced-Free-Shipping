@@ -48,7 +48,6 @@ class WAFS_Admin {
 			add_filter( 'plugin_action_links_' . plugin_basename( WAFS()->file ), array( $this, 'add_plugin_action_links' ), 10, 2 );
 		endif;
 
-
 	}
 
 
@@ -132,9 +131,9 @@ class WAFS_Admin {
 	 *
 	 * @since 1.0.10
 	 *
-	 * @param  array  $links List of existing links.
-	 * @param  string $file  Name of the current plugin being looped.
-	 * @return array         List of modified links.
+	 * @param   array   $links  List of existing links.
+	 * @param   string  $file   Name of the current plugin being looped.
+	 * @return  array           List of modified links.
 	 */
 	public function add_plugin_action_links( $links, $file ) {
 

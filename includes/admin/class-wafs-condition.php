@@ -96,7 +96,7 @@ class WAFS_Condition {
 	 *
 	 * @since 1.1.6
 	 *
-	 * @return array List of available conditions for a condition row.
+	 * @return  array  List of available conditions for a condition row.
 	 */
 	public function get_conditions() {
 
@@ -141,7 +141,7 @@ class WAFS_Condition {
 	 *
 	 * @since 1.1.6
 	 *
-	 * @return array List of available operators.
+	 * @return  array  List of available operators.
 	 */
 	public function get_operators() {
 
@@ -166,16 +166,16 @@ class WAFS_Condition {
 	 *
 	 * @since 1.1.6
 	 *
-	 * @return array
+	 * @return  array
 	 */
 	public function get_value_field_args() {
 
 		// Defaults
 		$values = array(
-			'name' => 'conditions[' . absint( $this->group ) . '][' . absint( $this->id ) . '][value]',
+			'name'        => 'conditions[' . absint( $this->group ) . '][' . absint( $this->id ) . '][value]',
 			'placeholder' => '',
-			'type' => 'text',
-			'class' => array( 'wpc-value' )
+			'type'        => 'text',
+			'class'       => array( 'wpc-value' )
 		);
 
 
@@ -199,16 +199,16 @@ class WAFS_Condition {
 					$values['custom_attributes']['data-selected'] = $product->get_formatted_name();
 				}
 
-				$values['type']   = 'text';
+				$values['type']        = 'text';
 				$values['placeholder'] =  __( 'Search for a product', 'woocommerce-advanced-messages' );
-				$values['class'][] = 'wc-product-search';
+				$values['class'][]     = 'wc-product-search';
 
 			break;
 
 			case 'contains_shipping_class' :
 
-				$values['type'] 			= 'select';
-				$values['options'][''] 		= __( 'No shipping class', 'woocommerce' );
+				$values['type']        = 'select';
+				$values['options'][''] = __( 'No shipping class', 'woocommerce' );
 
 				// Get all shipping classes
 				foreach ( get_terms( 'product_shipping_class', array( 'hide_empty' => false ) ) as $shipping_class ) :
@@ -246,13 +246,13 @@ class WAFS_Condition {
 			break;
 
 			case 'country' :
-				$values['type'] = 'select';
+				$values['type']    = 'select';
 				$values['options'] = WC()->countries->get_allowed_countries();
 			break;
 
 			case 'role' :
-				$values['type'] = 'select';
-				$roles = array_keys( get_editable_roles() );
+				$values['type']    = 'select';
+				$roles             = array_keys( get_editable_roles() );
 				$values['options'] = array_combine( $roles, $roles );
 			break;
 
@@ -269,7 +269,7 @@ class WAFS_Condition {
 
 			case 'stock_status' :
 
-				$values['type'] = 'select';
+				$values['type']    = 'select';
 				$values['options'] = array(
 					'instock'    => __( 'In stock', 'woocommerce-advanced-free-shipping' ),
 					'outofstock' => __( 'Out of stock', 'woocommerce-advanced-free-shipping' ),
@@ -298,8 +298,8 @@ class WAFS_Condition {
 
 		return $values;
 
-
 	}
+
 
 	/**
 	 * Get description.

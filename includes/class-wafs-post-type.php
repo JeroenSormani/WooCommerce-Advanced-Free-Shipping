@@ -111,10 +111,10 @@ class WAFS_post_type {
 		if ( 'wafs' == $post_type ) :
 			$overview_link = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=wafs_free_shipping_method' );
 
-			$overview = sprintf( ' <a href="%s">%s</a>', esc_url( $overview_link ), __( 'Return to overview.', 'woocommerce-advanced-free-shipping' ) );
-			$messages[ $post_type ][1] .= $overview;
-			$messages[ $post_type ][6] .= $overview;
-			$messages[ $post_type ][9] .= $overview;
+			$overview                    = sprintf( ' <a href="%s">%s</a>', esc_url( $overview_link ), __( 'Return to overview.', 'woocommerce-advanced-free-shipping' ) );
+			$messages[ $post_type ][1]  .= $overview;
+			$messages[ $post_type ][6]  .= $overview;
+			$messages[ $post_type ][9]  .= $overview;
 			$messages[ $post_type ][8]  .= $overview;
 			$messages[ $post_type ][10] .= $overview;
 

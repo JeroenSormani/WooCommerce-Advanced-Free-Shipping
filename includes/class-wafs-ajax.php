@@ -63,7 +63,7 @@ class WAFS_Ajax {
 
 		?><div class='wpc-condition-group wpc-condition-group-<?php echo $group; ?>' data-group='<?php echo $group; ?>'>
 
-			<p class='or-match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' );?></p><?php
+			<p class='or-match'><?php _e( 'Or match all of the following rules to allow free shipping:', 'woocommerce-advanced-free-shipping' ); ?></p><?php
 
 			$wp_condition = new WAFS_Condition( null, $group );
 			$wp_condition->output_condition_row();
@@ -88,7 +88,7 @@ class WAFS_Ajax {
 
 		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
-		$wp_condition = new WAFS_Condition( $_POST['id'], $_POST['group'], $_POST['condition'] );
+		$wp_condition     = new WAFS_Condition( $_POST['id'], $_POST['group'], $_POST['condition'] );
 		$value_field_args = $wp_condition->get_value_field_args();
 
 		?><span class='wpc-value-wrap wpc-value-wrap-<?php echo absint( $wp_condition->id ); ?>'><?php
@@ -111,7 +111,7 @@ class WAFS_Ajax {
 
 		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
-		$condition = sanitize_text_field( $_POST['condition'] );
+		$condition    = sanitize_text_field( $_POST['condition'] );
 		$wp_condition = new WAFS_Condition( null, null, $condition );
 
 		if ( $desc = $wp_condition->get_description() ) {

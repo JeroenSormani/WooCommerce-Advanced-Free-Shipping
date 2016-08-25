@@ -477,7 +477,7 @@ class WAFS_Match_Conditions {
 		if ( ! isset( WC()->customer ) ) return $match;
 
 		$customer_city = strtolower( WC()->customer->get_shipping_city() );
-		$value = strtolower( $value );
+		$value         = strtolower( $value );
 
 		if ( '==' == $operator ) :
 

@@ -228,7 +228,7 @@ class WAFS_Condition {
 
 			case 'state' :
 
-				$values['type'] = 'select';
+				$values['type']    = 'select';
 				$values['class'][] = 'wc-enhanced-select';
 
 				foreach ( WC()->countries->states as $country => $states ) :
@@ -252,7 +252,7 @@ class WAFS_Condition {
 				$values['field']   = 'select';
 				$values['class'][] = 'wc-enhanced-select';
 
-				$countries =  WC()->countries->get_allowed_countries() + WC()->countries->get_shipping_countries();
+				$countries  =  WC()->countries->get_allowed_countries() + WC()->countries->get_shipping_countries();
 				$continents = array();
 				if ( method_exists( WC()->countries, 'get_continents' ) ) :
 					foreach ( WC()->countries->get_continents() as $k => $v ) :
@@ -263,7 +263,7 @@ class WAFS_Condition {
 				if ( $continents ) {
 					$values['options'][ __( 'Continents', 'woocommerce' ) ] = $continents;
 				}
-				$values['options'][ __( 'Countries', 'woocommerce' ) ]  = $countries;
+				$values['options'][ __( 'Countries', 'woocommerce' ) ] = $countries;
 
 				break;
 
@@ -296,7 +296,7 @@ class WAFS_Condition {
 
 			case 'category' :
 
-				$values['type'] = 'select';
+				$values['type']    = 'select';
 				$values['class'][] = 'wc-enhanced-select';
 
 				$categories = get_terms( 'product_cat', array( 'hide_empty' => false ) );

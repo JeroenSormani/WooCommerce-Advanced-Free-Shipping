@@ -91,7 +91,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	 * @since 1.0.0
 	 *
 	 * @param   array  $condition_groups  All condition groups set by the user.
-	 * @return  BOOL                      True if one of the conditions groups matches.
+	 * @return  bool                      true if one of the conditions groups matches.
 	 */
 	public function wafs_match_conditions( $condition_groups = array() ) {
 

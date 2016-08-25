@@ -475,10 +475,25 @@ class WAFS_Match_Conditions {
 
 		if ( ! isset( WC()->customer ) ) return $match;
 
+		$customer_city = strtolower( WC()->customer->get_shipping_city() );
+		$value = strtolower( $value );
+
 		if ( '==' == $operator ) :
-			$match = ( preg_match( "/^$value$/i", WC()->customer->get_shipping_city() ) );
+
+			if ( preg_match( '/\, ?/', $value ) ) :
+				$match = ( in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
+			else :
+				$match = ( $value == $customer_city );
+			endif;
+
 		elseif ( '!=' == $operator ) :
-			$match = ( ! preg_match( "/^$value$/i", WC()->customer->get_shipping_city() ) );
+
+			if ( preg_match( '/\, ?/', $value ) ) :
+				$match = ( ! in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
+			else :
+				$match = ( $value == $customer_city );
+			endif;
+
 		endif;
 
 		return $match;

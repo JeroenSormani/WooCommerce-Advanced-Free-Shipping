@@ -229,12 +229,14 @@ class WAFS_Condition {
 			case 'state' :
 
 				$values['type'] = 'select';
+				$values['class'][] = 'wc-enhanced-select';
 
 				foreach ( WC()->countries->states as $country => $states ) :
 
 					if ( empty( $states ) ) continue; // Don't show country if it has no states
 					if ( ! array_key_exists( $country, WC()->countries->get_allowed_countries() ) ) continue; // Skip unallowed countries
 
+					$country_states = array();
 					foreach ( $states as $state_key => $state ) :
 						$country_states[ WC()->countries->countries[ $country ] ][ $country . '_' . $state_key ] = $state;
 					endforeach;
@@ -246,9 +248,24 @@ class WAFS_Condition {
 			break;
 
 			case 'country' :
-				$values['type']    = 'select';
-				$values['options'] = WC()->countries->get_allowed_countries();
-			break;
+
+				$values['field']   = 'select';
+				$values['class'][] = 'wc-enhanced-select';
+
+				$countries =  WC()->countries->get_allowed_countries() + WC()->countries->get_shipping_countries();
+				$continents = array();
+				if ( method_exists( WC()->countries, 'get_continents' ) ) :
+					foreach ( WC()->countries->get_continents() as $k => $v ) :
+						$continents[ 'CO_' . $k ] = $v['name']; // Add prefix for country key compatibility
+					endforeach;
+				endif;
+
+				if ( $continents ) {
+					$values['options'][ __( 'Continents', 'woocommerce' ) ] = $continents;
+				}
+				$values['options'][ __( 'Countries', 'woocommerce' ) ]  = $countries;
+
+				break;
 
 			case 'role' :
 				$values['type']    = 'select';
@@ -280,6 +297,7 @@ class WAFS_Condition {
 			case 'category' :
 
 				$values['type'] = 'select';
+				$values['class'][] = 'wc-enhanced-select';
 
 				$categories = get_terms( 'product_cat', array( 'hide_empty' => false ) );
 				foreach ( $categories as $category ) :

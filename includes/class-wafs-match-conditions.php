@@ -314,20 +314,21 @@ class WAFS_Match_Conditions {
 	 * @param   bool    $match     Current match value.
 	 * @param   string  $operator  Operator selected by the user in the condition row.
 	 * @param   mixed   $value     Value given by the user in the condition row.
-	 * @return  BOOL               Matching result, TRUE if results match, otherwise FALSE.	 */
+	 * @return  BOOL               Matching result, TRUE if results match, otherwise FALSE.
+	 */
 	public function wafs_match_condition_contains_shipping_class( $match, $operator, $value ) {
 
 		if ( ! isset( WC()->cart ) ) return $match;
 
+		// True until proven false
 		if ( $operator == '!=' ) :
-			// True until proven false
 			$match = true;
 		endif;
 
 		foreach ( WC()->cart->cart_contents as $product ) :
 
 			$id      = ! empty( $product['variation_id'] ) ? $product['variation_id'] : $product['product_id'];
-			$product = get_product( $id );
+			$product = wc_get_product( $id );
 
 			if ( $operator == '==' ) :
 				if ( $product->get_shipping_class() == $value ) :

@@ -65,6 +65,11 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 == Changelog ==
 
+= 1.0.11 - 05-09-2016 =
+
+* [Fix] - State condition field only displayed states of the last country
+* [Fix] - Inability to add new conditions due to error
+
 = 1.0.10 - 25-08-2016 =
 
 * [Improvement] - Optimized asset scripts

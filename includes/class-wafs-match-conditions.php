@@ -369,13 +369,15 @@ class WAFS_Match_Conditions {
 		if ( ! isset( WC()->customer ) ) return $match;
 
 		$user_zipcode = WC()->customer->get_shipping_postcode();
+		$user_zipcode = preg_replace( '/[^0-9a-zA-Z]/', '', $user_zipcode );
 
 		// Prepare allowed values.
 		$zipcodes = (array) preg_split( '/,+ */', $value );
 
 		// Remove all non- letters and numbers
 		foreach ( $zipcodes as $key => $zipcode ) :
-			$zipcodes[ $key ] = preg_replace( '/[^0-9a-zA-Z-\*]/', '', $zipcode );
+			$zip              = preg_replace( '/[^0-9a-zA-Z\-\*]/', '', $zipcode );
+			$zipcodes[ $key ] = strtoupper( $zip );
 		endforeach;
 
 		if ( '==' == $operator ) :
@@ -385,10 +387,7 @@ class WAFS_Match_Conditions {
 				// @since 1.0.9 - Wildcard support (*)
 				if ( strpos( $zipcode, '*' ) !== false ) :
 
-					$user_zipcode = preg_replace( '/[^0-9a-zA-Z]/', '', $user_zipcode );
-					$zipcode      = str_replace( '*', '', $zipcode );
-
-					if ( empty( $zipcode ) ) continue;
+					$zipcode = str_replace( '*', '', $zipcode );
 
 					$parts = explode( '-', $zipcode );
 					if ( count( $parts ) > 1 ) :
@@ -398,10 +397,7 @@ class WAFS_Match_Conditions {
 					endif;
 
 				else :
-
-					// BC when not using asterisk (wildcard)
-					$match = ( (double) $user_zipcode == (double) $zipcode );
-
+					$match = ( (double) $user_zipcode == (double) $zipcode ); // BC when not using asterisk (wildcard)
 				endif;
 
 				if ( $match == true ) {
@@ -420,10 +416,7 @@ class WAFS_Match_Conditions {
 				// @since 1.0.9 - Wildcard support (*)
 				if ( strpos( $zipcode, '*' ) !== false ) :
 
-					$user_zipcode = preg_replace( '/[^0-9a-zA-Z]/', '', $user_zipcode );
-					$zipcode      = str_replace( '*', '', $zipcode );
-
-					if ( empty( $zipcode ) ) continue;
+					$zipcode = str_replace( '*', '', $zipcode );
 
 					$parts = explode( '-', $zipcode );
 					if ( count( $parts ) > 1 ) :
@@ -437,14 +430,11 @@ class WAFS_Match_Conditions {
 					endif;
 
 				else :
-
-					// BC when not using asterisk (wildcard)
-					$zipcode_match = ( (double) $user_zipcode == (double) $zipcode );
+					$zipcode_match = ( (double) $user_zipcode == (double) $zipcode ); // BC when not using asterisk (wildcard)
 
 					if ( $zipcode_match == true ) :
 						return $match = false;
 					endif;
-
 				endif;
 
 			endforeach;
@@ -545,12 +535,30 @@ class WAFS_Match_Conditions {
 	 */
 	public function wafs_match_condition_country( $match, $operator, $value ) {
 
-		if ( ! isset( WC()->customer ) ) return $match;
+		if ( ! isset( WC()->customer ) ) :
+			return $match;
+		endif;
+
+		$user_country = WC()->customer->get_shipping_country();
+
+		if ( method_exists( WC()->countries, 'get_continent_code_for_country' ) ) :
+			$user_continent = WC()->countries->get_continent_code_for_country( $user_country );
+		endif;
 
 		if ( '==' == $operator ) :
-			$match = ( preg_match( "/^$value$/i", WC()->customer->get_shipping_country() ) );
+			$match = stripos( $user_country, $value ) === 0;
+
+			// Check for continents if available
+			if ( ! $match && isset( $user_continent ) && strpos( $value, 'CO_' ) === 0 ) :
+				$match = stripos( $user_continent, str_replace( 'CO_','', $value ) ) === 0;
+			endif;
 		elseif ( '!=' == $operator ) :
-			$match = ( ! preg_match( "/^$value$/i", WC()->customer->get_shipping_country() ) );
+			$match = stripos( $user_country, $value ) === false;
+
+			// Check for continents if available
+			if ( ! $match && isset( $user_continent ) && strpos( $value, 'CO_' ) === 0 ) :
+				$match = stripos( $user_continent, str_replace( 'CO_','', $value ) ) === false;
+			endif;
 		endif;
 
 		return $match;

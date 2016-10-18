@@ -191,6 +191,9 @@ class WAFS_Match_Conditions {
 		$product_ids = array();
 		foreach ( WC()->cart->cart_contents as $product ) :
 			$product_ids[] = $product['product_id'];
+			if ( isset( $product['variation_id'] ) ) {
+				$product_ids[] = $product['variation_id'];
+			}
 		endforeach;
 
 		if ( '==' == $operator ) :

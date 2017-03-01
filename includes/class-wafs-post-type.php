@@ -47,16 +47,16 @@ class WAFS_post_type {
 	public function register_post_type() {
 
 		$labels = array(
-			'name'               => __( 'Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
-			'singular_name'      => __( 'Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
+			'name'               => __( 'Advanced Free Shipping rates', 'woocommerce-advanced-free-shipping' ),
+			'singular_name'      => __( 'Advanced Free Shipping rate', 'woocommerce-advanced-free-shipping' ),
 			'add_new'            => __( 'Add New', 'woocommerce-advanced-free-shipping' ),
-			'add_new_item'       => __( 'Add New Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'edit_item'          => __( 'Edit Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'new_item'           => __( 'New Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'view_item'          => __( 'View Advanced Free Shipping method', 'woocommerce-advanced-free-shipping' ),
-			'search_items'       => __( 'Search Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
-			'not_found'          => __( 'No Advanced Free Shipping methods', 'woocommerce-advanced-free-shipping' ),
-			'not_found_in_trash' => __( 'No Advanced Free Shipping methods found in Trash', 'woocommerce-advanced-free-shipping' ),
+			'add_new_item'       => __( 'Add New Advanced Free Shipping rate', 'woocommerce-advanced-free-shipping' ),
+			'edit_item'          => __( 'Edit Advanced Free Shipping rate', 'woocommerce-advanced-free-shipping' ),
+			'new_item'           => __( 'New Advanced Free Shipping rate', 'woocommerce-advanced-free-shipping' ),
+			'view_item'          => __( 'View Advanced Free Shipping rate', 'woocommerce-advanced-free-shipping' ),
+			'search_items'       => __( 'Search Advanced Free Shipping rates', 'woocommerce-advanced-free-shipping' ),
+			'not_found'          => __( 'No Advanced Free Shipping rates', 'woocommerce-advanced-free-shipping' ),
+			'not_found_in_trash' => __( 'No Advanced Free Shipping rates found in Trash', 'woocommerce-advanced-free-shipping' ),
 		);
 
 		register_post_type( 'wafs', array(
@@ -94,22 +94,22 @@ class WAFS_post_type {
 
 		$messages['wafs'] = array(
 			0  => '',
-			1  => __( 'Free shipping method updated.', 'woocommerce-advanced-free-shipping' ),
+			1  => __( 'Free shipping rate updated.', 'woocommerce-advanced-free-shipping' ),
 			2  => __( 'Custom field updated.', 'woocommerce-advanced-free-shipping' ),
 			3  => __( 'Custom field deleted.', 'woocommerce-advanced-free-shipping' ),
-			4  => __( 'Free shipping method updated.', 'woocommerce-advanced-free-shipping' ),
-			6  => __( 'Free shipping method published.', 'woocommerce-advanced-free-shipping' ),
-			7  => __( 'Free shipping method saved.', 'woocommerce-advanced-free-shipping' ),
-			8  => __( 'Free shipping method submitted.', 'woocommerce-advanced-free-shipping' ),
+			4  => __( 'Free shipping rate updated.', 'woocommerce-advanced-free-shipping' ),
+			6  => __( 'Free shipping rate published.', 'woocommerce-advanced-free-shipping' ),
+			7  => __( 'Free shipping rate saved.', 'woocommerce-advanced-free-shipping' ),
+			8  => __( 'Free shipping rate submitted.', 'woocommerce-advanced-free-shipping' ),
 			9  => sprintf(
 				__( 'Free shipping method scheduled for: <strong>%1$s</strong>.', 'woocommerce-advanced-free-shipping' ),
 				date_i18n( __( 'M j, Y @ G:i', 'woocommerce-advanced-free-shipping' ), strtotime( $post->post_date ) )
 			),
-			10 => __( 'Free shipping method draft updated.', 'woocommerce-advanced-free-shipping' ),
+			10 => __( 'Free shipping rate draft updated.', 'woocommerce-advanced-free-shipping' ),
 		);
 
 		if ( 'wafs' == $post_type ) :
-			$overview_link = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=wafs_free_shipping_method' );
+			$overview_link = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=advanced_free_shipping' );
 
 			$overview                    = sprintf( ' <a href="%s">%s</a>', esc_url( $overview_link ), __( 'Return to overview.', 'woocommerce-advanced-free-shipping' ) );
 			$messages[ $post_type ][1]  .= $overview;

@@ -1,4 +1,4 @@
-@import 'parts/wp-conditions';
+@import '../../libraries/wp-conditions/assets/css/wp-conditions';
 
 /* Hide visibility from admin */
 .post-type-wafs .misc-pub-visibility#visibility {
@@ -13,37 +13,7 @@
 .wafs_conditions_meta_box > p:first-child + div > .or_match {
 	display: none;
 }
-/*
- * Condition group
- */
-.condition-group {
-	margin-bottom: 30px;
-	background-color: #f5f5f5;
-	padding: 15px 20px 20px;
-	border: 1px solid #ddd;
-	-webkit-box-shadow: 0 1px 1px rgba( 0, 0, 0, .04);
-	box-shadow: 0 1px 1px rgba( 0, 0, 0, .04);
-}
-.wafs-condition-wrap {
-	margin: 10px 0px 5px;
-}
-.wafs-condition-wrap .wafs-condition {
-	width: 30%;
-}
-.wafs-condition-wrap .wafs-operator {
-	width: 12%;
-	min-width: 140px;
-}
-.wafs-condition-wrap .wafs-value {
-	width: 30%;
-}
-.wafs-condition-wrap input {
-	vertical-align: top;
-}
 
-#wafs_conditions p + p {
-	display: none;
-}
 /* Description */
 .wafs_desc {
 	display: none;
@@ -78,23 +48,6 @@
 	line-height: 20px;
 }
 
-/*
- * Loading icon
- */
-
-/* Load icon condition row */
-.wafs-condition-wrap ~ .loading-icon {
-	display: block;
-}
-.loading-icon {
-	width: 30%;
-	clear: both;
-	display: inline-block;
-	text-align: center;
-	line-height: 110%;
-	margin: 0 1px;
-}
-
 .condition-delete {
 	display: none;
 	opacity: 0;
@@ -105,19 +58,6 @@
 	opacity: 1;
 }
 
-
-/* WooCommerce Add icon */
-.add.button:before {
-	font-family: WooCommerce;
-	speak: none;
-	font-weight: 400;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	margin-right: 7px;
-	content: "\e007";
-}
 /* Overview row actions */
 #advanced_free_shipping_shipping_methods tr .row-actions {
 	visibility: hidden;

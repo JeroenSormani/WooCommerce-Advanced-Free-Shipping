@@ -18,12 +18,7 @@ class WAFS_Admin {
 	 *
 	 * @since 1.0.8
 	 */
-	public function __construct() {
-
-		// Initialize plugin parts
-		add_action( 'admin_init', array( $this, 'init' ) );
-
-	}
+	public function __construct() {}
 
 
 	/**
@@ -44,7 +39,6 @@ class WAFS_Admin {
 
 		global $pagenow;
 		if ( 'plugins.php' == $pagenow ) :
-			// Plugins page
 			add_filter( 'plugin_action_links_' . plugin_basename( WAFS()->file ), array( $this, 'add_plugin_action_links' ), 10, 2 );
 		endif;
 
@@ -64,10 +58,8 @@ class WAFS_Admin {
 
 		wp_register_style( 'woocommerce-advanced-free-shipping', plugins_url( 'assets/css/woocommerce-advanced-free-shipping.min.css', WAFS()->file ), array(), WAFS()->version );
 		wp_register_script( 'woocommerce-advanced-free-shipping', plugins_url( 'assets/js/woocommerce-advanced-free-shipping' . $suffix . '.js', WAFS()->file ), array( 'jquery' ), WAFS()->version, true );
-		wp_localize_script( 'woocommerce-advanced-free-shipping', 'wpc', array(
-			'nonce'         => wp_create_nonce( 'wpc-ajax-nonce' ),
-			'action_prefix' => 'wafs_',
-			'asset_url'     => plugins_url( 'assets/', WAFS()->file ),
+		wp_localize_script( 'woocommerce-advanced-free-shipping', 'wafs', array(
+			'nonce' => wp_create_nonce( 'wpc-ajax-nonce' ),
 		) );
 
 		if (
@@ -76,8 +68,14 @@ class WAFS_Admin {
 			( isset( $_REQUEST['section'] ) && 'advanced_free_shipping' == $_REQUEST['section'] )
 		) :
 
+			wp_localize_script( 'wp-conditions', 'wpc2', array(
+				'action_prefix' => 'wafs_',
+			) );
+
 			wp_enqueue_style( 'woocommerce-advanced-free-shipping' );
 			wp_enqueue_script( 'woocommerce-advanced-free-shipping' );
+			wp_enqueue_script( 'wp-conditions' );
+
 			wp_dequeue_script( 'autosave' );
 
 		endif;

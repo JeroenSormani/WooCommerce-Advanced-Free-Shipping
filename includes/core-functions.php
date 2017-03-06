@@ -28,3 +28,49 @@ function wafs_get_rates( $args = array() ) {
 	return apply_filters( 'woocommerce_advanced_free_shipping_get_rates', $shipping_rates );
 
 }
+
+/**************************************************************
+ * Backwards compatibility for WP Conditions
+ *************************************************************/
+
+/**
+ * Add the filters required for backwards-compatibility for the matching functionality.
+ *
+ * @since 1.1.0
+ */
+function wafs_add_bc_filter_condition_match( $match, $condition, $operator, $value, $args = array() ) {
+
+	if ( has_filter( 'wafs_match_condition_' . $condition ) ) {
+		$match = apply_filters( 'wafs_match_condition_' . $condition, $match, $operator, $value );
+	}
+
+	return $match;
+
+}
+add_action( 'wp-conditions\condition\match', 'wafs_add_bc_filter_condition_match', 10, 5 );
+
+
+/**
+ * Add condition descriptions of custom conditions.
+ *
+ * @since 1.1.0
+ */
+function wafs_add_bc_filter_condition_descriptions( $descriptions ) {
+	return apply_filters( 'wafs_descriptions', $descriptions );
+}
+add_filter( 'wp-conditions\condition_descriptions', 'wafs_add_bc_filter_condition_descriptions' );
+
+
+/**
+ * Add custom field BC.
+ *
+ * @since 1.1.0
+ */
+function wafs_add_bc_action_custom_fields( $type, $args ) {
+
+	if ( has_action( 'woocommerce_advanced_fees_condition_value_field_type_' . $type ) ) {
+		do_action( 'woocommerce_advanced_fees_condition_value_field_type_' . $args['type'], $args );
+	}
+
+}
+add_action( 'wp-conditions\html_field_hook', 'wafs_add_bc_action_custom_fields' );

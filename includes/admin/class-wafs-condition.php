@@ -58,7 +58,7 @@ class WAFS_Condition {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct( $id = null, $group = 0, $condition = null, $operator = null, $value = null ) {
+	public function __construct( $id = null, $group = 0, $condition = 'subtotal', $operator = null, $value = null ) {
 
 		$this->id        = $id;
 		$this->group     = $group;
@@ -144,17 +144,8 @@ class WAFS_Condition {
 	 * @return  array  List of available operators.
 	 */
 	public function get_operators() {
-
-		$operators = array(
-			'==' => __( 'Equal to', 'woocommerce-advanced-free-shipping' ),
-			'!=' => __( 'Not equal to', 'woocommerce-advanced-free-shipping' ),
-			'>=' => __( 'Greater or equal to', 'woocommerce-advanced-free-shipping' ),
-			'<=' => __( 'Less or equal to ', 'woocommerce-advanced-free-shipping' ),
-		);
-		$operators = apply_filters( 'wafs_operators', $operators );
-
-		return $operators;
-
+		$wpc_condition = wpc_get_condition( $this->condition );
+		return apply_filters( 'woocommerce_Advanced_Shipping_Validation_operators', $wpc_condition->get_available_operators() );
 	}
 
 
@@ -171,150 +162,27 @@ class WAFS_Condition {
 	public function get_value_field_args() {
 
 		// Defaults
-		$values = array(
+		$default_field_args = array(
 			'name'        => 'conditions[' . absint( $this->group ) . '][' . absint( $this->id ) . '][value]',
 			'placeholder' => '',
 			'type'        => 'text',
-			'class'       => array( 'wpc-value' )
+			'class'       => array( 'wpc-value' ),
 		);
 
+		$field_args = $default_field_args;
+		if ( $condition = wpc_get_condition( $this->condition ) ) {
+			$field_args = wp_parse_args( $condition->get_value_field_args(), $field_args );
+		}
 
+		if ( $this->condition == 'contains_product' && $product = wc_get_product( $this->value ) ) {
+			$field_args['custom_attributes']['data-selected'] = $product->get_formatted_name(); // WC < 2.7
+			$field_args['options'][ $this->value ] = $product->get_formatted_name(); // WC >= 2.7
+		}
 
-		switch ( $this->condition ) :
+		$field_args = apply_filters( 'wafs_values', $field_args, $this->condition );
+		$field_args = apply_filters( 'woocommerce_advanced_free_shipping_values', $field_args, $this->condition );
 
-			default:
-			case 'subtotal' :
-			case 'subtotal_ex_tax' :
-			case 'tax' :
-			case 'quantity' :
-			case 'coupon' :
-			case 'weight' :
-				$values['type'] = 'text';
-			break;
-
-			case 'contains_product' :
-
-				$product = wc_get_product( $this->value );
-				if ( $product ) {
-					$values['custom_attributes']['data-selected'] = $product->get_formatted_name();
-				}
-
-				$values['type']        = 'text';
-				$values['placeholder'] =  __( 'Search for a product', 'woocommerce-advanced-messages' );
-				$values['class'][]     = 'wc-product-search';
-
-			break;
-
-			case 'contains_shipping_class' :
-
-				$values['type']        = 'select';
-				$values['options'][''] = __( 'No shipping class', 'woocommerce' );
-
-				// Get all shipping classes
-				foreach ( get_terms( 'product_shipping_class', array( 'hide_empty' => false ) ) as $shipping_class ) :
-					$values['options'][ $shipping_class->slug ] = $shipping_class->name;
-				endforeach;
-
-			break;
-
-			/**
-			 * User details
-			 */
-
-			case 'zipcode' :
-			case 'city' :
-				$values['type'] = 'text';
-			break;
-
-			case 'state' :
-
-				$values['type']    = 'select';
-				$values['class'][] = 'wc-enhanced-select';
-
-				$country_states = array();
-				foreach ( WC()->countries->states as $country => $states ) :
-
-					if ( empty( $states ) ) continue; // Don't show country if it has no states
-					if ( ! array_key_exists( $country, WC()->countries->get_allowed_countries() ) ) continue; // Skip unallowed countries
-
-					foreach ( $states as $state_key => $state ) :
-						$country_states[ WC()->countries->countries[ $country ] ][ $country . '_' . $state_key ] = $state;
-					endforeach;
-
-					$values['options'] = $country_states;
-
-				endforeach;
-
-			break;
-
-			case 'country' :
-
-				$values['field']   = 'select';
-				$values['class'][] = 'wc-enhanced-select';
-
-				$countries  =  WC()->countries->get_allowed_countries() + WC()->countries->get_shipping_countries();
-				$continents = array();
-				if ( method_exists( WC()->countries, 'get_continents' ) ) :
-					foreach ( WC()->countries->get_continents() as $k => $v ) :
-						$continents[ 'CO_' . $k ] = $v['name']; // Add prefix for country key compatibility
-					endforeach;
-				endif;
-
-				if ( $continents ) {
-					$values['options'][ __( 'Continents', 'woocommerce' ) ] = $continents;
-				}
-				$values['options'][ __( 'Countries', 'woocommerce' ) ] = $countries;
-
-				break;
-
-			case 'role' :
-				$values['type']    = 'select';
-				$roles             = array_keys( get_editable_roles() );
-				$values['options'] = array_combine( $roles, $roles );
-			break;
-
-			/**
-			 * Product
-			 */
-
-			case 'width' :
-			case 'height' :
-			case 'length' :
-			case 'stock' :
-				$values['type'] = 'text';
-			break;
-
-			case 'stock_status' :
-
-				$values['type']    = 'select';
-				$values['options'] = array(
-					'instock'    => __( 'In stock', 'woocommerce-advanced-free-shipping' ),
-					'outofstock' => __( 'Out of stock', 'woocommerce-advanced-free-shipping' ),
-				);
-
-			break;
-
-			case 'category' :
-
-				$values['type']    = 'select';
-				$values['class'][] = 'wc-enhanced-select';
-
-				$categories = get_terms( 'product_cat', array( 'hide_empty' => false ) );
-				foreach ( $categories as $category ) :
-					$values['options'][ $category->slug ] = $category->name;
-				endforeach;
-
-			break;
-
-
-		endswitch;
-
-		$values = apply_filters( 'wafs_values', $values, $this->condition );
-
-
-		$values = apply_filters( 'woocommerce_advanced_free_shipping_values', $values, $this->condition );
-
-		return $values;
+		return $field_args;
 
 	}
 
@@ -327,23 +195,8 @@ class WAFS_Condition {
 	 * @since 1.0.0
 	 */
 	public function get_description() {
-
-		$descriptions = array(
-			'state'                   => __( 'States must be installed in WC.', 'woocommerce-advanced-free-shipping' ),
-			'weight'                  => __( 'Weight calculated on all the cart contents', 'woocommerce-advanced-free-shipping' ),
-			'length'                  => __( 'Compared to lengthiest product in cart', 'woocommerce-advanced-free-shipping' ),
-			'width'                   => __( 'Compared to widest product in cart', 'woocommerce-advanced-free-shipping' ),
-			'height'                  => __( 'Compared to highest product in cart', 'woocommerce-advanced-free-shipping' ),
-			'stock_status'            => __( 'All products in cart must match stock status', 'woocommerce-advanced-free-shipping' ),
-			'category'                => __( 'All products in cart must match category', 'woocommerce-advanced-free-shipping' ),
-			'contains_product'        => __( 'Cart must contain one of this product', 'woocommerce-advanced-free-shipping' ),
-			'contains_shipping_class' => __( 'Cart must contain at least one product with the selected shipping class', 'woocommerce-advanced-free-shipping' ),
-		);
-
-		$descriptions = apply_filters( 'wafs_descriptions', $descriptions );
-
+		$descriptions = apply_filters( 'wafs_descriptions', wpc_condition_descriptions() );
 		return isset( $descriptions[ $this->condition ] ) ? $descriptions[ $this->condition ] : '';
-
 	}
 
 

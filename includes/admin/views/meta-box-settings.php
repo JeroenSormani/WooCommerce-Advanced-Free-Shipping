@@ -32,5 +32,4 @@ $settings['shipping_title'] = ! empty( $settings['shipping_title'] ) ? $settings
 
 	</p>
 
-
 </div>

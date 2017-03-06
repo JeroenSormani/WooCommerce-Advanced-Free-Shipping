@@ -63,13 +63,13 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 
 		$methods = wafs_get_rates();
 
-		$matched_methods = '';
+		$matched_methods = array();
 		foreach ( $methods as $method ) :
 
 			$condition_groups = get_post_meta( $method->ID, '_wafs_shipping_method_conditions', true );
 
 			// Check if method conditions match
-			$match = $this->wafs_match_conditions( $condition_groups );
+			$match = wpc_match_conditions( $condition_groups );
 
 			// Add (single) match to parameter
 			if ( true == $match ) :
@@ -79,46 +79,6 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 		endforeach;
 
 		return $matched_methods;
-
-	}
-
-
-	/**
-	 * Match conditions.
-	 *
-	 * Method to check all condition groups and conditions if they match their rules.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param   array  $condition_groups  All condition groups set by the user.
-	 * @return  bool                      true if one of the conditions groups matches.
-	 */
-	public function wafs_match_conditions( $condition_groups = array() ) {
-
-		if ( empty( $condition_groups ) ) return false;
-
-		foreach ( $condition_groups as $condition_group => $conditions ) :
-
-			$match_condition_group = true;
-
-			foreach ( $conditions as $condition ) :
-
-				$match = apply_filters( 'wafs_match_condition_' . $condition['condition'], false, $condition['operator'], $condition['value'] );
-
-				if ( false == $match ) :
-					$match_condition_group = false;
-				endif;
-
-			endforeach;
-
-			// return true if one condition group matches
-			if ( true == $match_condition_group ) :
-				return true;
-			endif;
-
-		endforeach;
-
-		return false;
 
 	}
 
@@ -172,23 +132,6 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 			require_once plugin_dir_path( __FILE__ ) . 'admin/views/conditions-table.php';
 
 		return ob_get_clean();
-
-	}
-
-
-	/**
-	 * Validate table.
-	 *
-	 * Condition table does not need validation, so always return false.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param   mixed  $key  Key.
-	 * @return  bool         Validation.
-	 */
-	public function validate_additional_conditions_table_field( $key ) {
-
-		return false;
 
 	}
 

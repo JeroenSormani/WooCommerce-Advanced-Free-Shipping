@@ -26,7 +26,6 @@ class WAFS_post_type {
 		// Add/save meta boxes
 		add_action( 'add_meta_boxes', array( $this, 'post_type_meta_box' ) );
 		add_action( 'save_post', array( $this, 'save_meta' ) );
-		add_action( 'save_post', array( $this, 'save_condition_meta' ) );
 
 		// Edit user messages
 		add_filter( 'post_updated_messages', array( $this, 'custom_post_type_messages' ) );
@@ -148,12 +147,7 @@ class WAFS_post_type {
 	 * @since 1.0.0
 	 */
 	public function render_wafs_conditions() {
-
-		/**
-		 * Load meta box conditions view.
-		 */
 		require_once plugin_dir_path( __FILE__ ) . 'admin/views/meta-box-conditions.php';
-
 	}
 
 
@@ -165,40 +159,7 @@ class WAFS_post_type {
 	 * @since 1.0.0
 	 */
 	public function render_wafs_settings() {
-
-		/**
-		 * Load meta box settings view
-		 */
 		require_once plugin_dir_path( __FILE__ ) . 'admin/views/meta-box-settings.php';
-
-	}
-
-
-	/**
-	 * Save conditions meta box.
-	 *
-	 * Validate and save post meta from conditions meta box.
-	 *
-	 * @since 1.0.0
-	 */
-	public function save_condition_meta( $post_id ) {
-
-		if ( ! isset( $_POST['wafs_settings_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wafs_settings_meta_box_nonce'], 'wafs_settings_meta_box' ) ) :
-			return $post_id;
-		endif;
-
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
-			return $post_id;
-		endif;
-
-		if ( ! current_user_can( 'manage_woocommerce' ) ) :
-			return $post_id;
-		endif;
-
-		$shipping_method_conditions = $_POST['conditions'];
-
-		update_post_meta( $post_id, '_wafs_shipping_method_conditions', $shipping_method_conditions );
-
 	}
 
 
@@ -224,8 +185,10 @@ class WAFS_post_type {
 		endif;
 
 		$shipping_method = array_map( 'sanitize_text_field', $_POST['_wafs_shipping_method'] );
-
 		update_post_meta( $post_id, '_wafs_shipping_method', $shipping_method );
+
+		// Save sanitized conditions
+		update_post_meta( $post_id, '_wafs_shipping_method_conditions', wpc_sanitize_conditions( $_POST['conditions'] ) );
 
 	}
 

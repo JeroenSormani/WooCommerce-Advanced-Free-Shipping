@@ -88,8 +88,6 @@ class WooCommerce_Advanced_Free_Shipping {
 			endif;
 		endif;
 
-		$this->init();
-
 	}
 
 
@@ -132,6 +130,8 @@ class WooCommerce_Advanced_Free_Shipping {
 		// Updater
 		$this->update();
 
+		require_once plugin_dir_path( __FILE__ ) . '/libraries/wp-conditions/functions.php';
+
 		// Functions
 		require_once plugin_dir_path( __FILE__ ) . 'includes/core-functions.php';
 
@@ -157,10 +157,9 @@ class WooCommerce_Advanced_Free_Shipping {
 		 * Admin class
 		 */
 		if ( is_admin() ) :
-			require_once plugin_dir_path( __FILE__ ) . 'includes/admin/admin-functions.php';
-
 			require_once plugin_dir_path( __FILE__ ) . 'includes/admin/class-wafs-admin.php';
 			$this->admin = new WAFS_Admin();
+			$this->admin->init();
 		endif;
 
 	}
@@ -268,20 +267,6 @@ class WooCommerce_Advanced_Free_Shipping {
 	}
 
 
-	/**
-	 * Enqueue scripts.
-	 *
-	 * Enqueue javascript and stylesheets to the admin area.
-	 *
-	 * @since 1.0.0
-	 */
-	public function wafs_admin_enqueue_scripts() {
-
-		_deprecated_function( __FUNCTION__, '1.0.8', 'WAFS()->admin->admin_enqueue_script()' );
-
-	}
-
-
 }
 
 
@@ -307,4 +292,4 @@ if ( ! function_exists( 'WAFS' ) ) :
 
 endif;
 
-WAFS();
+WAFS()->init();

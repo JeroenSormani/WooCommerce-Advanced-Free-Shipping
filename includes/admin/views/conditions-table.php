@@ -19,7 +19,7 @@ $shipping_rates = wafs_get_rates( array( 'post_status' => array( 'draft', 'publi
 	</th>
 	<td class="forminp" id="<?php echo $this->id; ?>_shipping_methods">
 
-		<table class='wp-list-table wpc-conditions-post-table widefat'>
+		<table class='wp-list-table wpc-conditions-post-table wpc-sortable-post-table widefat'>
 			<thead>
 				<tr>
 					<th style='padding-left: 10px;'><?php _e( 'Title', 'woocommerce-advanced-free-shipping' ); ?></th>

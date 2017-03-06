@@ -212,7 +212,7 @@ class WooCommerce_Advanced_Free_Shipping {
 		add_action( 'woocommerce_shipping_init', array( $this, 'wafs_free_shipping' ) );
 
 		// Add shipping method
-		add_action( 'woocommerce_shipping_methods', array( $this, 'wafs_add_shipping_method' ) );
+		add_filter( 'woocommerce_shipping_methods', array( $this, 'wafs_add_shipping_method' ) );
 
 	}
 

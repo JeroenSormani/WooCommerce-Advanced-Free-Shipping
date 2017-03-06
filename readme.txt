@@ -2,8 +2,8 @@
 Contributors: sormano
 Tags: woocommerce, shipping, woocommerce shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 4.0
-Tested up to: 4.6
-Stable tag: 1.0.10
+Tested up to: 4.7.2
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,7 +14,8 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 
 *Conditions like:*
 
-- Cart total
+- Subtotal
+- User role
 - Country
 - Zip code
 - Stock / stock status
@@ -70,6 +71,19 @@ In case you do want to show this kind of message, The [Advanced Messages for Woo
 3. WAFS shipping conditions possibilities
 
 == Changelog ==
+
+= 1.1.0 - 06-03-2017 = IMPORTANT NOTE - As of this version, the plugin requires PHP 5.3 to function
+
+* [Fix] - Allow variations to be set (and make them working) with the 'contains product' condition
+* [Fix] - Prevent duplicate DB query
+* [Improvement] - BIG refactor of the backend conditions - please verify your setup if using custom coded condition
+* [Improvement] - Smoother User Experience with conditions
+	- Instant adding of conditions / condition groups
+	- Only show valid operator options
+	- Instantly show condition descriptions
+	- Deleting entire condition groups
+	- Duplicate condition groups
+* [Improvement] - WC 2.7 compatibility changes
 
 = 1.0.11 - 05-09-2016 =
 

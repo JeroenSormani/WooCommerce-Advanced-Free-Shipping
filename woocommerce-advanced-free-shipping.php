@@ -3,7 +3,7 @@
  * Plugin Name: 	WooCommerce Advanced Free Shipping
  * Plugin URI: 		https://wordpress.org/plugins/woocommerce-advanced-free-shipping/
  * Description: 	WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
- * Version: 		1.0.11
+ * Version: 		1.1.0
  * Author: 			Jeroen Sormani
  * Author URI: 		http://jeroensormani.com/
  * Text Domain: 	woocommerce-advanced-free-shipping
@@ -48,7 +48,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	 * @since 1.0.4
 	 * @var string $version Plugin version number.
 	 */
-	public $version = '1.0.11';
+	public $version = '1.1.0';
 
 
 	/**
@@ -120,6 +120,10 @@ class WooCommerce_Advanced_Free_Shipping {
 	 * @since 1.0.0
 	 */
 	public function init() {
+
+		if ( version_compare( PHP_VERSION, '5.3', 'lt' ) ) {
+			return add_action( 'admin_notices', array( $this, 'php_version_notice' ) );
+		}
 
 		// Add hooks/filters
 		$this->hooks();
@@ -266,6 +270,21 @@ class WooCommerce_Advanced_Free_Shipping {
 
 	}
 
+
+	/**
+	 * Display PHP 5.3 required notice.
+	 *
+	 * Display a notice when the required PHP version is not met.
+	 *
+	 * @since 1.0.6
+	 */
+	public function php_version_notice() {
+
+		?><div class='updated'>
+		<p><?php echo sprintf( __( 'Advanced Free Shipping requires PHP 5.3 or higher and your current PHP version is %s. Please (contact your host to) update your PHP version.', 'woocommerce-advanced-messages' ), PHP_VERSION ); ?></p>
+		</div><?php
+
+	}
 
 }
 

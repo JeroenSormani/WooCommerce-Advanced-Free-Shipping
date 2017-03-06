@@ -41,6 +41,10 @@ function wafs_get_rates( $args = array() ) {
  */
 function wafs_add_bc_filter_condition_match( $match, $condition, $operator, $value, $args = array() ) {
 
+	if ( ! isset( $args['context'] ) || $args['context'] != 'wafs' ) {
+		return $match;
+	}
+
 	if ( has_filter( 'wafs_match_condition_' . $condition ) ) {
 		$match = apply_filters( 'wafs_match_condition_' . $condition, $match = false, $operator, $value );
 	}

@@ -67,7 +67,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 			$condition_groups = get_post_meta( $method->ID, '_wafs_shipping_method_conditions', true );
 
 			// Check if conditions match
-			if ( wpc_match_conditions( $condition_groups ) ) :
+			if ( wpc_match_conditions( $condition_groups, array( 'context' => 'wafs' ) ) ) :
 				$matched_methods = $method->ID;
 			endif;
 

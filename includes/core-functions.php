@@ -19,7 +19,8 @@ function wafs_get_rates( $args = array() ) {
 		'posts_per_page'         => 1000,
 		'orderby'                => 'menu_order',
 		'order'                  => 'ASC',
-		'update_post_term_cache' => false
+		'update_post_term_cache' => false,
+		'no_found_rows'          => true,
 	) );
 
 	$rates_query    = new WP_Query( $query_args );
@@ -41,7 +42,7 @@ function wafs_get_rates( $args = array() ) {
 function wafs_add_bc_filter_condition_match( $match, $condition, $operator, $value, $args = array() ) {
 
 	if ( has_filter( 'wafs_match_condition_' . $condition ) ) {
-		$match = apply_filters( 'wafs_match_condition_' . $condition, $match, $operator, $value );
+		$match = apply_filters( 'wafs_match_condition_' . $condition, $match = false, $operator, $value );
 	}
 
 	return $match;

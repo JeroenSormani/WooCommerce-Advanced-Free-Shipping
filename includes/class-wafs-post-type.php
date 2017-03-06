@@ -26,7 +26,6 @@ class WAFS_post_type {
 		// Add/save meta boxes
 		add_action( 'add_meta_boxes', array( $this, 'post_type_meta_box' ) );
 		add_action( 'save_post', array( $this, 'save_meta' ) );
-		add_action( 'save_post', array( $this, 'save_condition_meta' ) );
 
 		// Edit user messages
 		add_filter( 'post_updated_messages', array( $this, 'custom_post_type_messages' ) );

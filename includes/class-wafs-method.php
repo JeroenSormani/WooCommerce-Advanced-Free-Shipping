@@ -19,8 +19,6 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 		$this->method_title       = __( 'Advanced Free Shipping', 'woocommerce-advanced-free-shipping' );
 		$this->method_description = __( 'Configure Advanced Free Shipping' );
 
-		$this->matched_methods = $this->wafs_match_methods();
-
 		$this->init();
 
 	}
@@ -63,16 +61,13 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 
 		$methods = wafs_get_rates();
 
-		$matched_methods = array();
+		$matched_methods = false;
 		foreach ( $methods as $method ) :
 
 			$condition_groups = get_post_meta( $method->ID, '_wafs_shipping_method_conditions', true );
 
-			// Check if method conditions match
-			$match = wpc_match_conditions( $condition_groups );
-
-			// Add (single) match to parameter
-			if ( true == $match ) :
+			// Check if conditions match
+			if ( wpc_match_conditions( $condition_groups ) ) :
 				$matched_methods = $method->ID;
 			endif;
 
@@ -125,12 +120,7 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	public function generate_conditions_table_html() {
 
 		ob_start();
-
-			/**
-			 * Load conditions table file
-			 */
 			require_once plugin_dir_path( __FILE__ ) . 'admin/views/conditions-table.php';
-
 		return ob_get_clean();
 
 	}
@@ -147,9 +137,15 @@ class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 	 */
 	public function calculate_shipping( $package = array() ) {
 
-		if ( false == $this->matched_methods || 'no' == $this->enabled ) return;
+		if ( $this->enabled == 'no' ) {
+			return;
+		}
 
-		$method_args = get_post_meta( $this->matched_methods, '_wafs_shipping_method', true );
+		if ( ! $matched_rate = $this->wafs_match_methods() ) {
+			return;
+		}
+
+		$method_args = get_post_meta( $matched_rate, '_wafs_shipping_method', true );
 		$label       = ! empty( $method_args['shipping_title'] ) ? $method_args['shipping_title'] : __( 'Free Shipping', 'woocommerce-advanced-free-shipping' );
 
 		$rate = array(

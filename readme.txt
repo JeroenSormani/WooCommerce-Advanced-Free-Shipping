@@ -46,6 +46,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 > View [WooCommerce Advanced Shipping](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573)
 
 **Showing a free shipping threshold message**
+
 There are a few plugins out there that add a message when someone hasn't reached the free shipping threshold yet. These plugin work on the 'Free shipping' option that is provided in WooCommerce by default.
 It is unlikely that these plugins will work out of the box with Advanced Free Shipping due to the complexity of the conditional logic.
 

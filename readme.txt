@@ -73,7 +73,7 @@ In case you do want to show this kind of message, The [Advanced Messages for Woo
 
 == Changelog ==
 
-= 1.1.0 - 06-03-2017 = IMPORTANT NOTE - As of this version, the plugin requires PHP 5.3 to function
+= 1.1.0 - 06-03-2017 = IMPORTANT NOTE - As of this version, the plugin requires PHP 5.3 or higher to function
 
 * [Fix] - Allow variations to be set (and make them working) with the 'contains product' condition
 * [Fix] - Prevent duplicate DB query

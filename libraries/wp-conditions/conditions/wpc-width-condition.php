@@ -9,7 +9,7 @@ if ( ! class_exists( 'WPC_Width_Condition' ) ) {
 			$this->name        = __( 'Width', 'wpc-conditions' );
 			$this->slug        = __( 'width', 'wpc-conditions' );
 			$this->group       = __( 'Product', 'wpc-conditions' );
-			$this->description = __( 'Compared to widest product in cart', 'wpc-conditions' );
+			$this->description = __( 'Compared to the widest product in cart', 'wpc-conditions' );
 
 			parent::__construct();
 		}
@@ -17,13 +17,11 @@ if ( ! class_exists( 'WPC_Width_Condition' ) ) {
 		public function get_compare_value() {
 
 			$width = array();
-			foreach ( WC()->cart->get_cart() as $product ) :
+			foreach ( WC()->cart->get_cart() as $item ) :
 
-				if ( true == $product['data']->variation_has_width ) :
-					$width[] = ( get_post_meta( $product['data']->variation_id, '_width', true ) );
-				else :
-					$width[] = ( get_post_meta( $product['product_id'], '_width', true ) );
-				endif;
+				/** @var $product WC_Product */
+				$product = $item['data'];
+				$width[] = $product->get_width();
 
 			endforeach;
 

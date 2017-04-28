@@ -22,16 +22,19 @@ if ( ! class_exists( 'WPC_Stock_Status_Condition' ) ) {
 
 				$match = true;
 				// $package['contents']
-				foreach ( WC()->cart->get_cart() as $product ) :
+				foreach ( WC()->cart->get_cart() as $item ) :
 
-					if ( true == $product['data']->variation_has_stock ) :
-						$stock_status = ( get_post_meta( $product['data']->variation_id, '_stock_status', true ) );
-					else :
-						$stock_status = ( get_post_meta( $product['product_id'], '_stock_status', true ) );
-					endif;
+					/** @var $product WC_Product */
+					$product = $item['data'];
+
+					if ( method_exists( $product, 'get_stock_status' ) ) { // WC 2.7 compatibility
+						$stock_status = $product->get_stock_status();
+					} else { // Pre 2.7
+						$stock_status = $product->stock_status;
+					}
 
 					if ( $stock_status != $value ) :
-						$match = false;
+						return false;
 					endif;
 
 				endforeach;
@@ -40,21 +43,26 @@ if ( ! class_exists( 'WPC_Stock_Status_Condition' ) ) {
 
 				$match = true;
 				// $package['contents']
-				foreach ( WC()->cart->get_cart() as $product ) :
+				foreach ( WC()->cart->get_cart() as $item ) :
 
-					if ( true == $product['data']->variation_has_stock ) :
-						$stock_status = ( get_post_meta( $product['data']->variation_id, '_stock_status', true ) );
-					else :
-						$stock_status = ( get_post_meta( $product['product_id'], '_stock_status', true ) );
-					endif;
+					/** @var $product WC_Product */
+					$product = $item['data'];
+
+					if ( method_exists( $product, 'get_stock_status' ) ) { // WC 2.7 compatibility
+						$stock_status = $product->get_stock_status();
+					} else { // Pre 2.7
+						$stock_status = $product->stock_status;
+					}
 
 					if ( $stock_status == $value ) :
-						$match = false;
+						return false;
 					endif;
 
 				endforeach;
 
 			endif;
+
+			return $match;
 
 		}
 
@@ -66,6 +74,20 @@ if ( ! class_exists( 'WPC_Stock_Status_Condition' ) ) {
 			unset( $operators['<='] );
 
 			return $operators;
+
+		}
+
+		public function get_value_field_args() {
+
+			$field_args = array(
+				'type'    => 'select',
+				'options' => array(
+					'1' => __( 'In stock', 'woocommerce' ),
+					'0' => __( 'Out of stock', 'woocommerce' ),
+				),
+			);
+
+			return $field_args;
 
 		}
 

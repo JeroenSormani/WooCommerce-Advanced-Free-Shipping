@@ -31,7 +31,7 @@ jQuery( function( $ ) {
 
     // Assign new ID to repeater row + open collapsible + re-enable nested repeater
     jQuery( document.body ).on( 'repeater-added-row', function( e, template, container, $self ) {
-        var new_id = Math.floor(Math.random()*8999999999+1000000000); // Random number sequence of 10 length
+        var new_id = Math.floor(Math.random()*899999999+100000000); // Random number sequence of 9 length
         template.find( 'input[name], select[name]' ).attr( 'name', function( index, value ) {
             return ( value.replace( '9999', new_id ) ) || value;
         });
@@ -55,7 +55,7 @@ jQuery( function( $ ) {
             condition_group_id   = condition_group_wrap.find( '.wpc-condition-group' ).attr( 'data-group' ),
             condition_group_list = $( this ).parents( '.wpc-conditions' ),
             new_group            = condition_group_wrap.clone(),
-            new_group_id         = Math.floor(Math.random()*8999999999+1000000000); // Random number sequence of 10 length
+            new_group_id         = Math.floor(Math.random()*899999999+100000000); // Random number sequence of 9 length
 
         // Fix dropdown selected not being cloned properly
         $( condition_group_wrap ).find( 'select' ).each(function(i) {

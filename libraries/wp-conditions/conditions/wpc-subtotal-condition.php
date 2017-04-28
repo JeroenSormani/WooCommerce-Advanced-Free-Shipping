@@ -15,7 +15,6 @@ if ( ! class_exists( 'WPC_Subtotal_Condition' ) ) {
 		}
 
 		public function get_value( $value ) {
-			// Make sure its formatted correct
 			return str_replace( ',', '.', $value );
 		}
 

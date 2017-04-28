@@ -19,13 +19,11 @@ if ( ! class_exists( 'WPC_Stock_Condition' ) ) {
 			$stock = array();
 
 			// $package['contents']
-			foreach ( WC()->cart->get_cart() as $product ) :
+			foreach ( WC()->cart->get_cart() as $item ) :
 
-				if ( true == $product['data']->variation_has_stock ) :
-					$stock[] = ( get_post_meta( $product['data']->variation_id, '_stock', true ) );
-				else :
-					$stock[] = ( get_post_meta( $product['product_id'], '_stock', true ) );
-				endif;
+				/** @var $product WC_Product */
+				$product = $item['data'];
+				$stock[] = $product->get_stock_quantity();
 
 			endforeach;
 

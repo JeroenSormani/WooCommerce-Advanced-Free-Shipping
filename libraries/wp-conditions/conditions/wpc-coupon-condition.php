@@ -62,9 +62,16 @@ if ( ! class_exists( 'WPC_Coupon_Condition' ) ) {
 
 			$coupons = array( 'percent' => array(), 'fixed' => array() );
 			foreach ( WC()->cart->get_coupons() as $coupon ) {
-				$type               = str_replace( '_product', '', $coupon->discount_type );
-				$type               = str_replace( '_cart', '', $type );
-				$coupons[ $type ][] = $coupon->coupon_amount;
+				/** @var $coupon WC_Coupon */
+				if ( version_compare( WC()->version, '2.7', '>=' ) ) {
+					$type               = str_replace( '_product', '', $coupon->get_discount_type() );
+					$type               = str_replace( '_cart', '', $type );
+					$coupons[ $type ][] = $coupon->get_amount();
+				} else {
+					$type               = str_replace( '_product', '', $coupon->discount_type );
+					$type               = str_replace( '_cart', '', $type );
+					$coupons[ $type ][] = $coupon->coupon_amount;
+				}
 			}
 
 			return $coupons;

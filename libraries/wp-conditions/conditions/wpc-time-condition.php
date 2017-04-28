@@ -27,7 +27,7 @@ if ( ! class_exists( 'WPC_Time_Condition' ) ) {
 			$field_args = array(
 				'type' => 'text',
 				'class' => array( 'wpc-value' ),
-				'placeholder' => 'dd-mm-yyyy or yyyy-mm-dd',
+				'placeholder' => sprintf( __( 'Current time is: %s', 'woocommerce-advanced-messages' ), current_time( 'H:i' ) ),
 			);
 
 			return $field_args;

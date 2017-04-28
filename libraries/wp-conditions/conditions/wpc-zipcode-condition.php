@@ -17,18 +17,7 @@ if ( ! class_exists( 'WPC_Zipcode_Condition' ) ) {
 		public function match( $match, $operator, $value ) {
 
 			$zipcode = $this->get_compare_value();
-
-			// Prepare the store-owner set value
-			$value_zipcodes = array();
-			if ( preg_match( '/\, ?/', $value ) ) :
-
-				foreach ( preg_split( '/\, ?/', $value ) as $v ) :
-					$value_zipcodes[] = preg_replace( '/[^0-9a-zA-Z\-]/', '', $v );
-				endforeach;
-
-			else :
-				$value_zipcodes[] = preg_replace( '/[^0-9a-zA-Z\-]/', '', $value );
-			endif;
+			$value_zipcodes = $this->get_value( $value );
 
 			// Match zipcode
 			if ( '==' == $operator ) :
@@ -43,7 +32,8 @@ if ( ! class_exists( 'WPC_Zipcode_Condition' ) ) {
 
 				$match = true;
 				foreach ( $value_zipcodes as $zip ) :
-					if ( $match = ! preg_match( '/^' . preg_quote( $zip, '/' ) . '/i', $zipcode ) ) :
+					if ( preg_match( '/^' . preg_quote( $zip, '/' ) . '/i', $zipcode ) ) :
+						return $match = false;
 						break;
 					endif;
 				endforeach;
@@ -69,6 +59,17 @@ if ( ! class_exists( 'WPC_Zipcode_Condition' ) ) {
 			endif;
 
 			return $match;
+
+		}
+
+		public function get_value( $value ) {
+
+			$value_zipcodes = array();
+			foreach ( preg_split( '/\, ?/', $value ) as $v ) :
+				$value_zipcodes[] = preg_replace( '/[^0-9a-zA-Z\-]/', '', $v );
+			endforeach;
+
+			return $value_zipcodes;
 
 		}
 

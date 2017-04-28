@@ -3,7 +3,7 @@ Contributors: sormano
 Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 4.0
 Tested up to: 4.7.3
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -98,6 +98,11 @@ In the future this will likely be changed, for now I recommend taking a look at 
 4. WooCommerce Shipping condition available operators
 
 == Changelog ==
+
+= 1.1.1 - 28-04-2017 =
+
+* [Fix] - Use 9 digit random IDs to prevent too big numbers for 32-bit systems
+* [Improvement] - Remove call to asset that no longer exists
 
 = 1.1.0 - 06-03-2017 = IMPORTANT NOTE - As of this version, the plugin requires PHP 5.3 or higher to function
 

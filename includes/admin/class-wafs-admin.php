@@ -54,8 +54,6 @@ class WAFS_Admin {
 	 */
 	public function admin_enqueue_scripts() {
 
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
 		wp_register_style( 'woocommerce-advanced-free-shipping', plugins_url( 'assets/css/woocommerce-advanced-free-shipping.min.css', WAFS()->file ), array(), WAFS()->version );
 
 		if (

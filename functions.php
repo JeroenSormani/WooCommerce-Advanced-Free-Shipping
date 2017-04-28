@@ -32,13 +32,31 @@ require_once 'conditions/wpc-state-condition.php';
 require_once 'conditions/wpc-country-condition.php';
 require_once 'conditions/wpc-role-condition.php';
 
+// Product (cart based)
 require_once 'conditions/wpc-length-condition.php';
 require_once 'conditions/wpc-width-condition.php';
 require_once 'conditions/wpc-height-condition.php';
 require_once 'conditions/wpc-stock-status-condition.php';
 require_once 'conditions/wpc-stock-condition.php';
 require_once 'conditions/wpc-category-condition.php';
+require_once 'conditions/wpc-volume-condition.php';
 
+// Product (single based)
+require_once 'conditions/wpc-product-condition.php';
+require_once 'conditions/wpc-product-age-condition.php';
+require_once 'conditions/wpc-product-type-condition.php';
+require_once 'conditions/wpc-product-category-condition.php';
+require_once 'conditions/wpc-product-shipping-class-condition.php';
+require_once 'conditions/wpc-product-tag-condition.php';
+require_once 'conditions/wpc-product-height-condition.php';
+require_once 'conditions/wpc-product-length-condition.php';
+require_once 'conditions/wpc-product-price-condition.php';
+require_once 'conditions/wpc-product-sale-price-condition.php';
+require_once 'conditions/wpc-product-stock-condition.php';
+require_once 'conditions/wpc-product-stock-status-condition.php';
+require_once 'conditions/wpc-product-width-condition.php';
+require_once 'conditions/wpc-product-sales-condition.php';
+require_once 'conditions/wpc-product-on-sale-condition.php';
 
 if ( ! function_exists( 'wpc_get_registered_conditions' ) ) {
 
@@ -78,6 +96,23 @@ if ( ! function_exists( 'wpc_get_registered_conditions' ) ) {
 			new WPC_Stock_Status_Condition(),
 			new WPC_Stock_Condition(),
 			new WPC_Category_Condition(),
+			new WPC_Volume_Condition(),
+
+			new WPC_Product_Condition(),
+			new WPC_Product_Age_Condition(),
+			new WPC_Product_Type_Condition(),
+			new WPC_Product_Length_Condition(),
+			new WPC_Product_Width_Condition(),
+			new WPC_Product_Height_Condition(),
+			new WPC_Product_Stock_Status_Condition(),
+			new WPC_Product_Stock_Condition(),
+			new WPC_Product_Category_Condition(),
+			new WPC_Product_Shipping_Class_Condition(),
+			new WPC_Product_Tag_Condition(),
+			new WPC_Product_Price_Condition(),
+			new WPC_Product_Sale_Price_Condition(),
+			new WPC_Product_Sales_Condition(),
+			new WPC_Product_On_Sale_Condition(),
 		);
 
 		return apply_filters( 'wp-conditions\registered_conditions', $conditions );
@@ -102,6 +137,8 @@ if ( ! function_exists( 'wpc_get_condition' ) ) {
 	function wpc_get_condition( $condition ) {
 
 		$class_name = 'WPC_' . implode( '_', array_map( 'ucfirst', explode( '_', $condition ) ) ) . '_Condition';
+		$class_name = apply_filters( 'wpc_get_condition_class_name', $class_name, $condition );
+
 		if ( class_exists( $class_name ) ) {
 			return new $class_name();
 		} else {

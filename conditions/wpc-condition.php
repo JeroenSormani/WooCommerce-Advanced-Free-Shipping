@@ -98,6 +98,10 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 
 		public function match( $match, $operator, $value ) {
 
+			if ( ! $this->validate() ) {
+				return false;
+			}
+
 			$value = $this->get_value( $value );
 			$compare_value = $this->get_compare_value();
 
@@ -112,6 +116,14 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 			endif;
 
 			return $match;
+		}
+
+		/**
+		 * Validates before matching function.
+		 * Can be used for example to verify the global $product exists.
+		 */
+		public function validate() {
+			return true;
 		}
 
 		public function get_description() {

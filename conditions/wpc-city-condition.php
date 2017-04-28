@@ -14,28 +14,15 @@ if ( ! class_exists( 'WPC_City_Condition' ) ) {
 			parent::__construct();
 		}
 
-		// @todo - Check if this can be cleaned up
 		public function match( $match, $operator, $value ) {
 
 			$value         = $this->get_value( $value );
 			$customer_city = $this->get_compare_value();
 
 			if ( '==' == $operator ) :
-
-				if ( preg_match( '/\, ?/', $value ) ) :
-					$match = ( in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
-				else :
-					$match = ( $value == $customer_city );
-				endif;
-
+				$match = ( in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
 			elseif ( '!=' == $operator ) :
-
-				if ( preg_match( '/\, ?/', $value ) ) :
-					$match = ( ! in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
-				else :
-					$match = ( $value == $customer_city );
-				endif;
-
+				$match = ( ! in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
 			endif;
 
 			return $match;

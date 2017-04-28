@@ -1,8 +1,8 @@
 === WooCommerce Advanced Free Shipping ===
 Contributors: sormano
-Tags: woocommerce, shipping, woocommerce shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
+Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 4.0
-Tested up to: 4.7.2
+Tested up to: 4.7.3
 Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -10,25 +10,32 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
 
 == Description ==
-WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
+With the WooCommerce Advanced Free Shipping plugin you can setup your own advanced rules to determine when a free shipping rate should be available for the customer.
+This plugin will give you full control over your free WooCommerce shipping rates.
 
+Within each shipping rate you can create multiple 'OR' condition groups with multiple 'AND' conditions inside each group. This means that it is very easy to setup a
+ free shipping rate for multiple user roles in one shipping rate for example.
+
+There are many default shipping conditions available.
 *Conditions like:*
 
 - Subtotal
+- Quantity
 - User role
 - Country
-- Zip code
-- Stock / stock status
+- Zipcode
+- Shipping class
+- Category
 - Weight
-- Quantity
-- Coupon
 - many, many more...
+
+Not there what you're looking for? The plugin has been made to be easily extensible, meaning you can also add your own custom conditions through code snippets!
 
 **Look at the screenshots!**
 
 > **Applying shipping cost**<br /><br />
 > Have you given this plugin a shot and like how you can set things up?<br />
-> Another plugin is available that allows you to setup shipping cost with the same conditional logic options as this plugin!<br /><br />
+> I've build another plugin that allows you to setup shipping cost with the same conditional logic power as this plugin!<br /><br />
 > **Features:**<br />
 > - Add shipping cost to the shipping rates<br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Per weight*<br />
@@ -43,7 +50,7 @@ WooCommerce Advanced Free Shipping is an plugin which allows you to set up advan
 > - Create shipping zones<br />
 > - Set tax status<br />
 > <br />
-> View [WooCommerce Advanced Shipping](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573)
+> View [Advanced Shipping for WooCommerce](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573)
 
 **Showing a free shipping threshold message**
 
@@ -56,8 +63,10 @@ In case you do want to show this kind of message, The [Advanced Messages for Woo
 
 **Translations**
 
-- Spanish [(Andres Felipe)](https://wordpress.org/support/profile/naturalworldstm)
-- Italian (Stefano Callisto)
+- Spanish
+- Italian
+- Portuguese (Brazil / Portugal)
+- Greek
 
 == Installation ==
 
@@ -65,11 +74,28 @@ In case you do want to show this kind of message, The [Advanced Messages for Woo
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go to the settings page to fine-tune the settings if desired
 
+== Frequently Asked Questions ==
+
+= Can I setup partial free shipping? =
+
+The short answer to this is 'no', the long answer comes down to 'possibly'. I wrote a full length blog post about this here:
+[Apply free shipping for specific products in WooCommerce](http://jeroensormani.com/apply-free-shipping-for-specific-products-in-woocommerce/)
+
+= Can multiple free shipping options show simultaneously? =
+
+The current version of the plugin - 1.1.0 - doesn't have the ability to show multiple Advanced Free Shipping rates at the same time.
+During first development I made the - in hindsight - wrong decision thinking "Why would anyone need multiple WooCommerce free shipping options at the same time".
+In the future this will likely be changed, for now I recommend taking a look at the [Advanced Shipping for WooCommerce](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573) plugin which does have the ability to show all rates that match the conditions.
+
+= The shipping rates I setup are not showing at the cart/check, why? =
+
+
 == Screenshots ==
 
-1. WooCommerce Shipping options
-2. WAFS shipping conditions
-3. WAFS shipping conditions possibilities
+1. WooCommerce Shipping options overview
+2. WooCommerce Shipping rate example
+3. WooCommerce Shipping rate all available conditions
+4. WooCommerce Shipping condition available operators
 
 == Changelog ==
 
@@ -122,7 +148,7 @@ In case you do want to show this kind of message, The [Advanced Messages for Woo
 = 1.0.6 - 04-06-2015 =
 
 * [Add] - Escaping/sanitizing to different elements
-* Improvement - Shipping class matching function now uses varation shiping class instead of the parents'
+* [Improvement] - Shipping class matching function now uses variation shipping class instead of the parents'
 * [i18n] - Add Italian translation
 
 = 1.0.5 - 14-12-2014 =
@@ -132,38 +158,38 @@ In case you do want to show this kind of message, The [Advanced Messages for Woo
 * Improvement - Add background color to overview table every other row
 
 = 1.0.4 =
-* Fix - Weight condition wasn't working
-* Fix - Cash On Delivery for WAFS
-* Added - Added languages files for Portuguese - Brazil pt_BR
+* [Fix] - Weight condition wasn't working
+* [Fix] - Cash On Delivery for WAFS
+* [Add] - Added languages files for Portuguese - Brazil pt_BR
 
 = 1.0.3 =
-* Improvement - Customized user messages when saving shipping method
-* Improvement - Updated some comments to comment standards
-* Improvement - Overview not showing all actions when hovering only one
-* Improvement - Added ABSPATH check to each file
-* Improvement - Improved code comments
-* Improvement - Remove globals, use WAFS() function now
-* Improvement - Zip codes are now better detected (only integer values)
-* Improvement - Load textdomains
-* Improvement - Add compatibility for custom value fields
-* Improvement - Add world wide state support
-* Fix - No notice on shipping title in DEBUG mode
-* Fix - Loading icon on sub directory websites
-* Fix - Condition description didn't show sometimes
-* Fix - 'Category' - 'Not equal to' error
-* Fix - Showing drafts in overview
-* Removed - Author from overview, who needs that?
+* [Improvement] - Customized user messages when saving shipping method
+* [Improvement] - Updated some comments to comment standards
+* [Improvement] - Overview not showing all actions when hovering only one
+* [Improvement] - Added ABSPATH check to each file
+* [Improvement] - Improved code comments
+* [Improvement] - Remove globals, use WAFS() function now
+* [Improvement] - Zip codes are now better detected (only integer values)
+* [Improvement] - Load textdomains
+* [Improvement] - Add compatibility for custom value fields
+* [Improvement] - Add world wide state support
+* [Fix] - No notice on shipping title in DEBUG mode
+* [Fix] - Loading icon on sub directory websites
+* [Fix] - Condition description didn't show sometimes
+* [Fix] - 'Category' - 'Not equal to' error
+* [Fix] - Showing drafts in overview
+* [Removed] - Author from overview, who needs that?
 
 
 = 1.0.2 = 07/03/2014
-* Added - support for comma separated zip codes
-* Added - filter for condition values
-* Added - filter for condition descriptions
+* [Added] - support for comma separated zip codes
+* [Added] - filter for condition values
+* [Added] - filter for condition descriptions
 
 
 = 1.0.1 =
-* Fix - Wrongful url for sub-domain websites
-* Add - Added states as condition
+* [Fix] - Wrongful url for sub-domain websites
+* [Add] - Added states as condition
 
 = 1.0.0 =
 * Initial release

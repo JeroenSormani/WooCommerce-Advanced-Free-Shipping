@@ -57,10 +57,6 @@ class WAFS_Admin {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_register_style( 'woocommerce-advanced-free-shipping', plugins_url( 'assets/css/woocommerce-advanced-free-shipping.min.css', WAFS()->file ), array(), WAFS()->version );
-		wp_register_script( 'woocommerce-advanced-free-shipping', plugins_url( 'assets/js/woocommerce-advanced-free-shipping' . $suffix . '.js', WAFS()->file ), array( 'jquery' ), WAFS()->version, true );
-		wp_localize_script( 'woocommerce-advanced-free-shipping', 'wafs', array(
-			'nonce' => wp_create_nonce( 'wpc-ajax-nonce' ),
-		) );
 
 		if (
 			( isset( $_REQUEST['post'] ) && 'wafs' == get_post_type( $_REQUEST['post'] ) ) ||
@@ -73,7 +69,6 @@ class WAFS_Admin {
 			) );
 
 			wp_enqueue_style( 'woocommerce-advanced-free-shipping' );
-			wp_enqueue_script( 'woocommerce-advanced-free-shipping' );
 			wp_enqueue_script( 'wp-conditions' );
 
 			wp_dequeue_script( 'autosave' );

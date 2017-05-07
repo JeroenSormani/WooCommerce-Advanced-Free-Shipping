@@ -34,7 +34,7 @@ if ( ! class_exists( 'WPC_Role_Condition' ) ) {
 				global $current_user;
 				return $current_user->caps;
 			} else {
-				return array( 'not_logged_in' );
+				return array( 'not_logged_in' => 'not_logged_in' );
 			}
 
 		}

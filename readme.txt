@@ -2,8 +2,8 @@
 Contributors: sormano
 Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 4.0
-Tested up to: 4.7.3
-Stable tag: 1.1.1
+Tested up to: 4.8
+Stable tag: 1.1.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,6 +27,7 @@ There are many default shipping conditions available.
 - Shipping class
 - Category
 - Weight
+- Volume (Width / Length / Height)
 - many, many more...
 
 Not there what you're looking for? The plugin has been made to be easily extensible, meaning you can also add your own custom conditions through code snippets!
@@ -98,6 +99,13 @@ In the future this will likely be changed, for now I recommend taking a look at 
 4. WooCommerce Shipping condition available operators
 
 == Changelog ==
+
+= 1.1.2 - 29-06-2017 =
+
+* [Improvement] - Update WP Conditions to 1.0.3
+		- [Fix] - 'User role' condition 'Guest' wasn't working
+		- [Improvement] - Allow conditions outside postbox / multiple times inside. Not limited to .postbox class.
+		- [Add] - Zipcode range support. E.g. 'Zipcode' = 'equal to' = '10000-20000,30000-40000'
 
 = 1.1.1 - 28-04-2017 =
 

@@ -2,12 +2,12 @@ jQuery( function( $ ) {
 
     function wpc_condition_group_repeater() {
         // Condition group repeater
-        $( '.wpc-conditions' ).parents( '.postbox' ).repeater({
+        $( '.wpc-conditions' ).repeater({
             addTrigger: '.wpc-condition-group-add',
             removeTrigger: '.wpc-condition-group .delete',
             template: '.wpc-condition-group-template .wpc-condition-group-wrap',
             elementWrap: '.wpc-condition-group-wrap',
-            elementsContainer: '.wpc-conditions',
+            elementsContainer: '.wpc-condition-groups',
             removeElement: function( el ) {
                 el.remove();
             }
@@ -53,7 +53,7 @@ jQuery( function( $ ) {
     $( document.body ).on ( 'click', '.wpc-conditions .duplicate', function() {
         var condition_group_wrap = $( this ).parents( '.wpc-condition-group-wrap' ),
             condition_group_id   = condition_group_wrap.find( '.wpc-condition-group' ).attr( 'data-group' ),
-            condition_group_list = $( this ).parents( '.wpc-conditions' ),
+            condition_group_list = $( this ).parents( '.wpc-condition-groups' ),
             new_group            = condition_group_wrap.clone(),
             new_group_id         = Math.floor(Math.random()*899999999+100000000); // Random number sequence of 9 length
 

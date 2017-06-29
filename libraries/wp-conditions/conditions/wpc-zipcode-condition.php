@@ -9,7 +9,7 @@ if ( ! class_exists( 'WPC_Zipcode_Condition' ) ) {
 			$this->name        = __( 'Zipcode', 'wpc-conditions' );
 			$this->slug        = __( 'zipcode', 'wpc-conditions' );
 			$this->group       = __( 'User', 'wpc-conditions' );
-			$this->description = __( 'Compare against customer zipcode. Comma separated list allowed. Use \'*\' for wildcard', 'wpc-conditions' );
+			$this->description = __( 'Compare against customer zipcode. All zipcodes are matched with a \'starts with\' matching method.', 'wpc-conditions' );
 
 			parent::__construct();
 		}
@@ -23,7 +23,10 @@ if ( ! class_exists( 'WPC_Zipcode_Condition' ) ) {
 			if ( '==' == $operator ) :
 
 				foreach ( $value_zipcodes as $zip ) :
-					if ( $match = preg_match( '/^' . preg_quote( $zip, '/' ) . '/i', $zipcode ) ) :
+					$parts = explode( '-', $zip );
+					if ( count( $parts ) > 1 && $match = ( $zipcode >= min( $parts ) && $zipcode <= max( $parts ) ) ) :
+						break;
+					elseif ( $match = preg_match( '/^' . preg_quote( $zip, '/' ) . '/i', $zipcode ) ) :
 						break;
 					endif;
 				endforeach;
@@ -32,9 +35,11 @@ if ( ! class_exists( 'WPC_Zipcode_Condition' ) ) {
 
 				$match = true;
 				foreach ( $value_zipcodes as $zip ) :
-					if ( preg_match( '/^' . preg_quote( $zip, '/' ) . '/i', $zipcode ) ) :
+					$parts = explode( '-', $zip );
+					if ( count( $parts ) > 1 && ( $zipcode >= min( $parts ) && $zipcode <= max( $parts ) ) ) :
 						return $match = false;
-						break;
+					elseif ( preg_match( '/^' . preg_quote( $zip, '/' ) . '/i', $zipcode ) ) :
+						return $match = false;
 					endif;
 				endforeach;
 

@@ -4,9 +4,13 @@ It is intended to be used on plugins like build by Jeroen such as Advanced Shipp
 Copyright © 2017 Jeroen Sormani
 
 
-# Current version: 1.0.3
+# Current version: 1.0.4
 
 # Changelog
+
+= 1.0.4 - 01/09/2017 =
+
+- [Improvement] - Use WC_Method:get_method_title() instead of get_title() to get method title.
 
 = 1.0.3 - 28/06/2017 =
 

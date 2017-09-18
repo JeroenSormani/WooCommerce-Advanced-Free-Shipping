@@ -58,8 +58,8 @@ if ( ! class_exists( 'WPC_Shipping_Method_Condition' ) ) {
 		private function get_shipping_options() {
 
 			$shipping_options = array();
-			foreach ( WC()->shipping->load_shipping_methods() as $method ) :
-				$shipping_options['Methods'][ $method->id ] = $method->get_title();
+			foreach ( WC()->shipping()->load_shipping_methods() as $method ) :
+				$shipping_options['Methods'][ $method->id ] = $method->get_method_title();
 			endforeach;
 
 			// Advanced Shipping

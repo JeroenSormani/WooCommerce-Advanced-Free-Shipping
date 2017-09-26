@@ -4,6 +4,7 @@ Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, wo
 Requires at least: 4.0
 Tested up to: 4.8
 Stable tag: 1.1.2
+Requires PHP: 5.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

@@ -7,6 +7,8 @@
  * Author: 			Jeroen Sormani
  * Author URI: 		http://jeroensormani.com/
  * Text Domain: 	woocommerce-advanced-free-shipping
+ * WC requires at least: 3.0.0
+ * WC tested up to:      3.2.0
 
  * Copyright Jeroen Sormani
  *
@@ -77,16 +79,13 @@ class WooCommerce_Advanced_Free_Shipping {
 	 */
 	public function __construct() {
 
-		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		// Check if WooCommerce is active
+		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! function_exists( 'WC' ) ) {
+			return;
 		}
 
-		// Check if WooCommerce is active
-		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) :
-			if ( ! is_plugin_active_for_network( 'woocommerce/woocommerce.php' ) ) :
-				return;
-			endif;
-		endif;
+		$this->init();
 
 	}
 
@@ -163,7 +162,6 @@ class WooCommerce_Advanced_Free_Shipping {
 		if ( is_admin() ) :
 			require_once plugin_dir_path( __FILE__ ) . 'includes/admin/class-wafs-admin.php';
 			$this->admin = new WAFS_Admin();
-			$this->admin->init();
 		endif;
 
 	}
@@ -281,7 +279,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	public function php_version_notice() {
 
 		?><div class='updated'>
-		<p><?php echo sprintf( __( 'Advanced Free Shipping requires PHP 5.3 or higher and your current PHP version is %s. Please (contact your host to) update your PHP version.', 'woocommerce-advanced-messages' ), PHP_VERSION ); ?></p>
+			<p><?php echo sprintf( __( 'Advanced Free Shipping requires PHP 5.3 or higher and your current PHP version is %s. Please (contact your host to) update your PHP version.', 'woocommerce-advanced-messages' ), PHP_VERSION ); ?></p>
 		</div><?php
 
 	}
@@ -289,19 +287,19 @@ class WooCommerce_Advanced_Free_Shipping {
 }
 
 
-/**
- * The main function responsible for returning the WooCommerce_Advanced_Free_Shipping object.
- *
- * Use this function like you would a global variable, except without needing to declare the global.
- *
- * Example: <?php WAFS()->method_name(); ?>
- *
- * @since 1.1.0
- *
- * @return  object  WooCommerce_Advanced_Free_Shipping class object.
- */
 if ( ! function_exists( 'WAFS' ) ) :
 
+	/**
+	 * The main function responsible for returning the WooCommerce_Advanced_Free_Shipping object.
+	 *
+	 * Use this function like you would a global variable, except without needing to declare the global.
+	 *
+	 * Example: <?php WAFS()->method_name(); ?>
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return  object  WooCommerce_Advanced_Free_Shipping class object.
+	 */
 	function WAFS() {
 
 		return WooCommerce_Advanced_Free_Shipping::instance();
@@ -311,4 +309,4 @@ if ( ! function_exists( 'WAFS' ) ) :
 
 endif;
 
-WAFS()->init();
+WAFS();

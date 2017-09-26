@@ -18,7 +18,10 @@ class WAFS_Admin {
 	 *
 	 * @since 1.0.8
 	 */
-	public function __construct() {}
+	public function __construct() {
+		// Initialize class
+		add_action( 'admin_init', array( $this, 'init' ) );
+	}
 
 
 	/**

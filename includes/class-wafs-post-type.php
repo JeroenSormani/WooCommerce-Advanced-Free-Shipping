@@ -135,6 +135,7 @@ class WAFS_post_type {
 
 		add_meta_box( 'wafs_conditions', __( 'Advanced Free Shipping conditions', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_conditions' ), 'wafs', 'normal' );
 		add_meta_box( 'wafs_settings', __( 'Shipping settings', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_settings' ), 'wafs', 'normal' );
+		add_meta_box( 'wafs_resources', __( 'Useful links', 'woocommerce-advanced-free-shipping' ), array( $this, 'render_wafs_resources' ), 'wafs', 'side' );
 
 	}
 
@@ -160,6 +161,26 @@ class WAFS_post_type {
 	 */
 	public function render_wafs_settings() {
 		require_once plugin_dir_path( __FILE__ ) . 'admin/views/meta-box-settings.php';
+	}
+
+
+	/**
+	 * Show resources MB contents.
+	 *
+	 * @since NEWVERSION
+	 */
+	function render_wafs_resources() {
+
+		?><ul>
+			<li><a href="http://jeroensormani.com/how-the-advanced-plugin-conditions-work?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'How the conditions work', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li><a href="http://jeroensormani.com/apply-free-shipping-for-specific-products-in-woocommerce?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Applying free shipping to specific products', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li><a href="http://jeroensormani.com/showing-add-10-free-shipping-notice#showing-a-free-shipping-notice-for-advanced-shipping?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Showing a free shipping message', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li><a href="http://jeroensormani.com/shipping-debug-mode?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Disabling the shipping cache', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li><a href="http://codecanyon.net/item/woocommerce-advanced-shipping/8634573" target="_blank"><?php _e( 'Apply shipping cost using conditions', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<hr />
+			<li><a href="http://jeroensormani.com/contact?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Hire me for custom condition development', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+		</ul><?php
+
 	}
 
 

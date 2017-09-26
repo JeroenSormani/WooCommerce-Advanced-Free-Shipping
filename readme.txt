@@ -4,9 +4,13 @@ It is intended to be used on plugins like build by Jeroen such as Advanced Shipp
 Copyright © 2017 Jeroen Sormani
 
 
-# Current version: 1.0.4
+# Current version: 1.0.5
 
 # Changelog
+
+= 1.0.5 - 26/09/2017 =
+
+- [Improvement] - WC 3.2 changes to prevent notices
 
 = 1.0.4 - 01/09/2017 =
 

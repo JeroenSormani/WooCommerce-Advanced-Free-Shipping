@@ -19,6 +19,10 @@ if ( ! class_exists( 'WPC_Tax_Condition' ) ) {
 		}
 
 		public function get_compare_value() {
+			if ( method_exists( WC()->cart, 'get_cart_contents_tax' ) ) { // WC 3.2+
+				return WC()->cart->get_cart_contents_tax();
+			}
+
 			return array_sum( (array) WC()->cart->taxes );
 		}
 

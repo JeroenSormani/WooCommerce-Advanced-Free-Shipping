@@ -19,6 +19,10 @@ if ( ! class_exists( 'WPC_Subtotal_Ex_Tax_Condition' ) ) {
 		}
 
 		public function get_compare_value() {
+			if ( method_exists( WC()->cart, 'get_subtotal' ) ) { // WC 3.2+
+				return WC()->cart->get_subtotal();
+			}
+
 			return WC()->cart->subtotal_ex_tax;
 		}
 

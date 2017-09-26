@@ -167,7 +167,7 @@ class WAFS_post_type {
 	/**
 	 * Show resources MB contents.
 	 *
-	 * @since NEWVERSION
+	 * @since 1.1.3
 	 */
 	function render_wafs_resources() {
 

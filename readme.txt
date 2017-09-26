@@ -3,7 +3,7 @@ Contributors: sormano
 Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -100,6 +100,16 @@ In the future this will likely be changed, for now I recommend taking a look at 
 4. WooCommerce Shipping condition available operators
 
 == Changelog ==
+
+= 1.1.3 - 26-09-2017 =
+
+* [Add] - Helpful resources meta box
+* [Tested] - WooCommerce 3.2
+* [Improvement] - Update WP Conditions to 1.0.5
+		- [Improvement] - WC 3.2 changes to prevent notices
+		= 1.0.4 =
+		- [Improvement] - Use WC_Method:get_method_title() instead of get_title() to get method title.
+
 
 = 1.1.2 - 29-06-2017 =
 

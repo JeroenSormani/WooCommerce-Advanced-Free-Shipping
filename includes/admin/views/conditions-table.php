@@ -22,7 +22,7 @@ $shipping_rates = wafs_get_rates( array( 'post_status' => array( 'draft', 'publi
 		<table class='wp-list-table wpc-conditions-post-table wpc-sortable-post-table widefat'>
 			<thead>
 				<tr>
-					<th style='padding-left: 10px;'><?php _e( 'Title', 'woocommerce-advanced-free-shipping' ); ?></th>
+					<th style='padding-left: 10px;' class="column-primary"><?php _e( 'Title', 'woocommerce-advanced-free-shipping' ); ?></th>
 					<th style='padding-left: 10px;'><?php _e( 'Shipping title', 'woocommerce-advanced-free-shipping' ); ?></th>
 					<th style='padding-left: 10px;'><?php _e( 'Condition groups', 'woocommerce-advanced-free-shipping' ); ?></th>
 				</tr>
@@ -37,7 +37,7 @@ $shipping_rates = wafs_get_rates( array( 'post_status' => array( 'draft', 'publi
 					$alt            = ( $i++ ) % 2 == 0 ? 'alternate' : '';
 
 					?><tr class='<?php echo $alt; ?>'>
-						<td>
+						<td class="column-primary">
 							<strong>
 								<a href='<?php echo get_edit_post_link( $post->ID ); ?>' class='row-title' title='<?php _e( 'Edit Method', 'woocommerce-advanced-fees' ); ?>'><?php
 									echo _draft_or_post_title( $post->ID );
@@ -66,14 +66,14 @@ $shipping_rates = wafs_get_rates( array( 'post_status' => array( 'draft', 'publi
 
 				if ( empty( $shipping_rates ) ) :
 					?><tr>
-						<td colspan='2'><?php _e( 'There are no Free Shipping rates. Yet...', 'woocommerce-advanced-free-shipping' ); ?></td>
+						<td colspan='2' style="display: table-cell;"><?php _e( 'There are no Free Shipping rates. Yet...', 'woocommerce-advanced-free-shipping' ); ?></td>
 					</tr><?php
 				endif;
 
 			?></tbody>
 			<tfoot>
 				<tr>
-					<th colspan='4' style='padding-left: 10px;'>
+					<th colspan='4' style='padding-left: 10px; display: table-cell;'>
 						<a href='<?php echo admin_url( 'post-new.php?post_type=wafs' ); ?>' class='add button'><?php _e( 'Add Free Shipping rate', 'woocommerce-advanced-free-shipping' ); ?></a>
 					</th>
 				</tr>

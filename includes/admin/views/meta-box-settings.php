@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 wp_nonce_field( 'wafs_settings_meta_box', 'wafs_settings_meta_box_nonce' );
 
 global $post;
-$settings                   = get_post_meta( $post->ID, '_wafs_shipping_method', true );
+$settings                   = (array) get_post_meta( $post->ID, '_wafs_shipping_method', true );
 $settings['shipping_title'] = ! empty( $settings['shipping_title'] ) ? $settings['shipping_title'] : '';
 
 ?><div class='wafs wafs_settings wafs_meta_box wafs_settings_meta_box'>

@@ -59,7 +59,7 @@ Not there what you're looking for? The plugin has been made to be easily extensi
 There are a few plugins out there that add a message when someone hasn't reached the free shipping threshold yet. These plugin work on the 'Free shipping' option that is provided in WooCommerce by default.
 It is unlikely that these plugins will work out of the box with Advanced Free Shipping due to the complexity of the conditional logic.
 
-In case you do want to show this kind of message, The [Advanced Messages for WooCommerce](https://shopplugins.com/plugins/woocommerce-advanced-messages/ ) plugin allows you to setup a message with the same type of conditions, allowing you to setup the messages according to the same needs as the free shipping options.
+In case you do want to show this kind of message, The [Advanced Messages for WooCommerce](https://aceplugins.com/plugin/woocommerce-advanced-messages/) plugin allows you to setup a message with the same type of conditions, allowing you to setup the messages according to the same needs as the free shipping options.
 
 **Translations, feature requests and ratings are welcome and appreciated!**
 

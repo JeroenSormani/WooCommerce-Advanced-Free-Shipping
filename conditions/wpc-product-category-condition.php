@@ -50,6 +50,19 @@ if ( ! class_exists( 'WPC_Product_Category_Condition' ) ) {
 
 		}
 
+		public function get_value_field_args() {
+
+			$categories = get_terms( 'product_cat', array( 'hide_empty' => false ) );
+			$field_args = array(
+				'type' => 'select',
+				'class' => array( 'wpc-value', 'wc-enhanced-select' ),
+				'options' => wp_list_pluck( $categories, 'name', 'slug' ),
+			);
+
+			return $field_args;
+
+		}
+
 	}
 
 }

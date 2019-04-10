@@ -19,15 +19,16 @@ if ( ! class_exists( 'WPC_Product_Stock_Status_Condition' ) ) {
 		}
 
 		public function get_value( $value ) {
-			$value = ( $value == 'instock' ) ? 1 : $value;
-			$value = ( $value == 'outofstock' ) ? 0 : $value;
+			$value = ( $value == '1' ) ? 'instock' : $value;
+			$value = ( $value == '0' ) ? 'outofstock' : $value;
 			return $value;
 		}
 
 		public function get_compare_value() {
 			/** @var $product WC_Product */
 			global $product;
-			return $product->is_in_stock();
+
+			return $product->get_stock_status();
 		}
 
 		public function get_available_operators() {
@@ -48,6 +49,7 @@ if ( ! class_exists( 'WPC_Product_Stock_Status_Condition' ) ) {
 				'options' => array(
 					'1' => __( 'In stock', 'woocommerce' ),
 					'0' => __( 'Out of stock', 'woocommerce' ),
+					'onbackorder' => __( 'On backorder', 'woocommerce' ),
 				),
 			);
 

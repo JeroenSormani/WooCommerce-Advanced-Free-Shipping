@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPC_Stock_Condition' ) ) {
 			endforeach;
 
 			// Get lowest value
-			return min( $stock );
+			return empty( $stock ) ? null : min( $stock );
 
 		}
 

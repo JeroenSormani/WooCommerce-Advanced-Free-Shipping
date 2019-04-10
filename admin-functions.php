@@ -94,11 +94,11 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 				foreach ( $options as $index => $values ) :
 
 					if ( ! is_array( $values ) ) :
-						?><option value='<?php echo esc_attr( $index ); ?>' <?php selected( $index, $value ); ?>><?php echo esc_attr( $values ); ?></option><?php
+						?><option value='<?php echo esc_attr( $index ); ?>' <?php selected( in_array( $index, (array) $value ) ); ?>><?php echo esc_attr( $values ); ?></option><?php
 					else :
 						?><optgroup label='<?php echo esc_attr( $index ); ?>'><?php
 							foreach ( $values as $k => $v ) :
-								?><option value='<?php echo esc_attr( $k ); ?>' <?php selected( $k, $value ); ?>><?php echo esc_attr( $v ); ?></option><?php
+								?><option value='<?php echo esc_attr( $k ); ?>' <?php selected( in_array( $k, (array) $value ) ); ?>><?php echo esc_attr( $v ); ?></option><?php
 							endforeach;
 						?></optgroup><?php
 					endif;

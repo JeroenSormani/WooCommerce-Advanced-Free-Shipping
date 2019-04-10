@@ -34,7 +34,7 @@ if ( ! class_exists( 'WPC_Country_Condition' ) ) {
 				$match = stripos( $customer_country, $value ) === false;
 
 				// Check for continents if available
-				if ( ! $match && isset( $customer_continent ) && strpos( $value, 'CO_' ) === 0 ) :
+				if ( isset( $customer_continent ) && strpos( $value, 'CO_' ) === 0 ) :
 					$match = stripos( $customer_continent, str_replace( 'CO_','', $value ) ) === false;
 				endif;
 			endif;

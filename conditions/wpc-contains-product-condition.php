@@ -53,21 +53,16 @@ if ( ! class_exists( 'WPC_Contains_Product_Condition' ) ) {
 
 		}
 
-		// @todo
 		public function get_value_field_args() {
 
 			$field_args = array(
-				'type' => 'text',
+				'type' => 'select',
 				'custom_attributes' => array(
 					'data-placeholder' => __( 'Search for a product', 'wp-conditions' ),
 				),
 				'class' => array( 'wpc-value', 'wc-product-search' ),
 				'options' => array(),
 			);
-
-			if ( version_compare( WC()->version, '2.7', '>=' ) ) {
-				$field_args['type'] = 'select';
-			}
 
 			return $field_args;
 

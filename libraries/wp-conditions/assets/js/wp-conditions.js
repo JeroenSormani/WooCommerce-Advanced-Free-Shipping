@@ -38,6 +38,9 @@ jQuery( function( $ ) {
         template.find( '.wpc-condition[data-id]' ).attr( 'data-id', function( index, value ) {
             return ( value.replace( '9999', new_id ) ) || value;
         });
+        // Fix #20 - condition IDs being replaced by group IDs
+        template.find( '.wpc-condition-template .wpc-condition[data-id]' ).attr( 'data-id', '9999' );
+
         template.find( '[data-group]' ).attr( 'data-group', function( index, value ) {
             return ( value.replace( '9999', new_id ) ) || value;
         });

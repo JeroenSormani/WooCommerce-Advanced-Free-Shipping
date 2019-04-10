@@ -2,8 +2,8 @@
 Contributors: sormano
 Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 1.1.3
+Tested up to: 5.1
+Stable tag: 1.1.4
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -100,6 +100,12 @@ In the future this will likely be changed, for now I recommend taking a look at 
 4. WooCommerce Shipping condition available operators
 
 == Changelog ==
+
+= 1.1.4 - 10-04-2018 =
+
+* [Improvement] - Improved mobile admin view
+* [Improvement] - Update WP Conditions to 1.0.8
+* [Fix] - Error message on debug mode when creating a new shipping rate
 
 = 1.1.3 - 26-09-2017 =
 

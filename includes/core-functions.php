@@ -72,9 +72,8 @@ add_filter( 'wp-conditions\condition_descriptions', 'wafs_add_bc_filter_conditio
  * @since 1.1.0
  */
 function wafs_add_bc_action_custom_fields( $type, $args ) {
-
-	if ( has_action( 'woocommerce_advanced_fees_condition_value_field_type_' . $type ) ) {
-		do_action( 'woocommerce_advanced_fees_condition_value_field_type_' . $args['type'], $args );
+	if ( has_action( 'woocommerce_advanced_free_shipping_condition_value_field_type_' . $type ) ) {
+		do_action( 'woocommerce_advanced_free_shipping_condition_value_field_type_' . $args['type'], $args );
 	}
 
 }

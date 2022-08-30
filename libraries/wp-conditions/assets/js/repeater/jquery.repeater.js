@@ -9,6 +9,7 @@
             elementWrap: '.repeater-row', // Used to identify what is one element within the container.
             elementsContainer: '.repeater-container', // Used to identify what is one element within the container.
             removeElement: undefined,
+            onAddElement: function () {}
         };
 
         return $( this ).filter( ':not(.repeater-active)' ).each( function(i, e) {
@@ -39,6 +40,7 @@
                 var template = getTemplate();
 
                 $container.append( template );
+                options.onAddElement(template, $container, $self)
                 $( document.body ).trigger( 'repeater-added-row', [template, $container, $self] );
             };
 

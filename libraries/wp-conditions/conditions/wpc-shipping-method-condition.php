@@ -31,7 +31,8 @@ if ( ! class_exists( 'WPC_Shipping_Method_Condition' ) ) {
 
 		public function get_compare_value() {
 			$packages_rates = wp_list_pluck( WC()->shipping()->get_packages(), 'rates' );
-			$chosen_rate_ids = (array) WC()->session->get( 'chosen_shipping_methods' );
+			$package_keys = array_flip( array_keys( WC()->shipping()->get_packages() ) ) ?: array( 0 );
+			$chosen_rate_ids = array_intersect_key( (array) WC()->session->get( 'chosen_shipping_methods' ), $package_keys );
 
 			// Add shipping method IDs
 			foreach ( $packages_rates as $package_key => $rates ) {
@@ -43,7 +44,7 @@ if ( ! class_exists( 'WPC_Shipping_Method_Condition' ) ) {
 				}
 			}
 
-			return $chosen_rate_ids;
+			return array_filter( $chosen_rate_ids );
 		}
 
 		public function get_available_operators() {

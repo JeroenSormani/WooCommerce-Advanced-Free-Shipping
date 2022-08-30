@@ -71,7 +71,7 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 				?><input
 					name="<?php echo esc_attr( $name ); ?>"
 					type="<?php echo $args['type']; ?>"
-					id="<?php echo esc_attr( $args['id'] ); ?>"
+					<?php if ( ! empty( $args['id'] ) ) : ?>id="<?php echo esc_attr( $args['id'] ); ?>"<?php endif; ?>
 					value="<?php echo esc_attr( $value ); ?>"
 					class="input-text <?php echo $class; ?>"
 					<?php echo implode( ' ', $custom_attributes ); ?>
@@ -86,7 +86,7 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 
 				?><select
 					name="<?php echo esc_attr( $args['name'] ); ?>"
-					id="<?php echo esc_attr( $args['id'] ); ?>"
+					<?php if ( ! empty( $args['id'] ) ) : ?>id="<?php echo esc_attr( $args['id'] ); ?>"<?php endif; ?>
 					class="input-select <?php echo $class; ?>"
 					<?php echo implode( ' ', $custom_attributes ); ?>
 				><?php

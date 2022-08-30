@@ -4,9 +4,33 @@ It is intended to be used on plugins like build by Jeroen such as Advanced Shipp
 Copyright © 2017 Jeroen Sormani
 
 
-# Current version: 1.0.8
+# Current version: 1.0.12
 
 # Changelog
+
+= 1.0.12 - 30/12/2021 =
+
+* [Fix] - Adding condition group did not change the template ID(s)
+
+= 1.0.11 - 30/11/2021 =
+
+* [Improvement] - Update repeater.js to have onAddElement() action
+* [Improvement] - Improved matching for weight condition (fix float matching issue)
+* [Improvement] - Style improvements
+* [Fix] - Javascript error undefined variable saving sorting order
+
+= 1.0.10 - 25/11/2019 =
+
+* [Fix] - Coupon condition possibly giving warning when no coupon is applied
+* [Improvement] - Allow for 'Coupon' - equal - {empty} - for a 'no coupon applied' condition
+
+= 1.0.9 - 05/07/2019 =
+
+* [Add] - Value field input validation for order amount / weight conditions
+* [Fix] - 'No shipping class' in shipping class condition not always working as expected
+* [Fix] - Possible notice from 'Page' condition on non-pages
+* [Fix] - Duplicating condition groups with conditions using Select2 now continue to work
+* [Improvement] - Shipping method condition matches only against chosen methods of available shipping packages
 
 = 1.0.8 - 20/08/2018 =
 

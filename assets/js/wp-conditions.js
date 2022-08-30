@@ -8,6 +8,26 @@ jQuery( function( $ ) {
             template: '.wpc-condition-group-template .wpc-condition-group-wrap',
             elementWrap: '.wpc-condition-group-wrap',
             elementsContainer: '.wpc-condition-groups',
+			onAddElement: function (template, container, $self) {
+				var new_id = Math.floor(Math.random() * 899999999 + 100000000); // Random number sequence of 9 length
+				template.find('input[name], select[name]').attr('name', function (index, value) {
+					return (value.replace('9999', new_id)) || value;
+				});
+				template.find('.wpc-condition[data-id]').attr('data-id', function (index, value) {
+					return (value.replace('9999', new_id)) || value;
+				});
+				// Fix #20 - condition IDs being replaced by group IDs
+				template.find('.wpc-condition-template .wpc-condition[data-id]').attr('data-id', '9999');
+
+				template.find('[data-group]').attr('data-group', function (index, value) {
+					return (value.replace('9999', new_id)) || value;
+				});
+
+				template.find('.repeater-active').removeClass('repeater-active');
+
+				// Init condition group repeater
+				wpc_condition_row_repeater();
+			},
             removeElement: function( el ) {
                 el.remove();
             }
@@ -24,32 +44,33 @@ jQuery( function( $ ) {
             template: '.wpc-condition-template .wpc-condition-wrap',
             elementWrap: '.wpc-condition-wrap',
             elementsContainer: '.wpc-conditions-list',
+
+            // Assign new ID to repeater row + open collapsible + re-enable nested repeater
+            onAddElement: function (e, template, container, $self) {
+                var new_id = Math.floor(Math.random() * 899999999 + 100000000); // Random number sequence of 9 length
+                template.find('input[name], select[name]').attr('name', function (index, value) {
+                    return (value.replace('9999', new_id)) || value;
+                });
+                template.find('.wpc-condition[data-id]').attr('data-id', function (index, value) {
+                    return (value.replace('9999', new_id)) || value;
+                });
+                // Fix #20 - condition IDs being replaced by group IDs
+                template.find('.wpc-condition-template .wpc-condition[data-id]').attr('data-id', '9999');
+
+                template.find('[data-group]').attr('data-group', function (index, value) {
+                    return (value.replace('9999', new_id)) || value;
+                });
+
+                template.find('.repeater-active').removeClass('repeater-active');
+
+                // Init condition group repeater
+                wpc_condition_row_repeater();
+            }
         });
     }
     wpc_condition_row_repeater();
 
 
-    // Assign new ID to repeater row + open collapsible + re-enable nested repeater
-    jQuery( document.body ).on( 'repeater-added-row', function( e, template, container, $self ) {
-        var new_id = Math.floor(Math.random()*899999999+100000000); // Random number sequence of 9 length
-        template.find( 'input[name], select[name]' ).attr( 'name', function( index, value ) {
-            return ( value.replace( '9999', new_id ) ) || value;
-        });
-        template.find( '.wpc-condition[data-id]' ).attr( 'data-id', function( index, value ) {
-            return ( value.replace( '9999', new_id ) ) || value;
-        });
-        // Fix #20 - condition IDs being replaced by group IDs
-        template.find( '.wpc-condition-template .wpc-condition[data-id]' ).attr( 'data-id', '9999' );
-
-        template.find( '[data-group]' ).attr( 'data-group', function( index, value ) {
-            return ( value.replace( '9999', new_id ) ) || value;
-        });
-
-        template.find( '.repeater-active' ).removeClass( 'repeater-active' );
-
-        // Init condition group repeater
-        wpc_condition_row_repeater();
-    });
 
 
     // Duplicate condition group
@@ -57,8 +78,11 @@ jQuery( function( $ ) {
         var condition_group_wrap = $( this ).parents( '.wpc-condition-group-wrap' ),
             condition_group_id   = condition_group_wrap.find( '.wpc-condition-group' ).attr( 'data-group' ),
             condition_group_list = $( this ).parents( '.wpc-condition-groups' ),
-            new_group            = condition_group_wrap.clone(),
             new_group_id         = Math.floor(Math.random()*899999999+100000000); // Random number sequence of 9 length
+
+        condition_group_wrap.find('.enhanced').select2('destroy').removeClass('enhanced'); // Select2 need to be re-init for clones
+
+        var new_group = condition_group_wrap.clone();
 
         // Fix dropdown selected not being cloned properly
         $( condition_group_wrap ).find( 'select' ).each(function(i) {
@@ -75,7 +99,7 @@ jQuery( function( $ ) {
         condition_group_list.append( new_group );
 
         // Enable Select2's
-        //$( document.body ).trigger( 'wc-enhanced-select-init' );
+        $( document.body ).trigger( 'wc-enhanced-select-init' );
 
         // Init condition repeater
         wpc_condition_row_repeater();
@@ -96,13 +120,13 @@ jQuery( function( $ ) {
     // Update condition values
     $( document.body ).on( 'change', '.wpc-condition', function () {
 
-        var loading_wrap = '<span style="width: calc( 42.5% - 75px ); border: 1px solid transparent; display: inline-block;">&nbsp;</span>';
+        var loading_wrap = '<span class="wpc-loading" style="width: calc( 42.5% - 75px ); border: 1px solid transparent; display: inline-block;">&nbsp;</span>';
         var data = {
-            action: 	wpc2.action_prefix + 'update_condition_value',
-            id:			$( this ).attr( 'data-id' ),
-            group:		$( this ).parents( '.wpc-condition-group' ).attr( 'data-group' ),
-            condition: 	$( this ).val(),
-            nonce: 		wpc.nonce
+            action:     wpc2.action_prefix + 'update_condition_value',
+            id:            $( this ).attr( 'data-id' ),
+            group:        $( this ).parents( '.wpc-condition-group' ).attr( 'data-group' ),
+            condition:     $( this ).val(),
+            nonce:         wpc.nonce
         };
         var condition_wrap = $( this ).parents( '.wpc-condition-wrap' ).first();
         var replace = '.wpc-value-field-wrap';
@@ -141,15 +165,15 @@ jQuery( function( $ ) {
 
     // Sortable post table
     $( '.wpc-conditions-post-table.wpc-sortable-post-table tbody' ).sortable({
-        items:					'tr',
-        handle:					'.sort',
-        cursor:					'move',
-        axis:					'y',
-        scrollSensitivity:		40,
-        forcePlaceholderSize: 	true,
-        helper: 				'clone',
-        opacity: 				0.65,
-        placeholder: 			'wc-metabox-sortable-placeholder',
+        items:                    'tr',
+        handle:                    '.sort',
+        cursor:                    'move',
+        axis:                    'y',
+        scrollSensitivity:        40,
+        forcePlaceholderSize:     true,
+        helper:                 'clone',
+        opacity:                 0.65,
+        placeholder:             'wc-metabox-sortable-placeholder',
         start: function(event,ui){
             ui.item.css( 'background-color','#f6f6f6' );
         },
@@ -158,13 +182,13 @@ jQuery( function( $ ) {
         },
         update: function(event, ui) {
 
-            $table 	= $( this ).closest( 'table' );
+            var $table = $( this ).closest( 'table' );
             $table.block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
             // Update fee order
             var data = {
-                action:	'wpc_save_post_order',
-                form: 	$( this ).closest( 'form' ).serialize(),
-                nonce: 	wpc.nonce
+                action:    'wpc_save_post_order',
+                form:     $( this ).closest( 'form' ).serialize(),
+                nonce:     wpc.nonce
             };
 
             $.post( ajaxurl, data, function( response ) {

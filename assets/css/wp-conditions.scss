@@ -54,6 +54,7 @@
 			}
 			.wpc-value {
 				width: calc( 42.5% - 75px );
+				max-width: unset;
 				height: 28px;
 			}
 			.wpc-description {
@@ -162,7 +163,7 @@
 			height: 28px;
 			margin: 1px;
 
-			#select2--container,
+			.select2-selection__rendered,
 			.select2-selection__arrow {
 				line-height: 26px;
 				height: 28px;
@@ -172,7 +173,7 @@
 			.select2-selection--single {
 				height: 36px;
 
-				#select2--container,
+				.select2-selection__rendered,
 				.select2-selection__arrow {
 					line-height: 36px;
 					height: 36px;
@@ -260,21 +261,25 @@
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 19px;
-	height: 27px;
+	height: 30px;
 	box-sizing: border-box;
 	color: #555;
 	text-align: center;
 	background-color: #EEE;
-	border: 1px solid #DDD;
+	border: 1px solid #8c8f94;
 	border-right: none;
 	border-radius: 4px 0px 0px 4px;
 	margin: 1px 0px 1px 1px;
 	display: inline-block;
+	vertical-align: middle;
 
 	& + input {
 		margin-left: -4px;
-		line-height: 19px ;
+		line-height: 19px;
 		width: 161px !important;
+		border-left: unset;
+		border-radius: 0 4px 4px 0;
+		vertical-align: middle;
 	}
 
 	@media screen and (max-width: 782px) {

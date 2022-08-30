@@ -20,6 +20,7 @@ if ( ! class_exists( 'WPC_Page_Condition' ) ) {
 
 			$value    = $this->get_value( $value );
 			$wp_query = $this->get_compare_value();
+			$post_id  = isset( $post->ID ) ? $post->ID : null;
 
 			if ( '==' == $operator ) :
 
@@ -28,7 +29,7 @@ if ( ! class_exists( 'WPC_Page_Condition' ) ) {
 				elseif ( wc_get_page_id( 'shop' ) == $value ) : // Shop page
 					$match = ( 'product' == $wp_query->query_vars['post_type'] && $wp_query->is_archive() );
 				else :
-					$match = ( $post->ID == $value );
+					$match = ( $post_id == $value );
 				endif;
 
 			elseif ( '!=' == $operator ) :
@@ -38,7 +39,7 @@ if ( ! class_exists( 'WPC_Page_Condition' ) ) {
 				elseif ( wc_get_page_id( 'shop' ) == $value ) : // Shop page
 					$match = ! ( 'product' == $wp_query->query_vars['post_type'] && $wp_query->is_archive() );
 				else :
-					$match = ( $post->ID != $value );
+					$match = ( $post_id != $value );
 				endif;
 
 			endif;

@@ -31,7 +31,17 @@ if ( ! class_exists( 'WPC_State_Condition' ) ) {
 
 		public function get_value_field_args() {
 
+			$field_args = array(
+				'type' => 'select',
+				'class' => array( 'wpc-value', 'wc-enhanced-select' ),
+				'options' => self::get_country_states(),
+			);
 
+			return $field_args;
+
+		}
+
+		public static function get_country_states() {
 			$country_states = array();
 			foreach ( WC()->countries->states as $country => $states ) {
 
@@ -44,14 +54,7 @@ if ( ! class_exists( 'WPC_State_Condition' ) ) {
 
 			}
 
-			$field_args = array(
-				'type' => 'select',
-				'class' => array( 'wpc-value', 'wc-enhanced-select' ),
-				'options' => $country_states,
-			);
-
-			return $field_args;
-
+			return $country_states;
 		}
 
 	}

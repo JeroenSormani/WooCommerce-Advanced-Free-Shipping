@@ -26,6 +26,15 @@ if ( ! class_exists( 'WPC_Tax_Condition' ) ) {
 			return array_sum( (array) WC()->cart->taxes );
 		}
 
+		public function get_value_field_args() {
+
+			$field_args = array(
+				'class' => array( 'input-text', 'wpc-value', 'wc_input_price' ),
+			);
+
+			return $field_args;
+
+		}
 	}
 
 }

@@ -26,6 +26,15 @@ if ( ! class_exists( 'WPC_Subtotal_Ex_Tax_Condition' ) ) {
 			return WC()->cart->subtotal_ex_tax;
 		}
 
+		public function get_value_field_args() {
+
+			$field_args = array(
+				'class' => array( 'input-text', 'wpc-value', 'wc_input_price' ),
+			);
+
+			return $field_args;
+
+		}
 	}
 
 }

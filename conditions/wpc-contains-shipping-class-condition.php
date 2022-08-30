@@ -53,7 +53,7 @@ if ( ! class_exists( 'WPC_Contains_Shipping_Class_Condition' ) ) {
 
 			$shipping_classes = get_terms( 'product_shipping_class', array( 'hide_empty' => false ) );
 			$shipping_classes = array_merge(
-				array( '-1' => __( 'No shipping class', 'woocommerce' ) ),
+				array( '' => __( 'No shipping class', 'woocommerce' ) ),
 				wp_list_pluck( $shipping_classes, 'name', 'slug' )
 			);
 

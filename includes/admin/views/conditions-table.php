@@ -11,7 +11,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$shipping_rates = wafs_get_rates( array( 'post_status' => array( 'draft', 'publish' ) ) );
+$shipping_rates = wafs_get_rates( array( 'post_status' => array( 'draft', 'publish', 'future' ) ) );
 
 ?><tr valign="top">
 	<th scope="row" class="titledesc">

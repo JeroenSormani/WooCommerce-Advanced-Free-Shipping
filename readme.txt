@@ -2,9 +2,9 @@
 Contributors: sormano
 Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 4.0
-Tested up to: 5.1
-Stable tag: 1.1.4
-Requires PHP: 5.3
+Tested up to: 6.0
+Stable tag: 1.1.5
+Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -87,10 +87,18 @@ The short answer to this is 'no', the long answer comes down to 'possibly'. I wr
 
 The current version of the plugin - 1.1.0 - doesn't have the ability to show multiple Advanced Free Shipping rates at the same time.
 During first development I made the - in hindsight - wrong decision thinking "Why would anyone need multiple WooCommerce free shipping options at the same time".
-In the future this will likely be changed, for now I recommend taking a look at the [Advanced Shipping for WooCommerce](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573) plugin which does have the ability to show all rates that match the conditions.
+In the future this will likely be changed, for now I recommend taking a look at the [Advanced Shipping for WooCommerce](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573) plugin which does have the ability to show all rates that match the conditions.
 
-= The shipping rates I setup are not showing at the cart/check, why? =
+= The shipping rates I configured are not showing at the cart/check, why? =
 
+There are two common reasons why a rate may not be appearing when expected.
+
+1) Shipping cache. It could be you're looking at cached shipping rates. I'd recommend enabling the [shipping debug mode](https://jeroensormani.com/shipping-debug-mode/) when testing.
+
+2) A conflict in the conditions prevents the rate from appearing. For example, having two 'Country' conditions in one *condition group* is not possible.
+Try and set a single condition such as 'Subtotal - greater - 0' and see if that will appear.
+
+If after the above still no rate is showing it is most commonly a third party element that is interfering. Try disabling all other plugins / switch to a default theme and see if the rate is appearing then.
 
 == Screenshots ==
 
@@ -100,6 +108,13 @@ In the future this will likely be changed, for now I recommend taking a look at 
 4. WooCommerce Shipping condition available operators
 
 == Changelog ==
+
+= 1.1.5 - 06-09-2022 =
+
+* [Fix] - Fixed wrong named action from 'woocommerce_advanced_fees_condition_value_field_type_' to 'woocommerce_advanced_free_shipping_condition_value_field_type_'
+* [Fix] - Show in overview future scheduled rates
+* [Improvement] - Update WP Conditions to 1.0.12
+	- [Fix] - PHP 8.0 compatibility with the Coupon condition
 
 = 1.1.4 - 10-04-2018 =
 

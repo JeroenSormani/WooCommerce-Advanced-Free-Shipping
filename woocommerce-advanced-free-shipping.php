@@ -120,7 +120,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	 */
 	public function init() {
 
-		if ( version_compare( PHP_VERSION, '5.3', 'lt' ) ) {
+		if ( version_compare( PHP_VERSION, '7.0', 'lt' ) ) {
 			return add_action( 'admin_notices', array( $this, 'php_version_notice' ) );
 		}
 
@@ -273,7 +273,7 @@ class WooCommerce_Advanced_Free_Shipping {
 
 
 	/**
-	 * Display PHP 5.3 required notice.
+	 * Display PHP 7.0 required notice.
 	 *
 	 * Display a notice when the required PHP version is not met.
 	 *
@@ -282,7 +282,7 @@ class WooCommerce_Advanced_Free_Shipping {
 	public function php_version_notice() {
 
 		?><div class='updated'>
-			<p><?php echo sprintf( __( 'Advanced Free Shipping requires PHP 5.3 or higher and your current PHP version is %s. Please (contact your host to) update your PHP version.', 'woocommerce-advanced-messages' ), PHP_VERSION ); ?></p>
+			<p><?php echo sprintf( __( 'Advanced Free Shipping requires PHP 7.0 or higher and your current PHP version is %s. Please (contact your host to) update your PHP version.', 'woocommerce-advanced-messages' ), PHP_VERSION ); ?></p>
 		</div><?php
 
 	}

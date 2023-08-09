@@ -164,6 +164,12 @@ class WooCommerce_Advanced_Free_Shipping {
 			$this->admin = new WAFS_Admin();
 		endif;
 
+		// Declare HPOS compatibility
+		add_action( 'before_woocommerce_init', function () {
+			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+			}
+		} );
 	}
 
 

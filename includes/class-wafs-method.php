@@ -6,6 +6,11 @@ if ( class_exists( 'Wafs_Free_Shipping_Method' ) ) return; // Stop if the class 
 
 class Wafs_Free_Shipping_Method extends WC_Shipping_Method {
 
+	/**
+	 * @var mixed
+	 */
+	public $hide_shipping;
+
 
 	/**
 	 * Constructor.

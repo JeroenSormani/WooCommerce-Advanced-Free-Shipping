@@ -71,6 +71,31 @@ class WooCommerce_Advanced_Free_Shipping {
 	 */
 	private static $instance;
 
+	/**
+	 * @var Wafs_Match_Conditions
+	 */
+	public $matcher;
+
+	/**
+	 * @var WAFS_post_type
+	 */
+	public $post_type;
+
+	/**
+	 * @var WAFS_Ajax
+	 */
+	public $ajax;
+
+	/**
+	 * @var WAFS_Admin
+	 */
+	public $admin;
+
+	/**
+	 * @var Wafs_Free_Shipping_Method
+	 */
+	public $was_method;
+
 
 	/**
 	 * Constructor.

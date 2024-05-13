@@ -2,8 +2,8 @@
 Contributors: sormano
 Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 5.0
-Tested up to: 8.0
-Stable tag: 1.1.6
+Tested up to: 6.4
+Stable tag: 1.1.7
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -109,7 +109,11 @@ If after the above still no rate is showing it is most commonly a third party el
 
 == Changelog ==
 
-= 1.1.6 - 06-09-2022 =
+= 1.1.7 - 08-01-2024 =
+
+* [Fix] - PHP 8.2 compatibility
+
+= 1.1.6 - 08-09-2023 =
 
 * [Add] - HPOS compatibility declaration
 * [Update] - Minimum PHP version updated to 7.0

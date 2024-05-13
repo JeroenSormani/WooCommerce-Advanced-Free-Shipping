@@ -4,9 +4,33 @@ It is intended to be used on plugins like build by Jeroen such as Advanced Shipp
 Copyright © 2017 Jeroen Sormani
 
 
-# Current version: 1.0.12
+# Current version: 1.0.15.1
 
 # Changelog
+
+= 1.0.15.1 - 06/03/2024 =
+
+* [Add] - Cards / notice to show when a object is not enabled
+
+= 1.0.15 - 19/02/2024 =
+
+* [Add] - Toggle functionality
+* [Fix] - Add missing capability check
+
+= 1.0.14 - 10/07/2023 =
+
+* [Improvement] - Condition group matching performance
+* [Fix] - Incorrect textdomains
+* [Fix] - Fatal error when Weight/Width/Height/Length condition values are empty in PHP 8+
+* [Fix] - #32 - Weight issue
+
+= 1.0.13 - 03/01/2023 =
+
+* [Add] - Introduced the function wpc_clean() to recursively sanitize
+* [Update] - To new Gulp structure
+* [Fix] - 'Page' condition when matching for product X, matched for archive page as well when product X was first.
+* [Fix] - 'User role' condition allow selecting all user roles, not just 'Editable' for current user.
+* [Fix] - 'Stock status' condition not working as expected in certain situations
 
 = 1.0.12 - 30/12/2021 =
 

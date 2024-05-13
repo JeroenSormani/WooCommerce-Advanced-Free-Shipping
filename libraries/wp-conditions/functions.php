@@ -136,7 +136,7 @@ if ( ! function_exists( 'wpc_get_condition' ) ) {
 	 */
 	function wpc_get_condition( $condition ) {
 
-		$class_name = 'WPC_' . implode( '_', array_map( 'ucfirst', explode( '_', $condition ) ) ) . '_Condition';
+		$class_name = 'WPC_' . implode( '_', array_map( 'ucfirst', explode( '_', $condition ?? '' ) ) ) . '_Condition';
 		$class_name = apply_filters( 'wpc_get_condition_class_name', $class_name, $condition );
 
 		if ( class_exists( $class_name ) ) {
@@ -192,6 +192,7 @@ if ( ! function_exists( 'wpc_match_conditions' ) ) {
 
 				if ( false == $match ) :
 					$match_condition_group = false;
+					break; // No point to going over additional conditions when a condition is matching false in a group.
 				endif;
 
 			endforeach;
@@ -249,11 +250,7 @@ if ( ! function_exists( 'wpc_sanitize_conditions' ) ) {
 							break;
 
 						case 'value' :
-							if ( is_array( $condition_value ) ) :
-								$condition_value = array_map( 'sanitize_text_field', $condition_value );
-							elseif ( is_string( $condition_value ) ) :
-								$condition_value = sanitize_text_field( $condition_value );
-							endif;
+							$condition_value = wpc_clean( $condition_value );
 							break;
 
 					endswitch;
@@ -270,6 +267,26 @@ if ( ! function_exists( 'wpc_sanitize_conditions' ) ) {
 
 	}
 
+}
+
+if ( ! function_exists( 'wpc_clean' ) ) {
+	/**
+	 * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
+	 * Non-scalar values are ignored.
+	 * Copy of wc_clean() from WooCommerce.
+	 *
+	 * @since 1.0.13
+	 *
+	 * @param  string|array $var Data to sanitize.
+	 * @return string|array
+	 */
+	function wpc_clean( $var ) {
+		if ( is_array( $var ) ) {
+			return array_map( 'wpc_clean', $var );
+		} else {
+			return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
+		}
+	}
 }
 
 

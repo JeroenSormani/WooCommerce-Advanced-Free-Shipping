@@ -5,15 +5,16 @@
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.4",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
     "browser-sync": "^2.26.14",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp-uglify": "^3.0.2"
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.54.5"
   },
   "scripts": {
     "watch": "gulp watch"

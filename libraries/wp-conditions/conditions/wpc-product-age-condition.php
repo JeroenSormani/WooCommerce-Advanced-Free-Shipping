@@ -29,16 +29,16 @@ if ( ! class_exists( 'WPC_Product_Age_Condition' ) ) {
 			elseif ( '!=' == $operator ) :
 				$match = ( $compare_value != $value );
 			elseif ( '>=' == $operator ) :
-				if ( date( 'Y-m-d', strtotime( $raw_value ) ) > 1970 ) {
-					$match = ( $compare_value >= $value ); // Reversed operator intentional
-				} else {
+				if ( is_numeric( $raw_value ) ) {
 					$match = ( $compare_value <= $value );
+				} else {
+					$match = ( $compare_value >= $value ); // Reversed operator intentional
 				}
 			elseif ( '<=' == $operator ) :
-				if ( date( 'Y-m-d', strtotime( $raw_value ) ) > 1970 ) {
-					$match = ( $compare_value <= $value );
-				} else {
+				if ( is_numeric( $raw_value ) ) {
 					$match = ( $compare_value >= $value ); // Reversed operator intentional
+				} else {
+					$match = ( $compare_value <= $value );
 				}
 			endif;
 
@@ -48,10 +48,10 @@ if ( ! class_exists( 'WPC_Product_Age_Condition' ) ) {
 
 		public function get_value( $value ) {
 
-			if ( date( 'Y-m-d', strtotime( $value ) ) > 1970 ) {
-				$value = date( 'Y-m-d', strtotime( $value ) );
-			} else {
+			if ( is_numeric( $value ) ) {
 				$value = date( 'Y-m-d', strtotime( "-$value days", time() ) );
+			} else {
+				$value = date( 'Y-m-d', strtotime( $value ) );
 			}
 
 			return $value;

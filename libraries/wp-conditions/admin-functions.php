@@ -107,7 +107,7 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 
 				if ( empty( $options ) ) :
 					?><option readonly disabled><?php
-						_e( 'There are no options available', 'wp-conditions' );
+						_e( 'There are no options available', 'wpc-conditions' );
 					?></option><?php
 				endif;
 
@@ -147,8 +147,11 @@ if ( ! function_exists( 'wpc_ajax_save_post_order' ) ) {
 	 * @since 1.0.0
 	 */
 	function wpc_ajax_save_post_order() {
-
 		global $wpdb;
+
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			return;
+		}
 
 		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
@@ -158,7 +161,7 @@ if ( ! function_exists( 'wpc_ajax_save_post_order' ) ) {
 			die( '-1' );
 		}
 
-		$menu_order = 0;
+		$menu_order = 1;
 		foreach ( $args['sort'] as $sort ) :
 
 			$wpdb->update(
@@ -177,5 +180,47 @@ if ( ! function_exists( 'wpc_ajax_save_post_order' ) ) {
 
 	}
 	add_action( 'wp_ajax_wpc_save_post_order', 'wpc_ajax_save_post_order' );
+
+}
+
+
+if ( ! function_exists( 'wpc_ajax_toggle_enabled' ) ) {
+
+	/**
+	 * Toggle enabled.
+	 *
+	 * Toggle the enabled (post status) of a post.
+	 *
+	 * @since 1.0.15
+	 */
+	function wpc_ajax_toggle_enabled() {
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			return;
+		}
+
+		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
+
+		if ( ! isset( $_POST['id'] ) ) {
+			die( '-1' );
+		}
+
+		$post = get_post( $_POST['id'] );
+
+		if ( ! $post instanceof WP_Post ) {
+			die( '-1' );
+		}
+
+		wp_update_post( array(
+			'ID' => $post->ID,
+			'post_status' => $post->post_status !== 'publish' ? 'publish' : 'draft',
+		) );
+
+		$post = get_post( $_POST['id'] );
+
+		wp_send_json( array(
+			'enabled' => $post->post_status == 'publish' ? 'yes' : 'no',
+		) );
+	}
+	add_action( 'wp_ajax_wpc_toggle_enabled', 'wpc_ajax_toggle_enabled' );
 
 }

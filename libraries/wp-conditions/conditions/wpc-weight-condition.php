@@ -15,7 +15,7 @@ if ( ! class_exists( 'WPC_Weight_Condition' ) ) {
 		}
 
 		public function get_value( $value ) {
-			return str_replace( ',', '.', $value );
+			return (float) str_replace( ',', '.', $value );
 		}
 
 		public function get_compare_value() {
@@ -23,8 +23,8 @@ if ( ! class_exists( 'WPC_Weight_Condition' ) ) {
 		}
 
 		public function match( $match, $operator, $value ) {
-			$value         = number_format( $this->get_value( $value ), 5 );
-			$compare_value = number_format( $this->get_compare_value(), 5 );
+			$value         = (float) number_format( $this->get_value( $value ), 5, '.', '' );
+			$compare_value = (float) number_format( $this->get_compare_value(), 5, '.', '' );
 
 			if ( '==' == $operator ) :
 				$match = ( $compare_value == $value );

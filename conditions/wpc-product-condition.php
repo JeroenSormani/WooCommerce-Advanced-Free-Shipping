@@ -21,7 +21,11 @@ if ( ! class_exists( 'WPC_Product_Condition' ) ) {
 		public function get_compare_value() {
 			/** @var $product WC_Product */
 			global $product;
-			return $product->get_id();
+			return apply_filters( 'wpml_object_id', $product->get_id(), 'product', true );
+		}
+
+		public function get_value( $value ) {
+			return apply_filters( 'wpml_object_id', $value, 'product', true );
 		}
 
 		public function get_available_operators() {
@@ -38,18 +42,13 @@ if ( ! class_exists( 'WPC_Product_Condition' ) ) {
 		public function get_value_field_args() {
 
 			$field_args = array(
-				'type' => 'text',
+				'type' => 'select',
 				'custom_attributes' => array(
-					'data-placeholder' => __( 'Search for a product', 'wp-conditions' ),
+					'data-placeholder' => __( 'Search for a product', 'wpc-conditions' ),
 				),
 				'class' => array( 'wpc-value', 'wc-product-search' ),
 				'options' => array(),
 			);
-
-			// Should be a select field in WC 2.7+
-			if ( version_compare( WC()->version, '2.7', '>=' ) ) {
-				$field_args['type'] = 'select';
-			}
 
 			return $field_args;
 

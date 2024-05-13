@@ -18,6 +18,11 @@ if ( ! class_exists( 'WPC_Product_Category_Condition' ) ) {
 			return isset( $GLOBALS['product'] );
 		}
 
+		public function get_value( $value ) {
+			$term = get_term_by( 'slug', $value, 'product_cat' );
+			return apply_filters( 'wpml_object_id', $term->term_id ?? null, 'product_cat', true );
+		}
+
 		public function match( $match, $operator, $value ) {
 
 			if ( ! $this->validate() ) {
@@ -29,10 +34,15 @@ if ( ! class_exists( 'WPC_Product_Category_Condition' ) ) {
 
 			$value = $this->get_value( $value );
 
+			// Category not found, so return false
+			if ( ! $value ) {
+				return false;
+			}
+
 			if ( '==' == $operator ) {
-				$match = $match = ( has_term( $value, 'product_cat', $product->get_id() ) );
+				$match = ( has_term( $value, 'product_cat', $product->get_id() ) );
 			} elseif ( '!=' == $operator ) {
-				$match = ! $match = ( has_term( $value, 'product_cat', $product->get_id() ) );
+				$match = ! ( has_term( $value, 'product_cat', $product->get_id() ) );
 			}
 
 			return $match;

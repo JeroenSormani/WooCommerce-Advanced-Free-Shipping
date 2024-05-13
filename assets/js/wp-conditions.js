@@ -8,26 +8,26 @@ jQuery( function( $ ) {
             template: '.wpc-condition-group-template .wpc-condition-group-wrap',
             elementWrap: '.wpc-condition-group-wrap',
             elementsContainer: '.wpc-condition-groups',
-			onAddElement: function (template, container, $self) {
-				var new_id = Math.floor(Math.random() * 899999999 + 100000000); // Random number sequence of 9 length
-				template.find('input[name], select[name]').attr('name', function (index, value) {
-					return (value.replace('9999', new_id)) || value;
-				});
-				template.find('.wpc-condition[data-id]').attr('data-id', function (index, value) {
-					return (value.replace('9999', new_id)) || value;
-				});
-				// Fix #20 - condition IDs being replaced by group IDs
-				template.find('.wpc-condition-template .wpc-condition[data-id]').attr('data-id', '9999');
+            onAddElement: function (template, container, $self) {
+                var new_id = Math.floor(Math.random() * 899999999 + 100000000); // Random number sequence of 9 length
+                template.find('input[name], select[name]').attr('name', function (index, value) {
+                    return (value.replace('9999', new_id)) || value;
+                });
+                template.find('.wpc-condition[data-id]').attr('data-id', function (index, value) {
+                    return (value.replace('9999', new_id)) || value;
+                });
+                // Fix #20 - condition IDs being replaced by group IDs
+                template.find('.wpc-condition-template .wpc-condition[data-id]').attr('data-id', '9999');
 
-				template.find('[data-group]').attr('data-group', function (index, value) {
-					return (value.replace('9999', new_id)) || value;
-				});
+                template.find('[data-group]').attr('data-group', function (index, value) {
+                    return (value.replace('9999', new_id)) || value;
+                });
 
-				template.find('.repeater-active').removeClass('repeater-active');
+                template.find('.repeater-active').removeClass('repeater-active');
 
-				// Init condition group repeater
-				wpc_condition_row_repeater();
-			},
+                // Init condition group repeater
+                wpc_condition_row_repeater();
+            },
             removeElement: function( el ) {
                 el.remove();
             }
@@ -161,6 +161,45 @@ jQuery( function( $ ) {
         $( '#tiptip_arrow' ).removeAttr( 'style' );
 
     });
+
+	// Toggle a
+	function toggle_enabled(id, callback) {
+		 var data = {
+            action: 'wpc_toggle_enabled',
+            id: id,
+            nonce: wpc.nonce
+        };
+
+        $.post(ajaxurl, data, callback);
+	}
+
+    // Toggle enabled from overview
+    $(document.body).on('click', '.wpc-conditions-post-table .wpc-toggle-enabled', function (e) {
+        e.preventDefault();
+
+		var $row = $(this).closest('tr');
+		toggle_enabled($row.attr('data-id'), function(response) {
+			if (response.enabled == 'yes') {
+				$row.find('.woocommerce-input-toggle').removeClass('woocommerce-input-toggle--disabled').addClass('woocommerce-input-toggle--enabled');
+			} else {
+				$row.find('.woocommerce-input-toggle').removeClass('woocommerce-input-toggle--enabled').addClass('woocommerce-input-toggle--disabled');
+			}
+		});
+    });
+
+	// Enable from notice card
+	$(document.body).on('click', '.wpc-card .wpc-toggle-enabled', function (e) {
+		const card = $(this).parents('.wpc-card');
+
+		toggle_enabled($(this).attr('data-id'), function(response) {
+			if (response.enabled == 'yes') {
+				card.hide();
+			} else {
+				console.error(error);
+			}
+		});
+    });
+
 
 
     // Sortable post table

@@ -18,6 +18,11 @@ if ( ! class_exists( 'WPC_Product_Tag_Condition' ) ) {
 			return isset( $GLOBALS['product'] );
 		}
 
+		public function get_value( $value ) {
+			$term = get_term_by( 'slug', $value, 'product_tag' );
+			return apply_filters( 'wpml_object_id', $term->term_id ?? null, 'product_tag', true );
+		}
+
 		public function match( $match, $operator, $value ) {
 
 			if ( ! $this->validate() ) {
@@ -27,6 +32,11 @@ if ( ! class_exists( 'WPC_Product_Tag_Condition' ) ) {
 			/** @var $product WC_Product */
 			global $product;
 			$value = $this->get_value( $value );
+
+			// Tag not found
+			if ( ! $value ) {
+				return false;
+			}
 
 			if ( $operator == '==' ) {
 				$match = ( has_term( $value, 'product_tag', $product->get_id() ) );

@@ -14,6 +14,10 @@ if ( ! class_exists( 'WPC_Height_Condition' ) ) {
 			parent::__construct();
 		}
 
+		public function validate() {
+			return ! empty( WC()->cart->get_cart() );
+		}
+
 		public function get_compare_value() {
 
 			$height = array();

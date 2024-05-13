@@ -17,6 +17,8 @@ if ( ! class_exists( 'WPC_Stock_Status_Condition' ) ) {
 		public function match( $match, $operator, $value ) {
 
 			$value = $this->get_value( $value );
+			$value = $value === '1' ? 'instock' : $value;
+			$value = $value === '0' ? 'outofstock' : $value;
 
 			if ( '==' == $operator ) :
 

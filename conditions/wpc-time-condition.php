@@ -9,7 +9,7 @@ if ( ! class_exists( 'WPC_Time_Condition' ) ) {
 			$this->name        = __( 'Time', 'wpc-conditions' );
 			$this->slug        = __( 'time', 'wpc-conditions' );
 			$this->group       = __( 'General', 'wpc-conditions' );
-			$this->description = sprintf( __( 'Compares current server time to user given time. Current time: %s', 'woocommerce-advanced-messages' ), date_i18n( get_option( 'time_format' ) ) );
+			$this->description = sprintf( __( 'Compares current server time to user given time. Current time: %s', 'wpc-conditions' ), date_i18n( get_option( 'time_format' ) ) );
 
 			parent::__construct();
 		}
@@ -27,7 +27,7 @@ if ( ! class_exists( 'WPC_Time_Condition' ) ) {
 			$field_args = array(
 				'type' => 'text',
 				'class' => array( 'wpc-value' ),
-				'placeholder' => sprintf( __( 'Current time is: %s', 'woocommerce-advanced-messages' ), current_time( 'H:i' ) ),
+				'placeholder' => sprintf( __( 'Current time is: %s', 'wpc-conditions' ), current_time( 'H:i' ) ),
 			);
 
 			return $field_args;

@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class       WAFS_post_type
  * @author     	Jeroen Sormani
- * @package		WooCommerce Advanced Free Shipping
+ * @package		Advanced Free Shipping for WooCommerce
  * @version		1.0.0
  */
 class WAFS_post_type {

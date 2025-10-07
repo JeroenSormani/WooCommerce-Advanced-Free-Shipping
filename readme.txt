@@ -3,7 +3,7 @@ Contributors: sormano
 Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
 Requires at least: 5.0
 Tested up to: 6.4
-Stable tag: 1.1.7
+Stable tag: 1.1.7.1
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -108,6 +108,10 @@ If after the above still no rate is showing it is most commonly a third party el
 4. WooCommerce Shipping condition available operators
 
 == Changelog ==
+
+= 1.1.7.1 - 07-10-2025 =
+
+* [Update] - Plugin name from WooCommerce Advanced Free Shipping to Advanced Free Shipping for WooCommerce
 
 = 1.1.7 - 08-01-2024 =
 

@@ -5,7 +5,7 @@
  * Display the shipping settings in the meta box.
  *
  * @author		Jeroen Sormani
- * @package		WooCommerce Advanced Free Shipping
+ * @package		Advanced Free Shipping for WooCommerce
  * @version		1.0.0
  */
 

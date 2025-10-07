@@ -5,7 +5,7 @@
  * Display table with all the user configured Free shipping conditions.
  *
  * @author		Jeroen Sormani
- * @package 	WooCommerce Advanced Free Shipping
+ * @package 	Advanced Free Shipping for WooCommerce
  * @version		1.0.0
  */
 

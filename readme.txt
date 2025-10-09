@@ -1,17 +1,17 @@
-=== WooCommerce Advanced Free Shipping ===
+=== Advanced Free Shipping for WooCommerce ===
 Contributors: sormano
-Tags: woocommerce shipping, woocommerce, shipping, woocommerce free shipping, woocommerce free, woocommerce advanced free shipping, wc free shipping, wc shipping, advanced shipping, pro shipping, table rate shipping, country shipping, free shipping
+Tags: woocommerce shipping, shipping, free shipping, advanced free shipping, advanced shipping
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.8
 Stable tag: 1.1.7.1
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
+Advanced Free Shipping for WooCommerce is an plugin which allows you to set up advanced free shipping conditions.
 
 == Description ==
-With the WooCommerce Advanced Free Shipping plugin you can setup your own advanced rules to determine when a free shipping rate should be available for the customer.
+With the Advanced Free Shipping for WooCommerce plugin you can setup your own advanced rules to determine when a free shipping rate should be available for the customer.
 This plugin will give you full control over your free WooCommerce shipping rates.
 
 Within each shipping rate you can create multiple 'OR' condition groups with multiple 'AND' conditions inside each group. This means that it is very easy to setup a

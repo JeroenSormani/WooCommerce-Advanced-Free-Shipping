@@ -52,7 +52,7 @@ Not there what you're looking for? The plugin has been made to be easily extensi
 > - Create shipping zones<br />
 > - Set tax status<br />
 > <br />
-> View [Advanced Shipping for WooCommerce](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573)
+> View [Advanced Shipping for WooCommerce](https://aceplugins.com/plugin/advanced-shipping-for-woocommerce/purchase)
 
 **Showing a free shipping threshold message**
 
@@ -87,7 +87,7 @@ The short answer to this is 'no', the long answer comes down to 'possibly'. I wr
 
 The current version of the plugin - 1.1.0 - doesn't have the ability to show multiple Advanced Free Shipping rates at the same time.
 During first development I made the - in hindsight - wrong decision thinking "Why would anyone need multiple WooCommerce free shipping options at the same time".
-In the future this will likely be changed, for now I recommend taking a look at the [Advanced Shipping for WooCommerce](http://codecanyon.net/item/woocommerce-advanced-shipping/8634573) plugin which does have the ability to show all rates that match the conditions.
+In the future this will likely be changed, for now I recommend taking a look at the [Advanced Shipping for WooCommerce](https://aceplugins.com/plugin/advanced-shipping-for-woocommerce/purchase) plugin which does have the ability to show all rates that match the conditions.
 
 = The shipping rates I configured are not showing at the cart/check, why? =
 

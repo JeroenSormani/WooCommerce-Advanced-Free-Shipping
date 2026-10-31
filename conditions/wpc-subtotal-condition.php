@@ -14,6 +14,10 @@ if ( ! class_exists( 'WPC_Subtotal_Condition' ) ) {
 			parent::__construct();
 		}
 
+		public function validate() {
+			return isset( WC()->cart );
+		}
+
 		public function get_value( $value ) {
 			return str_replace( ',', '.', $value );
 		}

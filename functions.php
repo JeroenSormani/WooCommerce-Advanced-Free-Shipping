@@ -40,6 +40,7 @@ require_once 'conditions/wpc-stock-status-condition.php';
 require_once 'conditions/wpc-stock-condition.php';
 require_once 'conditions/wpc-category-condition.php';
 require_once 'conditions/wpc-volume-condition.php';
+require_once 'conditions/wpc-brand-condition.php';
 
 // Product (single based)
 require_once 'conditions/wpc-product-condition.php';
@@ -57,6 +58,7 @@ require_once 'conditions/wpc-product-stock-status-condition.php';
 require_once 'conditions/wpc-product-width-condition.php';
 require_once 'conditions/wpc-product-sales-condition.php';
 require_once 'conditions/wpc-product-on-sale-condition.php';
+require_once 'conditions/wpc-product-brand-condition.php';
 
 if ( ! function_exists( 'wpc_get_registered_conditions' ) ) {
 
@@ -113,6 +115,7 @@ if ( ! function_exists( 'wpc_get_registered_conditions' ) ) {
 			new WPC_Product_Sale_Price_Condition(),
 			new WPC_Product_Sales_Condition(),
 			new WPC_Product_On_Sale_Condition(),
+			new WPC_Product_Brand_Condition(),
 		);
 
 		return apply_filters( 'wp-conditions\registered_conditions', $conditions );

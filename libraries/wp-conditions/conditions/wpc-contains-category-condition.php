@@ -16,7 +16,7 @@ if ( ! class_exists( 'WPC_Contains_Category_Condition' ) ) {
 
 		public function match( $match, $operator, $value ) {
 
-			$value = $this->get_value( $value );
+			$value = $this->get_term_id( $value );
 
 			if ( '==' == $operator ) :
 
@@ -69,6 +69,23 @@ if ( ! class_exists( 'WPC_Contains_Category_Condition' ) ) {
 
 		}
 
+
+		/**
+		 * Convert slug to ID.
+		 *
+		 * Convert the category slug to ID and go through WPML translation filter.
+		 *
+		 * @since NEWVERSION
+		 *
+		 * @param $term
+		 * @return mixed|null
+		 */
+		private function get_term_id( $term ) {
+			$term    = get_term_by( 'slug', $term, 'product_cat' );
+			$term_id = $term->term_id ?? null;
+
+			return apply_filters( 'wpml_object_id', $term_id, 'product_category', true );
+		}
 	}
 
 }

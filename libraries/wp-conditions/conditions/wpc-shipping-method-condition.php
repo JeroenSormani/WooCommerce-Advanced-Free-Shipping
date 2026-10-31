@@ -14,7 +14,14 @@ if ( ! class_exists( 'WPC_Shipping_Method_Condition' ) ) {
 			parent::__construct();
 		}
 
+		public function validate() {
+			return isset( WC()->session );
+		}
+
 		public function match( $match, $operator, $value ) {
+			if ( ! $this->validate() ) {
+				return false;
+			}
 
 			$value                   = $this->get_value( $value );
 			$chosen_shipping_methods = $this->get_compare_value();

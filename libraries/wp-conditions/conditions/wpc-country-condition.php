@@ -14,7 +14,14 @@ if ( ! class_exists( 'WPC_Country_Condition' ) ) {
 			parent::__construct();
 		}
 
+		public function validate() {
+			return ! is_null( WC()->customer );
+		}
+
 		public function match( $match, $operator, $value ) {
+			if ( ! $this->validate() ) {
+				return false;
+			}
 
 			$value            = $this->get_value( $value );
 			$customer_country = $this->get_compare_value();

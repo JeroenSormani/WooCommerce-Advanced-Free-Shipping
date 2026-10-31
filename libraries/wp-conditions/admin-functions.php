@@ -70,11 +70,11 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 			case 'number' :
 				?><input
 					name="<?php echo esc_attr( $name ); ?>"
-					type="<?php echo $args['type']; ?>"
+					type="<?php echo esc_attr( $args['type'] ); ?>"
 					<?php if ( ! empty( $args['id'] ) ) : ?>id="<?php echo esc_attr( $args['id'] ); ?>"<?php endif; ?>
 					value="<?php echo esc_attr( $value ); ?>"
-					class="input-text <?php echo $class; ?>"
-					<?php echo implode( ' ', $custom_attributes ); ?>
+					class="input-text <?php echo esc_attr( $class ); ?>"
+					<?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					placeholder='<?php echo esc_attr( $args['placeholder'] ); ?>'
 				><?php
 				break;
@@ -87,8 +87,8 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 				?><select
 					name="<?php echo esc_attr( $args['name'] ); ?>"
 					<?php if ( ! empty( $args['id'] ) ) : ?>id="<?php echo esc_attr( $args['id'] ); ?>"<?php endif; ?>
-					class="input-select <?php echo $class; ?>"
-					<?php echo implode( ' ', $custom_attributes ); ?>
+					class="input-select <?php echo esc_attr( $class ); ?>"
+					<?php echo implode( ' ', $custom_attributes );  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				><?php
 
 				foreach ( $options as $index => $values ) :
@@ -107,7 +107,7 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 
 				if ( empty( $options ) ) :
 					?><option readonly disabled><?php
-						_e( 'There are no options available', 'wpc-conditions' );
+						esc_html_e( 'There are no options available', 'wpc-conditions' );
 					?></option><?php
 				endif;
 
@@ -155,7 +155,7 @@ if ( ! function_exists( 'wpc_ajax_save_post_order' ) ) {
 
 		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
-		$args = wp_parse_args( $_POST['form'] );
+		$args = wpc_clean( wp_parse_args( $_POST['form'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( ! isset( $args['sort'] ) ) {
 			die( '-1' );
@@ -204,7 +204,7 @@ if ( ! function_exists( 'wpc_ajax_toggle_enabled' ) ) {
 			die( '-1' );
 		}
 
-		$post = get_post( $_POST['id'] );
+		$post = get_post( absint( $_POST['id'] ) );
 
 		if ( ! $post instanceof WP_Post ) {
 			die( '-1' );
@@ -215,7 +215,7 @@ if ( ! function_exists( 'wpc_ajax_toggle_enabled' ) ) {
 			'post_status' => $post->post_status !== 'publish' ? 'publish' : 'draft',
 		) );
 
-		$post = get_post( $_POST['id'] );
+		$post = get_post( absint( $_POST['id'] ) );
 
 		wp_send_json( array(
 			'enabled' => $post->post_status == 'publish' ? 'yes' : 'no',

@@ -15,19 +15,21 @@ if ( ! class_exists( 'WPC_Contains_Shipping_Class_Condition' ) ) {
 		}
 
 		public function match( $match, $operator, $value ) {
+			$value = $this->get_term_id( $value );
 
 			foreach ( WC()->cart->get_cart() as $product ) {
 
-				$id      = ! empty( $product['variation_id'] ) ? $product['variation_id'] : $product['product_id'];
-				$product = wc_get_product( $id );
+				$id                  = ! empty( $product['variation_id'] ) ? $product['variation_id'] : $product['product_id'];
+				$product             = wc_get_product( $id );
+				$shipping_class_id   = $this->get_term_id( $product->get_shipping_class() );
 
 				if ( $operator == '==' ) {
-					if ( $product->get_shipping_class() == $value ) {
+					if ( $shipping_class_id == $value ) {
 						return true;
 					}
 				} elseif ( $operator == '!=' ) {
 					$match = true;
-					if ( $product->get_shipping_class() == $value ) {
+					if ( $shipping_class_id == $value ) {
 						return false;
 					}
 				}
@@ -67,6 +69,22 @@ if ( ! class_exists( 'WPC_Contains_Shipping_Class_Condition' ) ) {
 
 		}
 
+		/**
+		 * Convert slug to ID.
+		 *
+		 * Convert the category slug to ID and go through WPML translation filter.
+		 *
+		 * @since NEWVERSION
+		 *
+		 * @param $term
+		 * @return mixed|null
+		 */
+		private function get_term_id( $term ) {
+			$term    = get_term_by( 'slug', $term, 'product_shipping_class' );
+			$term_id = $term->term_id ?? null;
+
+			return apply_filters( 'wpml_object_id', $term_id, 'product_shipping_class', true );
+		}
 	}
 
 }

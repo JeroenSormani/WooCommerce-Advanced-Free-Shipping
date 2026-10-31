@@ -4,9 +4,25 @@ It is intended to be used on plugins like build by Jeroen such as Advanced Shipp
 Copyright © 2017 Jeroen Sormani
 
 
-# Current version: 1.0.15.1
+# Current version: 1.0.16.1
 
 # Changelog
+
+= 1.0.16.1 - 30/08/2026 =
+
+* [Fix] - Currency field height
+* [Fix] - Dev tool path
+
+= 1.0.16 - 12/06/2026 =
+
+* [Add] - Brand condition
+* [Update] - Add additional validations to prevent errors
+* [Remove] - Old backwards compatibility code for Woo 2.7 (we're at 10.9, damn I'm old..)
+
+= 1.0.15.2 - 15/10/2025 =
+
+* [Add] - Free shipping option for WC Coupon condition
+* [Update] - Escape some output
 
 = 1.0.15.1 - 06/03/2024 =
 
@@ -90,11 +106,9 @@ Copyright © 2017 Jeroen Sormani
 
 = 1.0.2 - 28/04/2017 =
 
-
 - [Add] - Volume condition
 - [Add] - Support for 'Guest' users in the 'User role' condition
 - [Fix] - Use 9 length IDs for new fields - prevents too big numbers for 32-bits systems.
-
 
 = 1.0.1 =
 

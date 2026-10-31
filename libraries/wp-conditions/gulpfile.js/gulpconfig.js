@@ -19,8 +19,8 @@ const browserSyncAtts = {
 		target: 'https://wp.x/'
 	},
 	https: {
-		key: '/Users/jeroensormani/.config/valet/Certificates/wp.x.key',
-		cert: '/Users/jeroensormani/.config/valet/Certificates/wp.x.crt',
+		key: '/Users/jeroen/Library/Application\ Support/Herd/config/valet/Certificates/wp.x.key',
+		cert: '/Users/jeroen/Library/Application\ Support/Herd/config/valet/Certificates/wp.x.crt',
 	},
 	// reloadDelay: 10
 }

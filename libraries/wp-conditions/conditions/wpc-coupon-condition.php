@@ -45,6 +45,14 @@ if ( ! class_exists( 'WPC_Coupon_Condition' ) ) {
 					$match = empty( $coupons['fixed'] ) ? $match : ( max( $coupons['fixed'] ) <= $amount_value );
 				endif;
 
+			} elseif ( strpos( $value, '📦' ) !== false ) {
+
+				if ( '==' == $operator ) :
+					$match = $coupons['free_shipping'] === true;
+				elseif ( '!=' == $operator ) :
+					$match = $coupons['free_shipping'] == null;
+				endif;
+
 			// Match coupon codes
 			} else {
 				$applied_coupons = WC()->cart->get_applied_coupons();
@@ -61,22 +69,24 @@ if ( ! class_exists( 'WPC_Coupon_Condition' ) ) {
 
 		public function get_compare_value() {
 
-			$coupons = array( 'percent' => array(), 'fixed' => array() );
+			$coupons = array( 'percent' => array(), 'fixed' => array(), 'free_shipping' => null );
 			foreach ( WC()->cart->get_coupons() as $coupon ) {
 				/** @var $coupon WC_Coupon */
-				if ( version_compare( WC()->version, '2.7', '>=' ) ) {
-					$type               = str_replace( '_product', '', $coupon->get_discount_type() );
-					$type               = str_replace( '_cart', '', $type );
-					$coupons[ $type ][] = $coupon->get_amount();
-				} else {
-					$type               = str_replace( '_product', '', $coupon->discount_type );
-					$type               = str_replace( '_cart', '', $type );
-					$coupons[ $type ][] = $coupon->coupon_amount;
+				$type               = str_replace( '_product', '', $coupon->get_discount_type() );
+				$type               = str_replace( '_cart', '', $type );
+				$coupons[ $type ][] = $coupon->get_amount();
+
+				if ( $coupon->get_free_shipping() ) {
+					$coupons['free_shipping'] = true;
 				}
 			}
 
 			return $coupons;
 
+		}
+
+		public function get_value( $value ) {
+			return strtolower( $value );
 		}
 
 	}

@@ -2,9 +2,9 @@
 Contributors: sormano
 Tags: woocommerce shipping, shipping, free shipping, advanced free shipping, advanced shipping
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 1.1.7.1
-Requires PHP: 7.0
+Tested up to: 7.1
+Stable tag: 1.2.0
+Requires PHP: 7.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -108,6 +108,15 @@ If after the above still no rate is showing it is most commonly a third party el
 4. WooCommerce Shipping condition available operators
 
 == Changelog ==
+
+= 1.2.0 - 31-10-2026 =
+
+* [Update] - PHP 8.5 compatibility
+* [Update] - Update WP Conditions to 1.0.16.1
+* [Update] - WordPress 7.1 compatibility verified
+* [Update] - WooCommerce 11.2 compatibility verified
+* [Add] - WPML support for shipping class/category condition
+* [Add] - Free shipping coupon support (use '📦' icon to indicate a free shipping coupon)
 
 = 1.1.7.1 - 07-10-2025 =
 

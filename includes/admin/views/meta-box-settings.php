@@ -31,5 +31,7 @@ $settings['shipping_title'] = ! empty( $settings['shipping_title'] ) ? $settings
 		>
 
 	</p>
-
+	<p class='wafs-option' style="margin-top: 35px; margin-bottom: 0;">
+		<i><?php echo __( 'Want to setup paid shipping rates with the same kind of conditional framework? Take a look at my <a href="https://aceplugins.com/plugin/advanced-shipping-for-woocommerce/purchase">Advanced Shipping for WooCommerce</a> plugin!', 'woocommerce-advanced-free-shipping' ); ?></i>
+	</p>
 </div>

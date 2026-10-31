@@ -171,14 +171,14 @@ class WAFS_post_type {
 	 */
 	function render_wafs_resources() {
 
-		?><ul>
-			<li><a href="http://jeroensormani.com/how-the-advanced-plugin-conditions-work?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'How the conditions work', 'woocommerce-advanced-free-shipping' ); ?></a></li>
-			<li><a href="http://jeroensormani.com/apply-free-shipping-for-specific-products-in-woocommerce?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Applying free shipping to specific products', 'woocommerce-advanced-free-shipping' ); ?></a></li>
-			<li><a href="http://jeroensormani.com/showing-add-10-free-shipping-notice#showing-a-free-shipping-notice-for-advanced-shipping?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Showing a free shipping message', 'woocommerce-advanced-free-shipping' ); ?></a></li>
-			<li><a href="http://jeroensormani.com/shipping-debug-mode?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Disabling the shipping cache', 'woocommerce-advanced-free-shipping' ); ?></a></li>
-			<li><strong><a href="https://aceplugins.com/plugin/advanced-shipping-for-woocommerce/purchase" target="_blank"><?php _e( 'Setup paid conditional shipping rates', 'woocommerce-advanced-free-shipping' ); ?></a></strong></li>
+		?><ul style="margin-bottom:0px;">
+			<li style="margin-bottom:10px;"><a href="http://jeroensormani.com/how-the-advanced-plugin-conditions-work?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'How the conditions work', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li style="margin-bottom:10px;"><a href="http://jeroensormani.com/apply-free-shipping-for-specific-products-in-woocommerce?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Applying free shipping to specific products', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li style="margin-bottom:10px;"><a href="http://jeroensormani.com/showing-add-10-free-shipping-notice#showing-a-free-shipping-notice-for-advanced-shipping?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Showing a free shipping message', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li style="margin-bottom:10px;"><a href="http://jeroensormani.com/shipping-debug-mode?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Disabling the shipping cache', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li style="margin-bottom:10px;"><strong><a href="https://aceplugins.com/plugin/advanced-shipping-for-woocommerce/purchase" target="_blank"><?php _e( 'Setup paid conditional shipping rates', 'woocommerce-advanced-free-shipping' ); ?></a></strong></li>
 			<hr />
-			<li><a href="http://jeroensormani.com/contact?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Hire me for custom condition development', 'woocommerce-advanced-free-shipping' ); ?></a></li>
+			<li style="margin-bottom:0px;"><a href="http://jeroensormani.com/contact?utm_source=WAFS-plugin&utm_medium=website&utm_campaign=WAFS-helpful-links" target="_blank"><?php _e( 'Hire me for custom condition development', 'woocommerce-advanced-free-shipping' ); ?></a></li>
 		</ul><?php
 
 	}

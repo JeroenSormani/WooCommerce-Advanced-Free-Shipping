@@ -18,14 +18,13 @@ if ( ! class_exists( 'WPC_Product_Brand_Condition' ) ) {
 			return isset( $GLOBALS['product'] );
 		}
 
-		public function get_value( $value ) {
-			$term = get_term_by( 'slug', $value, 'product_brand' );
-			return apply_filters( 'wpml_object_id', $term->term_id ?? null, 'product_brand', true );
-		}
-
 		public function match( $match, $operator, $value ) {
 
 			$value = $this->get_term_id( $value );
+
+			if ( empty( $value ) ) { // Value could be empty when term was deleted.
+				return false;
+			}
 
 			if ( '==' == $operator ) :
 

@@ -4,9 +4,14 @@ It is intended to be used on plugins like build by Jeroen such as Advanced Shipp
 Copyright © 2017 Jeroen Sormani
 
 
-# Current version: 1.0.16.1
+# Current version: 1.0.17
 
 # Changelog
+
+= 1.0.17 - 5/11/2026 =
+
+* [Add] - Time support for 'Date' condition
+* [Update] - Improve handling deleted terms in term based conditions
 
 = 1.0.16.1 - 30/08/2026 =
 

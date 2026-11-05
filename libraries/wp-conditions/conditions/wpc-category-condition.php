@@ -16,13 +16,18 @@ if ( ! class_exists( 'WPC_Category_Condition' ) ) {
 
 		public function match( $match, $operator, $value ) {
 
-			$value = $this->get_value( $value );
+			$value = $this->get_term_id( $value );
 			$match = true;
+
+			if ( empty( $value ) ) { // Value could be empty when term was deleted.
+				return false;
+			}
 
 			if ( '==' == $operator ) :
 
 				foreach ( WC()->cart->get_cart() as $product ) :
-					if ( ! has_term( $this->get_term_id( $value ), 'product_cat', $product['product_id'] ) ) :
+
+					if ( ! has_term( $value, 'product_cat', $product['product_id'] ) ) :
 						$match = false;
 					endif;
 
@@ -32,7 +37,7 @@ if ( ! class_exists( 'WPC_Category_Condition' ) ) {
 
 				foreach ( WC()->cart->get_cart() as $product ) :
 
-					if ( has_term( $this->get_term_id( $value ), 'product_cat', $product['product_id'] ) ) :
+					if ( has_term( $value, 'product_cat', $product['product_id'] ) ) :
 						$match = false;
 					endif;
 
@@ -82,7 +87,6 @@ if ( ! class_exists( 'WPC_Category_Condition' ) ) {
 		private function get_term_id( $term ) {
 			$term    = get_term_by( 'slug', $term, 'product_cat' );
 			$term_id = $term->term_id ?? null;
-
 			return apply_filters( 'wpml_object_id', $term_id, 'product_category', true );
 		}
 

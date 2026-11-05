@@ -18,6 +18,10 @@ if ( ! class_exists( 'WPC_Contains_Category_Condition' ) ) {
 
 			$value = $this->get_term_id( $value );
 
+			if ( empty( $value ) ) { // Value could be empty when term was deleted.
+				return false;
+			}
+
 			if ( '==' == $operator ) :
 
 				foreach ( WC()->cart->get_cart() as $product ) :

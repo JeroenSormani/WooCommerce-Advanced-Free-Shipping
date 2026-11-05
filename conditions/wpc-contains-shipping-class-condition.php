@@ -15,7 +15,7 @@ if ( ! class_exists( 'WPC_Contains_Shipping_Class_Condition' ) ) {
 		}
 
 		public function match( $match, $operator, $value ) {
-			$value = $this->get_term_id( $value );
+			$value = $this->get_term_id( $value ) ?? $value; // If empty (deleted), use the slug. Prevents matching empty (unintentional) == empty.
 
 			foreach ( WC()->cart->get_cart() as $product ) {
 
